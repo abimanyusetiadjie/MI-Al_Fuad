@@ -1,0 +1,263 @@
+---
+import {
+  Award,
+  BookOpen,
+  CheckCircle2,
+  GraduationCap,
+  HeartHandshake,
+  Sparkles,
+} from 'lucide-astro';
+import { SITE_CONFIG } from '@/data/siteConfig';
+---
+
+<section
+  id="program-tahfidz"
+  class="scroll-mt-24 py-16 md:py-24 bg-surface-cream/65 border-b border-primary-dark/10"
+>
+  <div class="container-12 gap-y-8 items-stretch">
+    <!-- Header Section & Kutipan Kemuliaan Al-Qur'an (Font Amiri) -->
+    <div class="col-span-12 lg:col-span-7 flex flex-col justify-end space-y-4">
+      <span
+        class="inline-flex w-fit items-center gap-2 rounded-full bg-primary-surface px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-primary-dark border border-primary/20"
+      >
+        <Sparkles class="h-4 w-4 text-gold shrink-0" aria-hidden="true" />
+        <span>Metode Khas YPI Tahfidz Qur'an Al-Fuad</span>
+      </span>
+
+      <h2
+        class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink-heading leading-tight"
+      >
+        Membina Cinta Al-Qur'an, Adab Mulia &amp; Keteladanan Pendidik
+      </h2>
+
+      <p class="text-base sm:text-lg text-ink-body leading-relaxed max-w-2xl">
+        Ayah &amp; Bunda tidak perlu khawatir apabila Ananda belum lancar membaca
+        Al-Qur'an saat masuk. Dewan guru kami membimbing setiap peserta didik dari
+        dasar hingga mampu menghafal, memahami arti ayat, dan mengamalkannya dalam
+        keseharian.
+      </p>
+    </div>
+
+    <!-- Kartu Kutipan Arab (Font Amiri) -->
+    <div class="col-span-12 lg:col-span-5">
+      <figure
+        class="h-full rounded-3xl bg-white p-6 sm:p-7 border border-gold/30 shadow-sm flex flex-col justify-between gap-4 relative overflow-hidden"
+      >
+        <div
+          class="absolute top-0 right-0 h-20 w-20 bg-gold-light/50 rounded-bl-[3rem] pointer-events-none"
+          aria-hidden="true"
+        >
+        </div>
+
+        <blockquote class="relative space-y-3">
+          <p
+            lang="ar"
+            dir="rtl"
+            class="font-arabic text-2xl sm:text-3xl font-bold text-primary-dark leading-[2.1] text-right"
+          >
+            خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
+          </p>
+          <p class="text-sm sm:text-base font-medium text-ink-heading italic leading-relaxed">
+            “Sebaik-baik kalian adalah orang yang mempelajari Al-Qur'an dan
+            mengajarkannya.”
+          </p>
+        </blockquote>
+
+        <figcaption class="text-xs font-semibold text-amber-700 flex items-center gap-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-amber-700" aria-hidden="true"></span>
+          <span>HR. Al-Bukhari &bull; Ruh Pengabdian YPI Al-Fuad Sejak 1990</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- Bento Card 1 (7 Kolom): Tahsin & Tahfidz Mutqin + Pemahaman Arti Ayat (Tadabbur) -->
+    <article
+      class="col-span-12 lg:col-span-7 rounded-3xl bg-white p-6 sm:p-8 border border-primary-dark/10 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-6"
+    >
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <span
+            class="inline-flex items-center gap-2 rounded-full bg-primary-surface px-3 py-1 text-xs font-bold text-primary-dark border border-primary/15"
+          >
+            <BookOpen class="h-3.5 w-3.5 text-primary shrink-0" aria-hidden="true" />
+            <span>Pilar 01 &bull; Tahsin, Tahfidz Mutqin &amp; Tadabbur</span>
+          </span>
+          <span class="text-xs font-semibold text-amber-700">
+            Bisa Dimulai Dari Nol
+          </span>
+        </div>
+
+        <h3 class="font-heading text-xl sm:text-2xl font-bold text-ink-heading">
+          Tahsin &amp; Tahfidz Mutqin Disertai Pemahaman Arti Ayat
+        </h3>
+
+        <p class="text-sm sm:text-base text-ink-body leading-relaxed">
+          Pembelajaran Al-Qur'an dirancang bertahap agar Ananda tidak merasa
+          terbebani. Dimulai dari pengenalan huruf hijaiyah dan perbaikan makhraj
+          (tahsin), hafalan terukur (ziyadah &amp; muraja'ah), hingga memahami
+          terjemahan dan makna surat untuk diamalkan sehari-hari.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+        <div class="rounded-2xl bg-surface-alabaster p-4 border border-primary-dark/10">
+          <p class="font-heading text-sm font-bold text-primary-dark">
+            Pemetaan &amp; Bimbingan Dari Nol
+          </p>
+          <p class="mt-1 text-xs sm:text-sm text-ink-body">
+            Setiap calon siswa dipetakan kemampuannya (Iqra hingga Al-Qur'an)
+            agar dibina sesuai ritme belajar masing-masing.
+          </p>
+        </div>
+        <div class="rounded-2xl bg-surface-alabaster p-4 border border-primary-dark/10">
+          <p class="font-heading text-sm font-bold text-primary-dark">
+            Wajib Hafal &amp; Paham Arti Juz 30
+          </p>
+          <p class="mt-1 text-xs sm:text-sm text-ink-body">
+            Standar utama lulusan MIT Al-Fuad, lalu dilanjutkan ke Juz 29 &amp; 28
+            pada jenjang SMP-IT hingga muraja'ah di SMK-IT.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Bento Card 2 (5 Kolom): Pembiasaan Adab Harian & Sholat Berjamaah di Masjid At-Taqwa -->
+    <article
+      class="col-span-12 lg:col-span-5 rounded-3xl bg-primary-surface/80 p-6 sm:p-8 border border-primary/20 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-5"
+    >
+      <div class="space-y-4">
+        <span
+          class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold text-primary-dark border border-primary/15"
+        >
+          <HeartHandshake
+            class="h-3.5 w-3.5 text-primary shrink-0"
+            aria-hidden="true"
+          />
+          <span>Pilar 02 &bull; Adab &amp; Ibadah Harian</span>
+        </span>
+
+        <h3 class="font-heading text-xl sm:text-2xl font-bold text-ink-heading">
+          Pembiasaan Adab &amp; Sholat Berjamaah di Masjid At-Taqwa
+        </h3>
+
+        <p class="text-sm sm:text-base text-ink-body leading-relaxed">
+          Kampus terpadu yang berdampingan langsung dengan Masjid At-Taqwa
+          memudahkan pembiasaan ibadah dan penjagaan akhlak remaja maupun anak
+          usia dini dari pengaruh negatif lingkungan.
+        </p>
+      </div>
+
+      <ul class="space-y-2.5 text-sm text-ink-subheading">
+        <li class="flex items-start gap-2.5">
+          <CheckCircle2
+            class="h-4 w-4 text-primary shrink-0 mt-0.5"
+            aria-hidden="true"
+          />
+          <span>Sholat Dhuha, Dzuhur berjamaah &amp; dzikir pagi bersama guru</span>
+        </li>
+        <li class="flex items-start gap-2.5">
+          <CheckCircle2
+            class="h-4 w-4 text-primary shrink-0 mt-0.5"
+            aria-hidden="true"
+          />
+          <span>Pembinaan adab sopan santun kepada Ayah, Bunda &amp; Ustadz/Ustadzah</span>
+        </li>
+        <li class="flex items-start gap-2.5">
+          <CheckCircle2
+            class="h-4 w-4 text-primary shrink-0 mt-0.5"
+            aria-hidden="true"
+          />
+          <span>Lingkungan belajar aman, terpantau &amp; bebas pergaulan bebas</span>
+        </li>
+      </ul>
+    </article>
+
+    <!-- Bento Card 3 (5 Kolom): Wisuda Tahfidz Akbar Rutin -->
+    <article
+      class="col-span-12 lg:col-span-5 rounded-3xl bg-gold-light/65 p-6 sm:p-8 border border-gold/30 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-5"
+    >
+      <div class="space-y-4">
+        <span
+          class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold text-amber-800 border border-gold/30"
+        >
+          <GraduationCap
+            class="h-3.5 w-3.5 text-gold shrink-0"
+            aria-hidden="true"
+          />
+          <span>Pilar 03 &bull; Syiar &amp; Apresiasi Santri</span>
+        </span>
+
+        <h3 class="font-heading text-xl sm:text-2xl font-bold text-ink-heading">
+          Wisuda Tahfidz Akbar Rutin Bersama Orang Tua
+        </h3>
+
+        <p class="text-sm sm:text-base text-ink-body leading-relaxed">
+          Setiap capaian hafalan santri/siswa dimuliakan dalam prosesi Wisuda
+          Tahfidz Akbar rutin yang penuh haru, menjadi kebanggaan Ayah &amp; Bunda
+          sekaligus motivasi bagi adik kelas.
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-white/90 p-4 border border-gold/25">
+        <p class="text-xs sm:text-sm font-semibold text-ink-heading">
+          Uji Publik &amp; Tasmi' Hafalan Terverifikasi
+        </p>
+        <p class="mt-1 text-xs text-ink-body">
+          Peserta wisuda melalui tahapan uji kelancaran (tasmi') bersama tim
+          pembina hafidz sebelum dikukuhkan.
+        </p>
+      </div>
+    </article>
+
+    <!-- Bento Card 4 (7 Kolom): Ekosistem 52+ Guru Hafidz & Apresiasi Ibadah Umroh -->
+    <article
+      class="col-span-12 lg:col-span-7 rounded-3xl bg-primary-dark text-white p-6 sm:p-8 border border-primary-medium/40 shadow-md flex flex-col justify-between gap-6"
+    >
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <span
+            class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-gold-light border border-gold/30"
+          >
+            <Award class="h-3.5 w-3.5 text-gold-medium shrink-0" aria-hidden="true" />
+            <span>Pilar 04 &bull; Ekosistem Guru Penuh Berkah</span>
+          </span>
+          <span class="text-xs font-semibold text-emerald-100/90">
+            Ketua Yayasan: {SITE_CONFIG.chairman}
+          </span>
+        </div>
+
+        <h3 class="font-heading text-xl sm:text-2xl font-bold text-white">
+          52+ Pendidik Hafidz/Hafidzah dengan Apresiasi Ibadah Umroh Tahunan
+        </h3>
+
+        <p class="text-sm sm:text-base text-emerald-50/90 leading-relaxed">
+          Pendidikan yang penuh keberkahan lahir dari guru-guru yang ikhlas dan
+          dimuliakan. YPI Al-Fuad menaungi lebih dari 52 guru dan pembina
+          berlatar belakang penghafal Al-Qur'an, serta secara konsisten
+          menyelenggarakan program hadiah Umroh tahunan bagi 2 guru berprestasi.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="rounded-2xl bg-white/10 p-4 border border-white/15">
+          <p class="font-heading text-lg font-extrabold text-gold-medium">
+            {SITE_CONFIG.stats.tahfidzTeachers}+ Guru
+          </p>
+          <p class="mt-0.5 text-xs sm:text-sm text-emerald-50/85">
+            Tenaga pengajar dan pembina halaqah Al-Qur'an berdedikasi di seluruh
+            unit.
+          </p>
+        </div>
+        <div class="rounded-2xl bg-white/10 p-4 border border-white/15">
+          <p class="font-heading text-lg font-extrabold text-gold-medium">
+            {SITE_CONFIG.stats.annualTeacherUmrahReward} Guru / Tahun
+          </p>
+          <p class="mt-0.5 text-xs sm:text-sm text-emerald-50/85">
+            Program apresiasi ibadah Umroh rutin bagi pendidik teladan demi
+            menjaga ruh pengabdian.
+          </p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

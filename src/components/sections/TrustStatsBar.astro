@@ -1,0 +1,79 @@
+---
+import { Award, BookOpen, Building2, ShieldCheck } from 'lucide-astro';
+
+interface StatCard {
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: 'shield' | 'award' | 'book' | 'building';
+}
+
+const statCards: readonly StatCard[] = [
+  {
+    title: '35+ Tahun Mengabdi',
+    subtitle: 'Berdiri sejak 1990',
+    description:
+      'Lebih dari tiga dekade melayani pendidikan keluarga Muslim di Poris Gaga & Tangerang.',
+    icon: 'shield',
+  },
+  {
+    title: '52+ Pendidik Hafidz/Hafidzah',
+    subtitle: 'Bimbingan langsung bersanad & berkualitas',
+    description:
+      'Ustadz & Ustadzah penghafal Al-Qur’an yang membimbing Ananda secara sabar dari nol.',
+    icon: 'award',
+  },
+  {
+    title: 'Wajib Juz 30 + Terjemah',
+    subtitle: 'Hafal lafadz sekaligus paham arti per ayat',
+    description:
+      'Program terstruktur agar Ananda menghafal sekaligus mengerti makna ayat Al-Qur’an.',
+    icon: 'book',
+  },
+  {
+    title: '5 Jenjang Terpadu',
+    subtitle: 'Pendidikan berkelanjutan dari RA hingga SMK-IT & Pesantren',
+    description:
+      'RA, MIS/MIT, SMP-IT, SMK-IT & Pondok Pesantren terpadu dalam satu kawasan aman.',
+    icon: 'building',
+  },
+] as const;
+---
+
+<section
+  aria-label="Statistik Kredibilitas YPI Al-Fuad"
+  class="bg-surface-alabaster py-10 md:py-14 border-b border-primary-dark/10"
+>
+  <div class="container-12">
+    {
+      statCards.map((item) => (
+        <article class="col-span-6 lg:col-span-3 rounded-2xl bg-white p-4 sm:p-6 border border-primary-dark/10 shadow-sm hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between gap-3">
+          <div class="space-y-3">
+            <span
+              class="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-primary-surface text-primary border border-primary/15"
+              aria-hidden="true"
+            >
+              {item.icon === 'shield' && <ShieldCheck class="h-5 w-5" />}
+              {item.icon === 'award' && <Award class="h-5 w-5" />}
+              {item.icon === 'book' && <BookOpen class="h-5 w-5" />}
+              {item.icon === 'building' && <Building2 class="h-5 w-5" />}
+            </span>
+
+            <div class="space-y-1">
+              <h2 class="font-heading text-base sm:text-lg lg:text-xl font-extrabold text-primary-dark leading-snug">
+                {item.title}
+              </h2>
+              <p class="text-xs sm:text-sm font-semibold text-amber-700">
+                {item.subtitle}
+              </p>
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-ink-body leading-relaxed">
+            {item.description}
+          </p>
+        </article>
+      ))
+    }
+  </div>
+</section>

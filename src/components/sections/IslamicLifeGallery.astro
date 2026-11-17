@@ -1,0 +1,163 @@
+---
+import { Image } from 'astro:assets';
+import { Building2, Camera, MapPin, ShieldCheck } from 'lucide-astro';
+import { SCHOOL_FACILITIES } from '@/data/pillarsAndFacilities';
+import { SITE_CONFIG } from '@/data/siteConfig';
+import masjidAtTaqwaImg from '@/assets/galeri/masjid-jami-at-taqwa.svg';
+import ruangKelasImg from '@/assets/galeri/ruang-kelas-kondusif.svg';
+import labKomputerImg from '@/assets/galeri/lab-komputer-smk.svg';
+import kegiatanTahfidzImg from '@/assets/galeri/kegiatan-tahfidz-ekskul.svg';
+
+interface GalleryItem {
+  id: string;
+  tag: string;
+  title: string;
+  caption: string;
+  image: ImageMetadata;
+  alt: string;
+}
+
+const galleryItems: readonly GalleryItem[] = [
+  {
+    id: 'masjid-at-taqwa',
+    tag: 'Ibadah & Pembinaan Spiritual',
+    title: "Masjid Jami' At-Taqwa & Halaqah Tahfidz",
+    caption:
+      'Pusat pembiasaan sholat Dhuha, sholat Dzuhur berjamaah, setoran hafalan Al-Qur’an harian, dan majelis ta’lim warga sekitar.',
+    image: masjidAtTaqwaImg,
+    alt: "Masjid Jami' At-Taqwa dan pusat halaqah tahfidz Al-Qur'an YPI Al-Fuad Poris Gaga",
+  },
+  {
+    id: 'ruang-kelas',
+    tag: 'Lingkungan Belajar Rapi',
+    title: 'Ruang Kelas Kondusif & Ramah Anak',
+    caption:
+      'Ruang belajar yang tertata rapi, terang, dan nyaman agar Ananda fokus mengikuti pelajaran umum maupun bimbingan tahfidz.',
+    image: ruangKelasImg,
+    alt: 'Ruang kelas kondusif untuk belajar dan pembinaan Juz 30 di YPI Al-Fuad',
+  },
+  {
+    id: 'lab-komputer',
+    tag: 'Praktikum Kejuruan & Digital',
+    title: 'Laboratorium Komputer SMK-IT & SMP-IT',
+    caption:
+      'Sarana praktikum teknologi informasi, literasi digital, dan kesiapan kerja kejuruan dengan tetap berlandaskan etika kerja Islami.',
+    image: labKomputerImg,
+    alt: 'Laboratorium komputer dan ruang praktik kejuruan SMK-IT Al-Fuad Tangerang',
+  },
+  {
+    id: 'kegiatan-tahfidz-ekskul',
+    tag: 'School Life & Prestasi',
+    title: 'Area Kegiatan Tahfidz, Wisuda & Ekstrakurikuler',
+    caption:
+      'Ruang tumbuh karakter santri melalui Wisuda Tahfidz Akbar, Pramuka, Pencak Silat, Hadroh, dan olahraga dalam kawasan terpantau.',
+    image: kegiatanTahfidzImg,
+    alt: 'Area kegiatan tahfidz Al-Qur’an, wisuda, dan ekstrakurikuler siswa YPI Al-Fuad',
+  },
+] as const;
+---
+
+<section
+  id="fasilitas"
+  class="scroll-mt-24 py-16 md:py-24 bg-white border-b border-primary-dark/10"
+>
+  <div class="container-12 gap-y-8">
+    <!-- Header Section -->
+    <div class="col-span-12 lg:col-span-8 space-y-4">
+      <span
+        class="inline-flex items-center gap-2 rounded-full bg-primary-surface px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-primary-dark border border-primary/20"
+      >
+        <Camera class="h-4 w-4 text-gold shrink-0" aria-hidden="true" />
+        <span>Islamic Life &amp; Fasilitas Kampus Terpadu</span>
+      </span>
+
+      <h2
+        class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink-heading leading-tight"
+      >
+        Suasana Belajar Sejuk, Aman &amp; Mendukung Pembiasaan Ibadah
+      </h2>
+
+      <p class="text-base sm:text-lg text-ink-body leading-relaxed">
+        Berada di lingkungan Perum Poris Indah Blok Tempe Gg. Masjid At-Taqwa,
+        seluruh fasilitas dirancang agar Ananda merasa betah bersekolah, dekat
+        dengan masjid, serta terlindungi dari pergaulan negatif.
+      </p>
+    </div>
+
+    <div class="col-span-12 lg:col-span-4 flex lg:items-end lg:justify-end">
+      <a
+        href={SITE_CONFIG.address.googleMapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex w-full lg:w-auto items-center justify-center gap-2 min-h-[48px] rounded-xl border border-primary/25 bg-primary-surface hover:bg-emerald-100 px-5 py-3 text-sm font-bold text-primary-dark transition-colors"
+      >
+        <MapPin class="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
+        <span>Survei Lokasi di Google Maps</span>
+      </a>
+    </div>
+
+    <!-- 4 Kartu Galeri Utama (2x2 Grid 12-Kolom dengan Rasio Konsisten 16:10) -->
+    {
+      galleryItems.map((item) => (
+        <figure class="col-span-12 md:col-span-6 group relative overflow-hidden rounded-3xl border border-primary-dark/12 bg-primary-dark shadow-sm hover:shadow-xl transition-shadow">
+          <div class="aspect-[16/10] w-full overflow-hidden">
+            <Image
+              src={item.image}
+              alt={item.alt}
+              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <!-- Overlay Caption Bersih -->
+          <figcaption class="bg-gradient-to-t from-primary-dark via-primary-dark/95 to-primary-dark/80 p-5 sm:p-6 text-white">
+            <span class="inline-flex items-center rounded-full bg-gold/20 border border-gold/40 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-gold-light">
+              {item.tag}
+            </span>
+            <h3 class="mt-2 font-heading text-lg sm:text-xl font-bold text-white leading-snug">
+              {item.title}
+            </h3>
+            <p class="mt-1.5 text-xs sm:text-sm text-emerald-50/85 leading-relaxed">
+              {item.caption}
+            </p>
+          </figcaption>
+        </figure>
+      ))
+    }
+
+    <!-- Daftar Detail 6 Fasilitas Penunjang (Grid 12-Kolom: 3 Kartu per Baris Desktop) -->
+    <div class="col-span-12 pt-4">
+      <div class="grid grid-cols-12 gap-4 md:gap-6">
+        <div class="col-span-12 flex flex-wrap items-center justify-between gap-2">
+          <h3 class="font-heading text-lg sm:text-xl font-bold text-ink-heading">
+            Sarana &amp; Prasarana Penunjang di Kawasan YPI Al-Fuad
+          </h3>
+          <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
+            <ShieldCheck class="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span>Kawasan Terpadu RA &ndash; SMK-IT &amp; Pesantren</span>
+          </span>
+        </div>
+
+        {
+          SCHOOL_FACILITIES.map((facility) => (
+            <article class="col-span-12 sm:col-span-6 lg:col-span-4 rounded-2xl bg-surface-alabaster p-5 border border-primary-dark/10 flex flex-col gap-2">
+              <div class="flex items-center justify-between gap-2">
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700">
+                  <Building2 class="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                  <span>{facility.category}</span>
+                </span>
+              </div>
+              <h4 class="font-heading text-base font-bold text-ink-heading">
+                {facility.name}
+              </h4>
+              <p class="text-xs sm:text-sm text-ink-body leading-relaxed">
+                {facility.description}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

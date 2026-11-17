@@ -1,0 +1,48 @@
+---
+import { MessageCircle } from 'lucide-astro';
+import { SITE_CONFIG } from '@/data/siteConfig';
+import { buildQuickWhatsAppUrl } from '@/utils/whatsapp';
+
+const quickWaUrl = buildQuickWhatsAppUrl();
+---
+
+<!-- Tombol WhatsApp Mengambang Kanan Bawah (Desktop & Mobile Tanpa Menutupi CTA Mobile) -->
+<div class="pointer-events-none fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2.5">
+  <!-- Tooltip Selalu Jelas di Desktop & Layar Lebar (sm+), Tidak Memenuhi Layar Mobile -->
+  <a
+    href={quickWaUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    tabindex="-1"
+    aria-hidden="true"
+    class="pointer-events-auto hidden md:inline-flex items-center rounded-full bg-white px-3.5 py-2 text-xs font-bold text-primary-dark shadow-lg border border-primary/20 transition-transform hover:-translate-x-0.5"
+  >
+    Tanya Kuota &amp; Biaya PPDB
+  </a>
+
+  <a
+    href={quickWaUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    title="Tanya Kuota & Biaya PPDB via WhatsApp"
+    aria-label={`Tanya Kuota & Biaya PPDB ${SITE_CONFIG.shortName} via WhatsApp`}
+    class="pointer-events-auto group relative inline-flex h-12 w-12 md:h-12 md:w-auto md:px-4 items-center justify-center gap-2 rounded-full bg-primary hover:bg-primary-dark text-white shadow-xl ring-2 ring-gold/80 transition-all hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+  >
+    <span
+      class="flex h-8 w-8 items-center justify-center rounded-full bg-amber-700 text-white shrink-0 transition-transform group-hover:scale-105"
+      aria-hidden="true"
+    >
+      <MessageCircle class="h-4 w-4" />
+    </span>
+    <span class="hidden md:inline text-sm font-bold whitespace-nowrap">
+      Chat Panitia WA
+    </span>
+
+    <!-- Tooltip Hover untuk Tablet/Aksesibilitas -->
+    <span
+      class="pointer-events-none absolute bottom-full right-0 mb-2 hidden whitespace-nowrap rounded-lg bg-ink-heading px-3 py-1.5 text-xs font-semibold text-white shadow-md sm:group-hover:block md:hidden"
+    >
+      Tanya Kuota &amp; Biaya PPDB
+    </span>
+  </a>
+</div>

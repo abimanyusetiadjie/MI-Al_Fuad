@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+import SEOHead, { type Props as SEOHeadProps } from '@/components/layout/SEOHead.astro';
+import Navbar from '@/components/layout/Navbar.astro';
+import Footer from '@/components/layout/Footer.astro';
+import FloatingWhatsApp from '@/components/ui/FloatingWhatsApp.astro';
+
+export interface Props extends SEOHeadProps {}
+
+const seoProps = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <SEOHead {...seoProps} />
+  </head>
+  <body
+    id="top"
+    class="min-h-screen flex flex-col bg-surface-alabaster text-ink-body antialiased selection:bg-primary/15 selection:text-primary-dark"
+  >
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-lg focus:bg-primary-dark focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg"
+    >
+      Lewati ke konten utama
+    </a>
+
+    <Navbar />
+
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+    <FloatingWhatsApp />
+  </body>
+</html>

@@ -1,0 +1,193 @@
+---
+import { SITE_CONFIG } from '@/data/siteConfig';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title = 'MI TPI Al-Fuad Poris Tangerang | Madrasah Ibtidaiyah & SD Islam Tahfidz',
+  description = "MI TPI Al-Fuad (Madrasah Ibtidaiyah setara SD Islam) di bawah naungan YPI Tahfidz Qur'an Al-Fuad Poris Gaga, Batuceper, Kota Tangerang sejak 1990. Membuka PPDB RA/TK Islam, MI TPI Al-Fuad, SMP-IT, SMK-IT & Pondok Pesantren. Bimbingan mengaji dari nol, wajib hafal & paham arti Juz 30.",
+  canonicalUrl,
+  ogImage = '/images/og-cover-alfuad.jpg',
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+const baseSiteUrl = Astro.site?.toString() ?? SITE_CONFIG.siteUrl;
+const resolvedCanonical =
+  canonicalUrl ?? new URL(Astro.url.pathname, baseSiteUrl).toString();
+const resolvedOgImage = new URL(ogImage, baseSiteUrl).toString();
+
+const keywords = [
+  'MI TPI Al-Fuad',
+  'MI Al-Fuad Poris',
+  'SD Islam Al-Fuad Tangerang',
+  'Madrasah Ibtidaiyah TPI Al-Fuad',
+  'Sekolah Islam di Poris Gaga',
+  'Madrasah Ibtidaiyah Tahfidz Batuceper Tangerang',
+  'SMP IT Al-Fuad Poris Indah',
+  'SMK IT Al-Fuad Tangerang',
+  'RA/TK Islam Poris Gaga',
+  "YPI Tahfidz Qur'an Al-Fuad",
+  'PPDB MI TPI Al-Fuad Tangerang',
+  'Pondok Pesantren Poris Indah',
+].join(', ');
+
+const subOrganizations = [
+  {
+    '@type': 'Preschool',
+    name: 'RA / TK Islam Al-Fuad Poris Gaga',
+    identifier: '69887983',
+  },
+  {
+    '@type': 'ElementarySchool',
+    name: 'MI TPI Al-Fuad Poris Gaga (Madrasah Ibtidaiyah / Setara SD Islam)',
+    identifier: '69727517',
+  },
+  {
+    '@type': 'MiddleSchool',
+    name: 'SMP-IT Al-Fuad Poris Gaga',
+    identifier: '20606776',
+  },
+  {
+    '@type': 'HighSchool',
+    name: 'SMK-IT Al-Fuad Poris Gaga',
+    identifier: '20613691',
+  },
+  {
+    '@type': 'EducationalOrganization',
+    name: "Pondok Pesantren & Majlis Ta'lim YPI Al-Fuad",
+    identifier: 'Terdaftar Kemenag',
+  },
+];
+
+const jsonLdSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['EducationalOrganization', 'LocalBusiness'],
+  '@id': `${SITE_CONFIG.siteUrl}/#organization`,
+  name: SITE_CONFIG.foundationName,
+  alternateName: [
+    'MI TPI Al-Fuad',
+    'MI Al-Fuad',
+    'SD Islam Al-Fuad',
+    'Madrasah Ibtidaiyah TPI Al-Fuad',
+    'MI Tahfidz Al-Fuad',
+    SITE_CONFIG.shortName,
+    'RA Al-Fuad',
+    'MIS Al-Fuad',
+    'MIT Al-Fuad',
+    'SMP IT Al-Fuad',
+    'SMK IT Al-Fuad',
+    'Pondok Pesantren Al-Fuad',
+  ],
+  foundingDate: String(SITE_CONFIG.foundedYear),
+  founder: {
+    '@type': 'Person',
+    name: SITE_CONFIG.chairman,
+  },
+  description,
+  url: SITE_CONFIG.siteUrl,
+  image: resolvedOgImage,
+  telephone: '+62-21-55740372',
+  email: SITE_CONFIG.contact.email,
+  priceRange: '$$',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '07:00',
+      closes: '16:00',
+    },
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE_CONFIG.address.street,
+    addressLocality: `${SITE_CONFIG.address.subdistrict}, ${SITE_CONFIG.address.district}, ${SITE_CONFIG.address.city}`,
+    addressRegion: SITE_CONFIG.address.province,
+    postalCode: SITE_CONFIG.address.postalCode,
+    addressCountry: 'ID',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: SITE_CONFIG.address.coordinates.lat,
+    longitude: SITE_CONFIG.address.coordinates.lng,
+  },
+  hasMap: SITE_CONFIG.address.googleMapsUrl,
+  areaServed: [
+    'Poris Gaga',
+    'Poris Indah',
+    'Batuceper',
+    'Cipondoh',
+    'Kota Tangerang',
+    'Kalideres',
+  ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: `+${SITE_CONFIG.contact.whatsappPrimary}`,
+      contactType: 'admissions',
+      areaServed: 'ID',
+      availableLanguage: ['Indonesian'],
+    },
+  ],
+  subOrganization: subOrganizations,
+};
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={SITE_CONFIG.foundationName} />
+<meta
+  name="robots"
+  content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'}
+/>
+
+<!-- Geo & Local SEO Tags -->
+<meta name="geo.region" content="ID-BT" />
+<meta name="geo.placename" content="Poris Gaga, Batuceper, Kota Tangerang" />
+<meta
+  name="geo.position"
+  content={`${SITE_CONFIG.address.coordinates.lat};${SITE_CONFIG.address.coordinates.lng}`}
+/>
+<meta
+  name="ICBM"
+  content={`${SITE_CONFIG.address.coordinates.lat}, ${SITE_CONFIG.address.coordinates.lng}`}
+/>
+
+<!-- Canonical & Icons -->
+<link rel="canonical" href={resolvedCanonical} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- OpenGraph (WhatsApp & Social Preview) -->
+<meta property="og:type" content={ogType} />
+<meta property="og:locale" content="id_ID" />
+<meta property="og:site_name" content={SITE_CONFIG.foundationName} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={resolvedCanonical} />
+<meta property="og:image" content={resolvedOgImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta
+  property="og:image:alt"
+  content={`${SITE_CONFIG.foundationName} — Berdiri Sejak ${SITE_CONFIG.foundedYear}`}
+/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={resolvedOgImage} />
+
+<!-- Structured Data JSON-LD -->
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />

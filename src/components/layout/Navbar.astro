@@ -1,0 +1,227 @@
+---
+import { Clock, MapPin, Menu, MessageCircle, Phone, X } from 'lucide-astro';
+import { SITE_CONFIG } from '@/data/siteConfig';
+import { buildQuickWhatsAppUrl } from '@/utils/whatsapp';
+
+interface NavLinkItem {
+  label: string;
+  href: string;
+}
+
+const isHomePage = Astro.url.pathname === '/';
+const anchorPrefix = isHomePage ? '' : '/';
+
+const navLinks: readonly NavLinkItem[] = [
+  { label: 'Tentang', href: `${anchorPrefix}#tentang` },
+  { label: 'Program Tahfidz', href: `${anchorPrefix}#program-tahfidz` },
+  { label: 'Jenjang', href: `${anchorPrefix}#jenjang` },
+  { label: 'Biaya PPDB', href: `${anchorPrefix}#biaya-ppdb` },
+  { label: 'Fasilitas', href: `${anchorPrefix}#fasilitas` },
+  { label: 'FAQ', href: `${anchorPrefix}#faq` },
+];
+
+const ppdbCtaHref = `${anchorPrefix}#biaya-ppdb`;
+const quickWaUrl = buildQuickWhatsAppUrl();
+---
+
+<!-- Top Utility Bar -->
+<div class="hidden md:block bg-primary-dark text-emerald-50 text-xs border-b border-white/10">
+  <div class="container-12 items-center py-2">
+    <div class="col-span-7 flex items-center gap-2 min-w-0">
+      <MapPin class="w-3.5 h-3.5 text-gold-medium shrink-0" aria-hidden="true" />
+      <span class="truncate">
+        {SITE_CONFIG.address.shortStreet}, {SITE_CONFIG.address.subdistrict},{' '}
+        {SITE_CONFIG.address.district}, {SITE_CONFIG.address.city}
+      </span>
+    </div>
+    <div class="col-span-5 flex items-center justify-end gap-4">
+      <span class="inline-flex items-center gap-1.5 text-emerald-100/90">
+        <Clock class="w-3.5 h-3.5 text-gold-medium shrink-0" aria-hidden="true" />
+        <span>{SITE_CONFIG.contact.operatingHours}</span>
+      </span>
+      <a
+        href="tel:+622155740372"
+        class="inline-flex items-center gap-1.5 font-medium text-white hover:text-gold-light transition-colors"
+      >
+        <Phone class="w-3.5 h-3.5 text-gold-medium shrink-0" aria-hidden="true" />
+        <span>{SITE_CONFIG.contact.phoneOffice1}</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Sticky Header Navbar -->
+<header
+  class="sticky top-0 z-50 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-primary-dark/10 shadow-[0_1px_12px_rgba(6,78,59,0.06)]"
+>
+  <div class="container-12 items-center py-2.5 md:py-3">
+    <!-- Logo & Identitas Lembaga -->
+    <div class="col-span-7 sm:col-span-8 lg:col-span-4">
+      <a
+        href={isHomePage ? '#top' : '/'}
+        class="group inline-flex items-center gap-2.5 min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      >
+        <span
+          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-dark text-gold-medium shadow-sm ring-1 ring-gold/30 transition-transform group-hover:scale-[1.03]"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 36 36"
+            class="h-6 w-6"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 5L29 12.5V28H7V12.5L18 5Z"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M18 13V28M12 18.5C14.2 17.3 16.3 17.5 18 19C19.7 17.5 21.8 17.3 24 18.5"
+              stroke="#ECFDF5"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+        <span class="flex flex-col leading-tight min-w-0">
+          <span class="font-heading text-sm sm:text-base font-extrabold tracking-tight text-primary-dark">
+            MI TPI Al-Fuad
+          </span>
+          <span class="text-[10px] sm:text-xs font-semibold text-amber-700 leading-snug">
+            Madrasah Ibtidaiyah (Setara SD Islam) &bull; Poris Gaga, Tangerang
+          </span>
+        </span>
+      </a>
+    </div>
+
+    <!-- Desktop Anchor Navigation -->
+    <nav
+      aria-label="Navigasi Utama"
+      class="hidden lg:col-span-6 lg:flex lg:items-center lg:justify-center lg:gap-4 xl:gap-5"
+    >
+      {
+        navLinks.map((item) => (
+          <a
+            href={item.href}
+            class="inline-flex items-center min-h-[44px] text-sm font-semibold text-ink-subheading hover:text-primary transition-colors whitespace-nowrap"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Desktop & Mobile Right Actions -->
+    <div class="col-span-5 sm:col-span-4 lg:col-span-2 flex items-center justify-end gap-2">
+      <a
+        href={ppdbCtaHref}
+        class="inline-flex items-center justify-center min-h-[44px] rounded-xl bg-amber-700 hover:bg-amber-800 px-3.5 sm:px-5 py-2 text-xs sm:text-sm font-bold text-white shadow-sm transition-colors whitespace-nowrap focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700"
+      >
+        Daftar PPDB
+      </a>
+
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="lg:hidden inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-xl border border-primary-dark/15 bg-white text-primary-dark hover:bg-primary-surface transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
+        aria-label="Buka menu navigasi"
+      >
+        <Menu id="mobile-icon-open" class="h-5 w-5" aria-hidden="true" />
+        <X id="mobile-icon-close" class="hidden h-5 w-5" aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Drawer -->
+  <div
+    id="mobile-nav-drawer"
+    class="hidden lg:hidden border-t border-primary-dark/10 bg-[#FAF8F5] shadow-lg"
+  >
+    <div class="mx-auto max-w-[1280px] px-4 sm:px-6 py-4 space-y-3">
+      <nav aria-label="Menu Mobile" class="flex flex-col gap-1">
+        {
+          navLinks.map((item) => (
+            <a
+              href={item.href}
+              data-mobile-nav-link
+              class="flex items-center justify-between min-h-[44px] rounded-xl px-3.5 py-2.5 text-sm font-semibold text-ink-heading hover:bg-primary-surface hover:text-primary transition-colors"
+            >
+              <span>{item.label}</span>
+              <span class="text-xs text-primary/60" aria-hidden="true">
+                &rarr;
+              </span>
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="pt-3 border-t border-primary-dark/10 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <a
+          href={ppdbCtaHref}
+          data-mobile-nav-link
+          class="inline-flex items-center justify-center min-h-[44px] rounded-xl bg-amber-700 hover:bg-amber-800 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors"
+        >
+          Daftar PPDB Online
+        </a>
+        <a
+          href={quickWaUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-mobile-nav-link
+          class="inline-flex items-center justify-center gap-2 min-h-[44px] rounded-xl bg-primary hover:bg-primary-dark px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors"
+        >
+          <MessageCircle class="h-4 w-4 shrink-0" aria-hidden="true" />
+          <span>Chat WA Panitia ({SITE_CONFIG.contact.whatsappDisplay})</span>
+        </a>
+      </div>
+
+      <p class="pt-1 text-xs text-ink-caption flex items-start gap-1.5">
+        <MapPin class="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+        <span>{SITE_CONFIG.address.fullAddress}</span>
+      </p>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const iconOpen = document.getElementById('mobile-icon-open');
+    const iconClose = document.getElementById('mobile-icon-close');
+
+    if (!toggleBtn || !drawer) return;
+
+    const setMenuOpen = (isOpen) => {
+      drawer.classList.toggle('hidden', !isOpen);
+      toggleBtn.setAttribute('aria-expanded', String(isOpen));
+      toggleBtn.setAttribute(
+        'aria-label',
+        isOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi',
+      );
+      if (iconOpen) iconOpen.classList.toggle('hidden', isOpen);
+      if (iconClose) iconClose.classList.toggle('hidden', !isOpen);
+    };
+
+    toggleBtn.addEventListener('click', () => {
+      const currentlyOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
+      setMenuOpen(!currentlyOpen);
+    });
+
+    const drawerLinks = drawer.querySelectorAll('[data-mobile-nav-link]');
+    drawerLinks.forEach((link) => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggleBtn.getAttribute('aria-expanded') === 'true') {
+        setMenuOpen(false);
+        toggleBtn.focus();
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none" role="img" aria-labelledby="tahfidz-title tahfidz-desc">
+  <title id="tahfidz-title">Area Kegiatan Tahfidz, Wisuda &amp; Ekstrakurikuler YPI Al-Fuad</title>
+  <desc id="tahfidz-desc">Ilustrasi halaqah setoran hafalan Al-Qur'an, wisuda tahfidz, dan kegiatan pengembangan bakat santri di Poris Gaga.</desc>
+  <defs>
+    <linearGradient id="areaGrad" x1="0" y1="0" x2="800" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ECFDF5" />
+      <stop offset="100%" stop-color="#FEF3C7" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#areaGrad)" />
+
+  <!-- Decorative Arch Panels -->
+  <path d="M84 440V180C84 110 142 66 210 66C278 66 336 110 336 180V440H84Z" fill="#065F46" />
+  <path d="M104 440V186C104 128 152 90 210 90C268 90 316 128 316 186V440H104Z" fill="#064E3B" stroke="#F59E0B" stroke-width="2.5" />
+
+  <!-- Open Mushaf Icon Inside Arch -->
+  <path d="M148 214L210 232L272 214V294L210 312L148 294V214Z" fill="#FFFFFF" stroke="#F59E0B" stroke-width="3" stroke-linejoin="round" />
+  <path d="M210 232V312" stroke="#065F46" stroke-width="3" />
+  <text x="210" y="362" text-anchor="middle" fill="#FEF3C7" font-family="Arial, sans-serif" font-size="15" font-weight="700">
+    HALAQAH TAHFIDZ
+  </text>
+
+  <!-- Right Side Cards: Wisuda, Pramuka & Hadroh, Olahraga -->
+  <rect x="380" y="74" width="356" height="106" rx="20" fill="#FFFFFF" stroke="#065F46" stroke-opacity="0.2" stroke-width="2" />
+  <circle cx="436" cy="127" r="28" fill="#FEF3C7" stroke="#D97706" stroke-width="2" />
+  <path d="M424 127L436 118L448 127L436 136L424 127Z" fill="#D97706" />
+  <text x="484" y="120" fill="#0F172A" font-family="Arial, sans-serif" font-size="18" font-weight="700">Wisuda Tahfidz Akbar</text>
+  <text x="484" y="146" fill="#475569" font-family="Arial, sans-serif" font-size="14">Apresiasi Juz 30 &amp; Multi-Juz Rutin</text>
+
+  <rect x="380" y="200" width="356" height="106" rx="20" fill="#FFFFFF" stroke="#065F46" stroke-opacity="0.2" stroke-width="2" />
+  <circle cx="436" cy="253" r="28" fill="#ECFDF5" stroke="#047857" stroke-width="2" />
+  <path d="M436 237L442 249L455 251L445 260L448 273L436 266L424 273L427 260L417 251L430 249L436 237Z" fill="#047857" />
+  <text x="484" y="246" fill="#0F172A" font-family="Arial, sans-serif" font-size="18" font-weight="700">Pramuka, Silat &amp; Hadroh</text>
+  <text x="484" y="272" fill="#475569" font-family="Arial, sans-serif" font-size="14">Membina keberanian &amp; kepemimpinan</text>
+
+  <rect x="380" y="326" width="356" height="106" rx="20" fill="#FFFFFF" stroke="#065F46" stroke-opacity="0.2" stroke-width="2" />
+  <circle cx="436" cy="379" r="28" fill="#ECFDF5" stroke="#047857" stroke-width="2" />
+  <rect x="422" y="365" width="28" height="28" rx="6" stroke="#065F46" stroke-width="2.5" />
+  <text x="484" y="372" fill="#0F172A" font-family="Arial, sans-serif" font-size="18" font-weight="700">Lingkungan Aman &amp; Terpantau</text>
+  <text x="484" y="398" fill="#475569" font-family="Arial, sans-serif" font-size="14">Kawasan terpadu Poris Indah Blok Tempe</text>
+</svg>

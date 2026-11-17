@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none" role="img" aria-labelledby="masjid-title masjid-desc">
+  <title id="masjid-title">Masjid Jami' At-Taqwa &amp; Halaqah Tahfidz YPI Al-Fuad</title>
+  <desc id="masjid-desc">Ilustrasi kubah Masjid Jami At-Taqwa berwarna zamrud dan emas di lingkungan YPI Al-Fuad Poris Gaga.</desc>
+  <defs>
+    <linearGradient id="skyMasjid" x1="0" y1="0" x2="800" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#064E3B" />
+      <stop offset="65%" stop-color="#047857" />
+      <stop offset="100%" stop-color="#065F46" />
+    </linearGradient>
+    <linearGradient id="domeGold" x1="300" y1="90" x2="500" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FEF3C7" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#skyMasjid)" />
+  <circle cx="660" cy="96" r="56" fill="#F59E0B" fill-opacity="0.18" />
+  <path d="M674 66C654 66 640 81 640 99C640 117 654 132 674 132C661 125 654 113 654 99C654 85 661 73 674 66Z" fill="#FEF3C7" />
+
+  <!-- Minarets -->
+  <rect x="172" y="148" width="44" height="232" rx="6" fill="#ECFDF5" fill-opacity="0.92" />
+  <path d="M164 148L194 94L224 148H164Z" fill="url(#domeGold)" />
+  <rect x="584" y="148" width="44" height="232" rx="6" fill="#ECFDF5" fill-opacity="0.92" />
+  <path d="M576 148L606 94L636 148H576Z" fill="url(#domeGold)" />
+
+  <!-- Main Mosque Dome & Building -->
+  <path d="M286 240C286 156 336 106 400 84C464 106 514 156 514 240H286Z" fill="url(#domeGold)" />
+  <path d="M400 54V84" stroke="#FEF3C7" stroke-width="4" stroke-linecap="round" />
+  <rect x="234" y="236" width="332" height="156" rx="12" fill="#FAF8F5" />
+
+  <!-- Three Entrance Mihrab Arches -->
+  <path d="M276 392V304C276 280 294 264 316 264C338 264 356 280 356 304V392H276Z" fill="#065F46" />
+  <path d="M368 392V292C368 264 382 250 400 250C418 250 432 264 432 292V392H368Z" fill="#064E3B" stroke="#D97706" stroke-width="3" />
+  <path d="M444 392V304C444 280 462 264 484 264C506 264 524 280 524 304V392H444Z" fill="#065F46" />
+
+  <!-- Courtyard & Halaqah Carpet -->
+  <rect x="0" y="392" width="800" height="108" fill="#04392B" />
+  <rect x="140" y="408" width="520" height="58" rx="14" fill="#10B981" fill-opacity="0.22" stroke="#10B981" stroke-opacity="0.4" />
+  <text x="400" y="443" text-anchor="middle" fill="#FEF3C7" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="1.2">
+    MASJID JAMI' AT-TAQWA &amp; PUSAT HALAQAH TAHFIDZ
+  </text>
+</svg>

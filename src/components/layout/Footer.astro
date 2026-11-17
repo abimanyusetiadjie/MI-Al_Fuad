@@ -1,0 +1,228 @@
+---
+import {
+  ChevronRight,
+  Clock,
+  ExternalLink,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Navigation,
+  Phone,
+  ShieldCheck,
+} from 'lucide-astro';
+import { SITE_CONFIG } from '@/data/siteConfig';
+import { buildQuickWhatsAppUrl } from '@/utils/whatsapp';
+
+const isHomePage = Astro.url.pathname === '/';
+const anchorPrefix = isHomePage ? '' : '/';
+const currentYear = new Date().getFullYear();
+const quickWaUrl = buildQuickWhatsAppUrl();
+const mapsEmbedUrl = `https://www.google.com/maps?q=${SITE_CONFIG.address.coordinates.lat},${SITE_CONFIG.address.coordinates.lng}&z=16&output=embed`;
+
+const quickNavLinks = [
+  { label: 'Profil Yayasan (Sejak 1990)', href: `${anchorPrefix}#tentang` },
+  { label: 'Program Tahfidz & Terjemah', href: `${anchorPrefix}#program-tahfidz` },
+  { label: '5 Jenjang Pendidikan', href: `${anchorPrefix}#jenjang` },
+  { label: 'Rincian Biaya & Kuota PPDB', href: `${anchorPrefix}#biaya-ppdb` },
+  { label: 'Fasilitas Kampus Al-Fuad', href: `${anchorPrefix}#fasilitas` },
+  { label: 'Pertanyaan Umum (FAQ)', href: `${anchorPrefix}#faq` },
+] as const;
+---
+
+<footer
+  id="kontak"
+  class="bg-primary-dark text-emerald-50 border-t border-primary-medium/30 mt-auto"
+>
+  <div class="container-12 py-12 md:py-16 gap-y-10">
+    <!-- Kolom 1 (4 Col): Informasi Yayasan & Daftar NPSN Resmi -->
+    <div class="col-span-12 md:col-span-6 lg:col-span-4 space-y-5">
+      <div class="space-y-2.5">
+        <span
+          class="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-gold-light border border-gold/30"
+        >
+          <ShieldCheck class="h-3.5 w-3.5 text-gold-medium shrink-0" aria-hidden="true" />
+          <span>Berdiri Sejak {SITE_CONFIG.foundedYear} &bull; {SITE_CONFIG.stats.yearsActive} Tahun Mengabdi</span>
+        </span>
+        <h2 class="font-heading text-xl font-bold text-white leading-snug">
+          {SITE_CONFIG.foundationName}
+        </h2>
+        <p class="text-sm text-emerald-100/85 leading-relaxed">
+          Lembaga pendidikan Islam terpadu dan pembinaan tahfidz Al-Qur'an di bawah asuhan{' '}
+          <strong class="font-semibold text-white">{SITE_CONFIG.chairman}</strong>. Membimbing
+          Ananda dari nol hingga hafal serta paham makna Juz 30.
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-2.5">
+        <h3 class="font-heading text-xs font-bold uppercase tracking-wider text-gold-light">
+          Daftar NPSN Resmi Satuan Pendidikan
+        </h3>
+        <ul class="space-y-2 text-xs sm:text-sm">
+          {
+            SITE_CONFIG.units.map((unit) => (
+              <li class="flex items-center justify-between gap-2 border-b border-white/10 pb-1.5 last:border-b-0 last:pb-0">
+                <span class="text-emerald-50 font-medium">{unit.name}</span>
+                <span class="shrink-0 rounded-md bg-primary-medium/50 px-2 py-0.5 font-mono text-xs font-semibold text-gold-light border border-white/10">
+                  {unit.npsn === 'Terdaftar Kemenag' ? unit.npsn : `NPSN ${unit.npsn}`}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- Kolom 2 (2 Col): Tautan Cepat Jenjang Pendidikan & Navigasi -->
+    <div class="col-span-12 sm:col-span-6 lg:col-span-2 space-y-4">
+      <h3 class="font-heading text-sm font-bold uppercase tracking-wider text-gold-light">
+        Tautan Cepat
+      </h3>
+      <ul class="space-y-1">
+        {
+          quickNavLinks.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="inline-flex items-center gap-1.5 min-h-[44px] text-sm text-emerald-100/85 hover:text-gold-light transition-colors"
+              >
+                <ChevronRight class="h-3.5 w-3.5 text-gold-medium shrink-0" aria-hidden="true" />
+                <span>{item.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Kolom 3 (3 Col): Jam Operasional & Kontak Sekretariat PPDB -->
+    <div class="col-span-12 sm:col-span-6 lg:col-span-3 space-y-4">
+      <h3 class="font-heading text-sm font-bold uppercase tracking-wider text-gold-light">
+        Sekretariat PPDB &amp; Kontak
+      </h3>
+
+      <ul class="space-y-3 text-sm text-emerald-100/90">
+        <li class="flex items-start gap-2.5">
+          <Clock class="h-4 w-4 text-gold-medium shrink-0 mt-0.5" aria-hidden="true" />
+          <div>
+            <p class="font-semibold text-white">Jam Layanan Sekretariat</p>
+            <p class="text-xs sm:text-sm text-emerald-100/80">
+              {SITE_CONFIG.contact.operatingHours}
+            </p>
+          </div>
+        </li>
+
+        <li class="flex items-start gap-2.5">
+          <MapPin class="h-4 w-4 text-gold-medium shrink-0 mt-0.5" aria-hidden="true" />
+          <div>
+            <p class="font-semibold text-white">Alamat Kampus Terpadu</p>
+            <p class="text-xs sm:text-sm text-emerald-100/80 leading-relaxed">
+              {SITE_CONFIG.address.fullAddress}
+            </p>
+          </div>
+        </li>
+
+        <li class="flex items-start gap-2.5">
+          <MessageCircle class="h-4 w-4 text-gold-medium shrink-0 mt-0.5" aria-hidden="true" />
+          <div>
+            <p class="font-semibold text-white">WhatsApp Panitia PPDB</p>
+            <a
+              href={quickWaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center min-h-[44px] text-gold-light hover:underline font-semibold"
+            >
+              {SITE_CONFIG.contact.whatsappDisplay}
+            </a>
+          </div>
+        </li>
+
+        <li class="flex items-start gap-2.5">
+          <Phone class="h-4 w-4 text-gold-medium shrink-0 mt-0.5" aria-hidden="true" />
+          <div>
+            <p class="font-semibold text-white">Telepon Kantor</p>
+            <p class="flex flex-wrap items-center gap-x-1.5 text-xs sm:text-sm text-emerald-100/85">
+              <a
+                href="tel:+622155740372"
+                class="inline-flex items-center min-h-[44px] hover:text-gold-light transition-colors"
+              >
+                {SITE_CONFIG.contact.phoneOffice1}
+              </a>
+              <span aria-hidden="true">/</span>
+              <a
+                href="tel:+622155775714"
+                class="inline-flex items-center min-h-[44px] hover:text-gold-light transition-colors"
+              >
+                {SITE_CONFIG.contact.phoneOffice2}
+              </a>
+            </p>
+          </div>
+        </li>
+
+        <li class="flex items-start gap-2.5">
+          <Mail class="h-4 w-4 text-gold-medium shrink-0 mt-0.5" aria-hidden="true" />
+          <div>
+            <p class="font-semibold text-white">Email Resmi</p>
+            <a
+              href={`mailto:${SITE_CONFIG.contact.email}`}
+              class="inline-flex items-center min-h-[44px] text-xs sm:text-sm text-emerald-100/85 hover:text-gold-light transition-colors break-all"
+            >
+              {SITE_CONFIG.contact.email}
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Kolom 4 (3 Col): Mini-Embed & Kartu Rute Google Maps -->
+    <div class="col-span-12 md:col-span-6 lg:col-span-3 space-y-3">
+      <h3 class="font-heading text-sm font-bold uppercase tracking-wider text-gold-light">
+        Peta &amp; Rute Lokasi
+      </h3>
+
+      <div class="rounded-2xl overflow-hidden border border-white/15 bg-white/5 shadow-md">
+        <div class="aspect-[16/10] w-full bg-primary-medium/30">
+          <iframe
+            src={mapsEmbedUrl}
+            title="Peta Lokasi YPI Tahfidz Qur'an Al-Fuad Poris Gaga"
+            class="h-full w-full border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+
+        <div class="p-3.5 space-y-3">
+          <div class="flex items-start gap-2 text-xs text-emerald-100/85 leading-relaxed">
+            <Navigation class="h-4 w-4 text-gold-medium shrink-0 mt-0.5" aria-hidden="true" />
+            <p>
+              <strong class="text-white">Akses Mudah:</strong> Masuk Gg. Masjid At-Taqwa, Jl.
+              Perum Poris Indah Blok Tempe (dekat Poris Gaga, Batuceper, Cipondoh &amp; Kalideres).
+            </p>
+          </div>
+
+          <a
+            href={SITE_CONFIG.address.googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex w-full items-center justify-center gap-2 min-h-[44px] rounded-xl bg-amber-700 hover:bg-amber-800 px-3.5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm transition-colors"
+          >
+            <span>Buka Rute Google Maps</span>
+            <ExternalLink class="h-4 w-4 shrink-0" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright Bar -->
+  <div class="border-t border-white/10 bg-[#04392b]">
+    <div class="container-12 items-center py-5 pb-24 md:pb-5 text-xs text-emerald-100/75">
+      <p class="col-span-12 md:col-span-7 text-center md:text-left">
+        &copy; {currentYear} {SITE_CONFIG.foundationName} &bull; Poris Gaga, Batuceper, Kota
+        Tangerang.
+      </p>
+      <p class="col-span-12 md:col-span-5 text-center md:text-right">
+        RA &bull; MIS/MIT &bull; SMP-IT &bull; SMK-IT &bull; Pondok Pesantren
+      </p>
+    </div>
+  </div>
+</footer>

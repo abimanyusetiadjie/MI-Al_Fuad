@@ -1,0 +1,160 @@
+---
+import { Image } from 'astro:assets';
+import {
+  ArrowRight,
+  Award,
+  CheckCircle2,
+  MessageCircle,
+  Sparkles,
+} from 'lucide-astro';
+import heroWisudaImg from '@/assets/hero-wisuda-tahfidz.svg';
+import { SITE_CONFIG } from '@/data/siteConfig';
+---
+
+<section
+  id="tentang"
+  class="scroll-mt-24 relative overflow-hidden bg-primary-dark text-white py-12 md:py-20 lg:py-24"
+>
+  <!-- Dekorasi Latar Belakang Lembut -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-20"
+    aria-hidden="true"
+  >
+    <div
+      class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-primary-light blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-gold blur-3xl"
+    >
+    </div>
+  </div>
+
+  <div class="relative container-12 items-center gap-y-10">
+    <!-- Kolom Kiri (7 Kolom Desktop): Copywriting & Dual CTA -->
+    <div class="col-span-12 lg:col-span-7 space-y-6">
+      <div
+        class="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/10 px-3.5 py-2 text-xs sm:text-sm font-semibold text-gold-light backdrop-blur-sm"
+      >
+        <Sparkles class="h-4 w-4 text-gold-medium shrink-0" aria-hidden="true" />
+        <span>
+          Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran Baru — RA &bull; MIT
+          &bull; SMP-IT &bull; SMK-IT &bull; Pesantren
+        </span>
+      </div>
+
+      <h1
+        class="font-heading text-3xl sm:text-4xl lg:text-[3.125rem] font-extrabold text-white leading-[1.15] tracking-tight"
+      >
+        Mencetak Generasi Qur'ani:
+        <span class="text-gold-medium">Hafal &amp; Paham Al-Qur'an</span>,
+        Beradab Mulia, Unggul di Poris Gaga
+      </h1>
+
+      <p class="text-base sm:text-lg text-emerald-50/90 leading-relaxed max-w-2xl">
+        Sejak tahun <strong class="text-white font-semibold">{SITE_CONFIG.foundedYear}</strong>,
+        YPI Tahfidz Qur'an Al-Fuad di Batuceper, Kota Tangerang mendampingi Ananda
+        dari nol hingga lancar mengaji, wajib hafal beserta paham arti Juz 30,
+        serta bertumbuh dalam lingkungan Islami dari RA hingga SMK-IT dan Pondok
+        Pesantren.
+      </p>
+
+      <!-- Dual CTA Buttons (Ramah Sentuh >= 48px) -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1">
+        <a
+          href="#daftar-ppdb"
+          class="inline-flex items-center justify-center gap-2.5 min-h-[48px] rounded-xl bg-amber-700 hover:bg-amber-800 px-6 py-3.5 text-sm sm:text-base font-bold text-white shadow-lg shadow-amber-950/30 transition-all hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
+        >
+          <MessageCircle class="h-5 w-5 shrink-0" aria-hidden="true" />
+          <span>Daftar PPDB via WhatsApp</span>
+        </a>
+
+        <a
+          href="#jenjang"
+          class="inline-flex items-center justify-center gap-2 min-h-[48px] rounded-xl border border-white/30 bg-white/10 hover:bg-white/20 px-6 py-3.5 text-sm sm:text-base font-semibold text-white backdrop-blur-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          <span>Lihat Jenjang &amp; Rincian Biaya</span>
+          <ArrowRight class="h-4 w-4 shrink-0" aria-hidden="true" />
+        </a>
+      </div>
+
+      <!-- Poin Jaminan Kepercayaan Orang Tua -->
+      <ul
+        class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2 text-xs sm:text-sm text-emerald-100/90"
+      >
+        <li class="flex items-center gap-2">
+          <CheckCircle2
+            class="h-4 w-4 text-gold-medium shrink-0"
+            aria-hidden="true"
+          />
+          <span>Bimbingan mengaji dari nol</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <CheckCircle2
+            class="h-4 w-4 text-gold-medium shrink-0"
+            aria-hidden="true"
+          />
+          <span>Berdiri 1990 &bull; 52+ Guru Hafidz</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <CheckCircle2
+            class="h-4 w-4 text-gold-medium shrink-0"
+            aria-hidden="true"
+          />
+          <span>NPSN Resmi &amp; Terakreditasi</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Kolom Kanan (5 Kolom Desktop): Visual Kartu Kegiatan & Floating Badges -->
+    <div class="col-span-12 lg:col-span-5">
+      <div class="relative mx-auto max-w-md lg:max-w-none">
+        <!-- Kartu Bingkai Utama -->
+        <div
+          class="rounded-3xl bg-gradient-to-br from-white/15 to-white/5 p-3 sm:p-4 border border-white/20 shadow-2xl backdrop-blur-sm"
+        >
+          <Image
+            src={heroWisudaImg}
+            alt="Ilustrasi Wisuda Tahfidz Al-Qur'an santri dan siswa YPI Al-Fuad Poris Gaga Tangerang"
+            class="w-full h-auto rounded-2xl object-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+
+        <!-- Floating Badge Kanan Atas -->
+        <div
+          class="mt-3 sm:mt-0 sm:absolute sm:-top-4 sm:-right-3 rounded-2xl bg-gold-light px-4 py-2.5 text-ink-heading shadow-xl border border-gold/40 flex items-center gap-2.5"
+        >
+          <span
+            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-amber-700 text-white"
+            aria-hidden="true"
+          >
+            <Award class="h-4 w-4" />
+          </span>
+          <div class="leading-tight">
+            <p class="font-heading text-xs font-extrabold text-primary-dark">
+              Target Wajib Lulusan
+            </p>
+            <p class="text-xs font-semibold text-ink-subheading">
+              Hafal &amp; Paham Makna Juz 30
+            </p>
+          </div>
+        </div>
+
+        <!-- Floating Card Kiri Bawah -->
+        <div
+          class="mt-2.5 sm:mt-0 sm:absolute sm:-bottom-5 sm:-left-4 rounded-2xl bg-white p-3.5 sm:p-4 text-ink-heading shadow-xl border border-primary/15 sm:max-w-[290px]"
+        >
+          <p class="font-heading text-sm font-extrabold text-primary-dark">
+            52+ Pendidik Hafidz/Hafidzah
+          </p>
+          <p class="mt-0.5 text-xs text-ink-body leading-snug">
+            Diasuh langsung di bawah naungan {SITE_CONFIG.chairman} &bull;
+            Apresiasi Umroh tahunan bagi guru berprestasi.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
