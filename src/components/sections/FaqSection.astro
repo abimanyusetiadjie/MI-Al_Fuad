@@ -1,5 +1,5 @@
 ---
-import { ChevronDown, HelpCircle, MessageCircle, Phone } from 'lucide-astro';
+import { ChevronDown, MessageCircle } from 'lucide-astro';
 import { PPDB_FAQS } from '@/data/faqData';
 import { SITE_CONFIG } from '@/data/siteConfig';
 import { buildQuickWhatsAppUrl } from '@/utils/whatsapp';
@@ -22,94 +22,55 @@ const faqJsonLd = {
 
 <section
   id="faq"
-  class="scroll-mt-24 py-16 md:py-24 bg-white"
+  class="scroll-mt-24 py-14 md:py-20 bg-[#FAF8F5]"
 >
   <div class="container-12 items-start gap-y-8">
-    <!-- Kolom Kiri (4 Kolom Desktop): Pengantar & Bantuan Langsung -->
-    <div class="col-span-12 lg:col-span-4 space-y-6">
-      <div class="space-y-3">
-        <span
-          class="inline-flex items-center gap-2 rounded-full bg-primary-surface px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-primary-dark border border-primary/20"
+    <!-- Kolom Kiri (4 Kolom Desktop) -->
+    <div class="col-span-12 lg:col-span-4 space-y-4">
+      <p class="text-xs font-bold uppercase tracking-wider text-amber-700">
+        FAQ PPDB
+      </p>
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-ink-heading tracking-tight">
+        Pertanyaan Umum Wali Murid.
+      </h2>
+      <p class="text-sm text-ink-body leading-relaxed">
+        Informasi ringkas mengenai mengaji dari nol, cicilan biaya, jam belajar, dan lokasi sekolah.
+      </p>
+
+      <div class="pt-1">
+        <a
+          href={quickWaUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 min-h-[44px] rounded-xl bg-primary hover:bg-primary-dark px-4 py-2.5 text-xs sm:text-sm font-semibold text-white transition-colors"
         >
-          <HelpCircle class="h-4 w-4 text-gold shrink-0" aria-hidden="true" />
-          <span>Pertanyaan Umum (FAQ PPDB)</span>
-        </span>
-
-        <h2
-          class="font-heading text-2xl sm:text-3xl font-bold text-ink-heading leading-tight"
-        >
-          Jawaban Hal Penting Bagi Ayah &amp; Bunda
-        </h2>
-
-        <p class="text-sm sm:text-base text-ink-body leading-relaxed">
-          Informasi lengkap mengenai bimbingan mengaji dari nol, sistem cicilan
-          uang pangkal, jam belajar per jenjang, hingga program Pondok
-          Pesantren Al-Fuad.
-        </p>
-      </div>
-
-      <div class="rounded-3xl bg-primary-surface/80 p-6 border border-primary/20 space-y-4">
-        <h3 class="font-heading text-base font-bold text-primary-dark">
-          Masih Ada Pertanyaan Khusus?
-        </h3>
-        <p class="text-xs sm:text-sm text-ink-subheading leading-relaxed">
-          Tim Panitia PPDB kami siap melayani konsultasi orang tua setiap{' '}
-          <strong class="font-semibold text-ink-heading">
-            {SITE_CONFIG.contact.operatingHours}
-          </strong>
-          .
-        </p>
-        <div class="space-y-2.5">
-          <a
-            href={quickWaUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex w-full items-center justify-center gap-2 min-h-[48px] rounded-xl bg-primary hover:bg-primary-dark px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors"
-          >
-            <MessageCircle class="h-4 w-4 shrink-0" aria-hidden="true" />
-            <span>Tanya via WhatsApp Panitia</span>
-          </a>
-          <a
-            href="tel:+622155740372"
-            class="inline-flex w-full items-center justify-center gap-2 min-h-[44px] rounded-xl bg-white hover:bg-surface-alabaster px-4 py-2 text-xs sm:text-sm font-semibold text-primary-dark border border-primary/20 transition-colors"
-          >
-            <Phone class="h-3.5 w-3.5 text-primary shrink-0" aria-hidden="true" />
-            <span>Telepon: {SITE_CONFIG.contact.phoneOffice1}</span>
-          </a>
-        </div>
+          <MessageCircle class="h-4 w-4 shrink-0" aria-hidden="true" />
+          <span>Tanya Panitia ({SITE_CONFIG.contact.whatsappDisplay})</span>
+        </a>
       </div>
     </div>
 
-    <!-- Kolom Kanan (8 Kolom Desktop): Accordion Native HTML <details> & <summary> (0 KB JS) -->
-    <div class="col-span-12 lg:col-span-8 space-y-3.5">
-      {
-        PPDB_FAQS.map((faq, index) => (
-          <details
-            class="group rounded-2xl bg-surface-alabaster border border-primary-dark/12 shadow-sm open:bg-white open:border-primary/35 open:ring-1 open:ring-primary/15 transition-all"
-            open={index === 0}
-          >
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 min-h-[52px] px-5 py-4 text-left font-heading text-sm sm:text-base font-bold text-ink-heading hover:text-primary-dark select-none [&::-webkit-details-marker]:hidden">
-              <span class="space-y-0.5">
-                <span class="block text-[11px] font-bold uppercase tracking-wider text-amber-700">
-                  {faq.category}
-                </span>
-                <span class="block leading-snug">{faq.question}</span>
-              </span>
+    <!-- Kolom Kanan (8 Kolom Desktop): Accordion Bersih Hairline -->
+    <div class="col-span-12 lg:col-span-8">
+      <div class="divide-y divide-stone-200 border-y border-stone-200 bg-white rounded-2xl px-4 sm:px-6 border-x">
+        {
+          PPDB_FAQS.map((faq, index) => (
+            <details class="group py-1" open={index === 0}>
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 min-h-[52px] py-3.5 text-left font-heading text-sm sm:text-base font-bold text-ink-heading hover:text-primary-dark select-none [&::-webkit-details-marker]:hidden">
+                <span>{faq.question}</span>
+                <ChevronDown
+                  class="h-4 w-4 shrink-0 text-ink-caption transition-transform duration-200 group-open:rotate-180 group-open:text-primary"
+                  aria-hidden="true"
+                />
+              </summary>
 
-              <span
-                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white border border-primary-dark/10 text-primary group-open:bg-primary-surface"
-                aria-hidden="true"
-              >
-                <ChevronDown class="h-4 w-4 transition-transform duration-200 group-open:rotate-180" />
-              </span>
-            </summary>
-
-            <div class="px-5 pb-5 pt-2 text-sm sm:text-[15px] text-ink-body leading-relaxed border-t border-primary-dark/10">
-              {faq.answer}
-            </div>
-          </details>
-        ))
-      }
+              <p class="pb-4 pr-6 text-xs sm:text-sm text-ink-body leading-relaxed">
+                {faq.answer}
+              </p>
+            </details>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>

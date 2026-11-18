@@ -46,4 +46,12 @@
   .container-12 {
     @apply mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8 grid grid-cols-12 gap-4 md:gap-6;
   }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }

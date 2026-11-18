@@ -1,10 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import { CheckCircle2, Quote, ShieldCheck, Star } from 'lucide-astro';
+import { CheckCircle2, Quote, ShieldCheck } from 'lucide-astro';
 
 const testimonials = await getCollection('testimonials');
 
-// Tempatkan apresiasi Pengawas Kemenag di akhir atau awal secara seimbang; di sini kita susun berurutan dengan wali murid dulu
 const sortedTestimonials = [...testimonials].sort((a, b) => {
   if (a.data.unitRelated === 'Yayasan') return 1;
   if (b.data.unitRelated === 'Yayasan') return -1;
@@ -14,120 +13,101 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
 
 <section
   id="testimoni"
-  class="scroll-mt-24 py-16 md:py-24 bg-surface-cream/60 border-b border-primary-dark/10"
+  class="scroll-mt-24 py-14 md:py-20 bg-[#FAF8F5] border-b border-stone-200/80"
 >
-  <div class="container-12 gap-y-8">
+  <div class="container-12 gap-y-6 md:gap-y-8">
     <!-- Section Heading -->
-    <div class="col-span-12 lg:col-span-8 space-y-4">
-      <span
-        class="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-primary-dark border border-primary/20 shadow-sm"
-      >
-        <Star class="h-4 w-4 text-gold shrink-0" aria-hidden="true" />
-        <span>Suara Wali Murid &amp; Apresiasi Pengawas</span>
-      </span>
-
-      <h2
-        class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink-heading leading-tight"
-      >
-        Dipercaya Orang Tua di Poris Indah, Batuceper, Cipondoh &amp; Kalideres
-      </h2>
-
-      <p class="text-base sm:text-lg text-ink-body leading-relaxed">
-        Perubahan adab Ananda, kemampuan membaca serta menghafal Juz 30 beserta
-        artinya, dan suasana sekolah yang sejuk adalah bukti nyata amanah kami
-        sejak tahun 1990.
+    <div class="col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div class="space-y-2 max-w-2xl">
+        <p class="text-xs font-bold uppercase tracking-wider text-amber-700">
+          Suara Wali Murid &amp; Pengawas
+        </p>
+        <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink-heading tracking-tight">
+          Dipercaya Keluarga Tangerang &amp; Sekitarnya.
+        </h2>
+      </div>
+      <p class="text-xs sm:text-sm text-ink-caption md:hidden">
+        Geser kartu ke samping untuk membaca ulasan &rarr;
       </p>
     </div>
 
-    <div class="col-span-12 lg:col-span-4 flex lg:items-end lg:justify-end">
-      <div
-        class="w-full lg:w-auto rounded-2xl bg-primary-dark text-white px-5 py-3.5 shadow-sm border border-primary-medium/40"
-      >
-        <p class="font-heading text-sm font-bold text-gold-light">
-          Amanah Keluarga Muslim Tangerang
-        </p>
-        <p class="mt-0.5 text-xs text-emerald-100/85">
-          Dibimbing 52+ Ustadz/Ustadzah Hafidz &amp; Terdaftar Kemenag
-        </p>
-      </div>
-    </div>
-
-    <!-- Grid 6 Kartu Testimoni (3 Kolom Desktop, 2 Kolom Tablet, 1 Kolom Mobile) -->
-    {
-      sortedTestimonials.map((item) => {
-        const isKemenag = item.data.unitRelated === 'Yayasan';
-        return (
-          <article
-            class={`col-span-12 md:col-span-6 lg:col-span-4 rounded-3xl p-6 sm:p-7 border shadow-sm flex flex-col justify-between gap-5 transition-shadow hover:shadow-md ${
-              isKemenag
-                ? 'bg-primary-dark text-white border-gold/40'
-                : 'bg-white text-ink-body border-primary-dark/12'
-            }`}
-          >
-            <div class="space-y-4">
-              <!-- Baris Badge Jenjang & Ikon Kutipan -->
-              <div class="flex items-center justify-between gap-2">
-                <span
-                  class={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold ${
-                    isKemenag
-                      ? 'bg-amber-700 text-white'
-                      : 'bg-primary-surface text-primary-dark border border-primary/20'
-                  }`}
-                >
-                  {isKemenag ? (
-                    <ShieldCheck class="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                  ) : (
-                    <CheckCircle2 class="h-3.5 w-3.5 text-primary shrink-0" aria-hidden="true" />
-                  )}
-                  <span>
-                    {isKemenag
-                      ? 'Apresiasi Kemenag'
-                      : `Wali Murid ${item.data.unitRelated}`}
-                  </span>
-                </span>
-
-                <Quote
-                  class={`h-6 w-6 shrink-0 ${
-                    isKemenag ? 'text-gold-medium/70' : 'text-gold/45'
-                  }`}
-                  aria-hidden="true"
-                />
-              </div>
-
-              <!-- Kutipan Testimoni -->
-              <blockquote
-                class={`text-sm sm:text-[15px] leading-relaxed ${
-                  isKemenag ? 'text-emerald-50/95' : 'text-ink-subheading'
-                }`}
-              >
-                “{item.data.quote}”
-              </blockquote>
-            </div>
-
-            <!-- Identitas Penulis -->
-            <footer
-              class={`pt-4 border-t ${
-                isKemenag ? 'border-white/15' : 'border-primary-dark/10'
+    <!-- Horizontal Swipe di Mobile, 3-Kolom Grid di Desktop -->
+    <div
+      class="col-span-12 no-scrollbar flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-12 md:gap-6 md:overflow-visible md:pb-0"
+    >
+      {
+        sortedTestimonials.map((item) => {
+          const isKemenag = item.data.unitRelated === 'Yayasan';
+          return (
+            <article
+              class={`shrink-0 w-[84%] sm:w-[68%] snap-start md:w-auto md:col-span-6 lg:col-span-4 rounded-2xl p-5 sm:p-6 border flex flex-col justify-between gap-4 ${
+                isKemenag
+                  ? 'bg-primary-dark text-white border-primary-dark'
+                  : 'bg-white text-ink-body border-stone-200/90'
               }`}
             >
-              <p
-                class={`font-heading text-sm font-bold ${
-                  isKemenag ? 'text-gold-light' : 'text-ink-heading'
+              <div class="space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <span
+                    class={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-bold ${
+                      isKemenag
+                        ? 'bg-amber-700 text-white'
+                        : 'bg-primary-surface text-primary-dark'
+                    }`}
+                  >
+                    {isKemenag ? (
+                      <ShieldCheck class="h-3 w-3 shrink-0" aria-hidden="true" />
+                    ) : (
+                      <CheckCircle2 class="h-3 w-3 text-primary shrink-0" aria-hidden="true" />
+                    )}
+                    <span>
+                      {isKemenag
+                        ? 'Apresiasi Kemenag'
+                        : `Wali Murid ${item.data.unitRelated}`}
+                    </span>
+                  </span>
+
+                  <Quote
+                    class={`h-5 w-5 shrink-0 ${
+                      isKemenag ? 'text-gold-medium/60' : 'text-stone-300'
+                    }`}
+                    aria-hidden="true"
+                  />
+                </div>
+
+                <blockquote
+                  class={`text-xs sm:text-sm leading-relaxed ${
+                    isKemenag ? 'text-emerald-50/90' : 'text-ink-subheading'
+                  }`}
+                >
+                  “{item.data.quote}”
+                </blockquote>
+              </div>
+
+              <footer
+                class={`pt-3 border-t ${
+                  isKemenag ? 'border-white/15' : 'border-stone-100'
                 }`}
               >
-                {item.data.authorName}
-              </p>
-              <p
-                class={`mt-0.5 text-xs ${
-                  isKemenag ? 'text-emerald-100/80' : 'text-ink-caption'
-                }`}
-              >
-                {item.data.authorRole}
-              </p>
-            </footer>
-          </article>
-        );
-      })
-    }
+                <p
+                  class={`font-heading text-sm font-bold ${
+                    isKemenag ? 'text-gold-light' : 'text-ink-heading'
+                  }`}
+                >
+                  {item.data.authorName}
+                </p>
+                <p
+                  class={`text-xs ${
+                    isKemenag ? 'text-emerald-100/75' : 'text-ink-caption'
+                  }`}
+                >
+                  {item.data.authorRole}
+                </p>
+              </footer>
+            </article>
+          );
+        })
+      }
+    </div>
   </div>
 </section>
