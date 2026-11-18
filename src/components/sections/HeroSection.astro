@@ -2,90 +2,75 @@
 import { Image } from 'astro:assets';
 import { ArrowRight, MessageCircle } from 'lucide-astro';
 import heroMiImg from '@/assets/hero-mi-alfuad.webp';
-import wisudaImg from '@/assets/galeri/wisuda-tahfidz.webp';
 ---
 
-<!-- Opsi C: Light Architectural Editorial Hero (Warm Alabaster, Tipografi Tegas, Kolase Bertingkat) -->
+<!-- Opsi B: Full-Bleed Cinematic Editorial Hero (Foto Jernih Alami + Directional Scrim Presisi) -->
 <section
   id="tentang"
-  class="scroll-mt-24 bg-surface-alabaster text-ink-body border-b border-line-subtle pt-8 pb-14 sm:pt-12 sm:pb-16 lg:py-20"
+  class="scroll-mt-24 relative overflow-hidden bg-primary-dark text-white min-h-[560px] sm:min-h-[590px] lg:min-h-[530px] flex flex-col justify-end lg:justify-center pt-52 pb-12 sm:pt-60 sm:pb-16 lg:pt-16 lg:pb-24"
 >
-  <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-12 items-center gap-y-7 md:gap-x-10 lg:gap-x-12">
-      <!-- Kolom Kiri (6 Kolom Desktop): Editorial Typography Rata Kiri -->
-      <div class="col-span-12 lg:col-span-6 space-y-4 sm:space-y-5">
-        <p class="text-[10.5px] sm:text-xs font-bold uppercase tracking-[0.16em] text-accent">
-          Poris Gaga, Tangerang &bull; Sejak 1990
-        </p>
+  <!-- Full-Bleed Photography Layer (Fokus pada Wajah Santri & Ustadzah di Atas/Kanan) -->
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <Image
+      src={heroMiImg}
+      alt="Suasana belajar Al-Qur'an siswa MI TPI Al-Fuad Poris Gaga bersama Ustadzah di ruang kelas terang"
+      class="h-full w-full object-cover object-[74%_42%] lg:object-[72%_center]"
+      loading="eager"
+      fetchpriority="high"
+    />
 
-        <h1 class="font-heading text-[1.65rem] sm:text-4xl lg:text-[3.1rem] font-extrabold text-primary-dark leading-[1.15] tracking-tight">
-          Generasi Qur'ani,{' '}
-          <span class="text-gold-text underline decoration-gold decoration-2 underline-offset-4">
-            Hafal &amp; Paham
-          </span>{' '}
-          <span class="whitespace-nowrap">Al-Qur'an.</span>
-        </h1>
+    <!-- Scrim Mobile/Tablet (Bottom-Up): Bagian Atas Foto Cerah Alami, Bagian Bawah Kontras Tajam -->
+    <div
+      class="lg:hidden absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/85 via-[38%] to-transparent"
+    >
+    </div>
 
-        <p class="max-w-lg text-sm sm:text-base text-ink-body leading-relaxed">
-          Madrasah Ibtidaiyah TPI Al-Fuad &amp; sekolah Islam terpadu (RA hingga SMK-IT &amp; Pondok) dengan bimbingan mengaji sabar dari nol.
-        </p>
+    <!-- Scrim Desktop (Left-to-Right): Sisi Kiri Tegas untuk Teks, Sisi Kanan Foto Terbuka Terang -->
+    <div
+      class="hidden lg:block absolute inset-0 bg-gradient-to-r from-primary-dark via-primary-dark/85 via-[45%] to-transparent"
+    >
+    </div>
+    <div
+      class="hidden lg:block absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-primary-dark/80 to-transparent"
+    >
+    </div>
+  </div>
 
-        <!-- Dual CTA: Primary Deep Emerald (Kontras 9.72:1 di Atas Latar Terang) + Clean Text Link -->
-        <div class="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2 pt-0.5">
-          <a
-            href="#daftar-ppdb"
-            class="inline-flex items-center justify-center gap-2 min-h-[46px] sm:min-h-[48px] rounded-xl bg-primary-dark hover:bg-primary px-4 sm:px-6 py-2.5 sm:py-3 text-[13px] sm:text-base font-bold text-white shadow-md transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          >
-            <MessageCircle class="h-4 w-4 text-gold shrink-0" aria-hidden="true" />
-            <span>Daftar PPDB</span>
-          </a>
+  <!-- Foreground Editorial Content -->
+  <div class="relative z-10 w-full mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+    <div class="max-w-lg lg:max-w-xl space-y-3.5 sm:space-y-4">
+      <p class="text-[10.5px] sm:text-xs font-bold uppercase tracking-[0.16em] text-gold-light">
+        Poris Gaga, Tangerang &bull; Sejak 1990
+      </p>
 
-          <a
-            href="#jenjang"
-            class="group inline-flex items-center gap-1.5 min-h-[46px] sm:min-h-[48px] px-1 text-[13px] sm:text-base font-bold text-primary-dark hover:text-accent transition-colors whitespace-nowrap"
-          >
-            <span>Lihat Unit &amp; Biaya</span>
-            <ArrowRight class="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-          </a>
-        </div>
-      </div>
+      <h1 class="font-heading text-[1.7rem] sm:text-4xl lg:text-[3.2rem] font-extrabold text-white leading-[1.13] tracking-tight drop-shadow-sm">
+        Generasi Qur'ani,{' '}
+        <span class="text-gold underline decoration-gold/50 decoration-2 underline-offset-4">
+          Hafal &amp; Paham
+        </span>{' '}
+        <span class="whitespace-nowrap">Al-Qur'an.</span>
+      </h1>
 
-      <!-- Kolom Kanan (6 Kolom Desktop): Kolase Arsitektural Terang Bertingkat -->
-      <div class="col-span-12 lg:col-span-6 space-y-3">
-        <figure class="overflow-hidden rounded-2xl bg-white p-1.5 border border-line-subtle shadow-lg">
-          <Image
-            src={heroMiImg}
-            alt="Suasana belajar Al-Qur'an siswa MI TPI Al-Fuad Poris Gaga bersama Ustadzah di ruang kelas terang"
-            class="w-full h-auto aspect-[16/10] rounded-xl object-cover"
-            loading="eager"
-            fetchpriority="high"
-          />
-        </figure>
+      <p class="max-w-md text-sm sm:text-base text-emerald-50/95 leading-relaxed">
+        Madrasah Ibtidaiyah TPI Al-Fuad &amp; sekolah Islam terpadu (RA hingga SMK-IT &amp; Pondok) dengan bimbingan mengaji sabar dari nol.
+      </p>
 
-        <!-- Baris Bawah Kolase (Khusus Tablet/Desktop agar Mobile Tetap Ringkas Above-the-Fold) -->
-        <div class="hidden sm:grid grid-cols-12 gap-3 items-stretch">
-          <figure class="col-span-7 overflow-hidden rounded-2xl bg-white p-1.5 border border-line-subtle shadow-sm">
-            <Image
-              src={wisudaImg}
-              alt="Prosesi Wisuda Tahfidz Akbar siswa-siswi Al-Fuad Poris Gaga"
-              class="w-full h-full max-h-[126px] rounded-xl object-cover"
-              loading="eager"
-            />
-          </figure>
-          <div class="col-span-5 rounded-2xl bg-primary-dark text-white p-4 flex flex-col justify-between border border-primary/20">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-gold-light">
-              Target Lulusan
-            </span>
-            <div>
-              <p class="font-heading text-sm font-extrabold text-white leading-snug">
-                Wajib Juz 30 &amp; Terjemah
-              </p>
-              <p class="mt-0.5 text-[11px] text-emerald-100/80">
-                Dibina 52+ guru hafidz
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2 pt-1">
+        <a
+          href="#daftar-ppdb"
+          class="inline-flex items-center justify-center gap-2 min-h-[46px] sm:min-h-[48px] rounded-xl bg-gold hover:bg-gold-hover px-4 sm:px-6 py-2.5 sm:py-3 text-[13px] sm:text-base font-bold text-ink-heading shadow-lg transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
+        >
+          <MessageCircle class="h-4 w-4 shrink-0" aria-hidden="true" />
+          <span>Daftar PPDB</span>
+        </a>
+
+        <a
+          href="#jenjang"
+          class="group inline-flex items-center gap-1.5 min-h-[46px] sm:min-h-[48px] px-1 text-[13px] sm:text-base font-semibold text-white hover:text-gold-light transition-colors whitespace-nowrap"
+        >
+          <span>Lihat Unit &amp; Biaya</span>
+          <ArrowRight class="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+        </a>
       </div>
     </div>
   </div>
