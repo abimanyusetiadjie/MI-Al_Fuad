@@ -1,179 +1,199 @@
 ---
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { ArrowRight, Calendar } from 'lucide-astro';
+import { Calendar } from 'lucide-astro';
 import { PPDB_WAVES } from '@/data/ppdbData';
 import heroMiImg from '@/assets/hero-mi-alfuad.webp';
 import wisudaTahfidzImg from '@/assets/galeri/wisuda-tahfidz.webp';
+import masjidImg from '@/assets/galeri/masjid-at-taqwa.webp';
+import labImg from '@/assets/galeri/lab-komputer-smkit.webp';
 
 const newsEntries = (await getCollection('news')).sort(
   (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
 );
 
+const featuredNews = newsEntries[0];
+const secondaryNews = newsEntries[1];
 const agendaMonths = ['OKT–DES', 'JAN–MAR', 'APR–JUL'] as const;
 
 const formatTanggalId = (date: Date) =>
   date.toLocaleDateString('id-ID', {
     day: 'numeric',
-    month: 'short',
+    month: 'long',
     year: 'numeric',
   });
 ---
 
+<!-- Section 7 (#kabar & #fasilitas): Latest Updates / Kabar & Agenda Sekolah (Adaptasi Section 7 Mutiara Bangsa) -->
 <section
   id="kabar"
-  class="scroll-mt-24 py-14 md:py-20 bg-white border-b border-stone-200/80"
+  class="scroll-mt-24 py-14 md:py-20 bg-[#FAF8F5] border-b border-stone-200/80"
 >
-  <div class="container-12 gap-y-8 items-start">
-    <!-- Section Heading -->
-    <div class="col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-4" data-reveal>
-      <div class="space-y-2 max-w-2xl">
-        <p class="text-xs font-bold uppercase tracking-wider text-amber-700">
-          Kabar &amp; Agenda Sekolah
-        </p>
-        <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink-heading tracking-tight">
-          Berita Kegiatan &amp; Jadwal PPDB Terkini.
-        </h2>
-      </div>
-      <a
-        href="#daftar-ppdb"
-        class="inline-flex w-fit items-center gap-1.5 text-xs sm:text-sm font-semibold text-primary-dark hover:underline"
-      >
-        <span>Konsultasi Jadwal Survei</span>
-        <ArrowRight class="h-4 w-4 shrink-0" aria-hidden="true" />
-      </a>
+  <span id="fasilitas" class="scroll-mt-24 sr-only" aria-hidden="true"></span>
+
+  <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 space-y-8">
+    <!-- Centered Header persis Mutiara Bangsa "Latest Updates" -->
+    <div class="text-center space-y-2" data-reveal>
+      <span class="inline-block rounded-full bg-gold-light px-4 py-1 text-xs font-bold text-amber-800 border border-gold/25">
+        Kabar Terbaru
+      </span>
+      <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-primary-dark tracking-tight">
+        Berita Kegiatan &amp; Agenda Sekolah
+      </h2>
     </div>
 
-    <!-- Kolom Kiri (7 Kolom Desktop): 2 Kartu Berita Terkini -->
-    <div class="col-span-12 lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
-      {
-        newsEntries.slice(0, 2).map((entry, idx) => {
-          const cardImage =
-            entry.data.category === 'Wisuda Tahfidz' ? wisudaTahfidzImg : heroMiImg;
-          return (
-            <article
-              data-reveal
-              data-reveal-delay={idx * 80}
-              class="group card-elevate rounded-2xl overflow-hidden bg-[#FAF8F5] border border-stone-200/90 flex flex-col justify-between"
-            >
-              <div>
-                <div class="aspect-[16/10] w-full overflow-hidden bg-primary-dark">
-                  <Image
-                    src={cardImage}
-                    alt={entry.data.coverAlt}
-                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
+    <!-- 1 Featured Wide Banner Card (Adaptasi Mutiara Bangsa Featured News Card) -->
+    {
+      featuredNews && (
+        <article
+          data-reveal
+          class="group relative overflow-hidden rounded-2xl border border-stone-200 bg-primary-dark h-[260px] sm:h-[320px] shadow-sm"
+        >
+          <Image
+            src={featuredNews.data.category === 'Wisuda Tahfidz' ? wisudaTahfidzImg : heroMiImg}
+            alt={featuredNews.data.coverAlt}
+            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+          <div class="absolute inset-x-0 bottom-0 p-5 sm:p-8 flex flex-col justify-end gap-2">
+            <h3 class="font-heading text-lg sm:text-2xl font-bold text-white leading-snug max-w-2xl">
+              {featuredNews.data.title}
+            </h3>
+            <p class="text-xs sm:text-sm text-emerald-50/85 max-w-2xl line-clamp-2">
+              {featuredNews.data.excerpt}
+            </p>
+            <div class="flex flex-wrap items-center gap-3 text-xs font-semibold pt-1">
+              <span class="text-gold-medium">{featuredNews.data.category}</span>
+              <span class="text-white/60">&bull;</span>
+              <time datetime={featuredNews.data.publishDate.toISOString()} class="text-white/90">
+                {formatTanggalId(featuredNews.data.publishDate)}
+              </time>
+            </div>
+          </div>
+        </article>
+      )
+    }
 
-                <div class="p-5 space-y-2.5">
-                  <div class="flex items-center justify-between gap-2 text-[11px] font-semibold">
-                    <span class="rounded-full bg-primary-surface px-2.5 py-0.5 text-primary-dark">
-                      {entry.data.category}
-                    </span>
-                    <time
-                      datetime={entry.data.publishDate.toISOString()}
-                      class="text-ink-caption"
-                    >
-                      {formatTanggalId(entry.data.publishDate)}
-                    </time>
-                  </div>
-
-                  <h3 class="font-heading text-base font-bold text-ink-heading leading-snug">
-                    {entry.data.title}
-                  </h3>
-
-                  <p class="text-xs text-ink-body leading-relaxed line-clamp-2">
-                    {entry.data.excerpt}
-                  </p>
-                </div>
-              </div>
-
-              <div class="px-5 pb-5">
-                <details class="group/read">
-                  <summary class="inline-flex cursor-pointer list-none items-center gap-1 text-xs font-bold text-amber-700 hover:underline [&::-webkit-details-marker]:hidden">
-                    <span>Baca ringkasan kabar</span>
-                    <span aria-hidden="true" class="transition-transform group-open/read:rotate-90">&rsaquo;</span>
-                  </summary>
-                  <p class="mt-2.5 pt-2.5 border-t border-stone-100 text-xs text-ink-body leading-relaxed">
-                    {entry.data.excerpt} Kunjungi sekretariat atau hubungi WhatsApp 0877-7214-4633 (Senin–Sabtu 07.00–16.00 WIB) untuk informasi lengkap.
-                  </p>
-                </details>
+    <!-- Bottom Grid: Kartu Berita/Fasilitas + Kalender PPDB -->
+    <div class="grid grid-cols-12 gap-5 items-stretch">
+      <!-- Kiri (7 Kolom): 3 Portrait Photo Cards (Adaptasi Grid Berita/Kampus Mutiara Bangsa) -->
+      <div class="col-span-12 lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {
+          secondaryNews && (
+            <article class="group relative overflow-hidden rounded-2xl bg-primary-dark aspect-[4/5] sm:aspect-auto sm:min-h-[260px]">
+              <Image
+                src={wisudaTahfidzImg}
+                alt={secondaryNews.data.coverAlt}
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+              <div class="absolute inset-x-0 bottom-0 p-4 space-y-1">
+                <p class="text-[11px] font-bold text-gold-medium">{secondaryNews.data.category}</p>
+                <h4 class="font-heading text-sm font-bold text-white leading-snug line-clamp-2">
+                  {secondaryNews.data.title}
+                </h4>
+                <time datetime={secondaryNews.data.publishDate.toISOString()} class="block text-[11px] text-white/80">
+                  {formatTanggalId(secondaryNews.data.publishDate)}
+                </time>
               </div>
             </article>
-          );
-        })
-      }
-    </div>
-
-    <!-- Kolom Kanan (5 Kolom Desktop): Agenda & Kalender PPDB (Bootstrap Event List Pattern) -->
-    <div
-      data-reveal
-      data-reveal-delay="120"
-      class="col-span-12 lg:col-span-5 rounded-2xl bg-white border border-stone-200/90 p-5 sm:p-6 space-y-4"
-    >
-      <div class="flex items-center justify-between gap-2 pb-3 border-b border-stone-100">
-        <div class="inline-flex items-center gap-2">
-          <Calendar class="h-4 w-4 text-amber-700 shrink-0" aria-hidden="true" />
-          <h3 class="font-heading text-base font-bold text-ink-heading">
-            Kalender &amp; Gelombang PPDB
-          </h3>
-        </div>
-        <span class="text-[11px] font-semibold text-primary">TA 2026/2027</span>
-      </div>
-
-      <ul class="divide-y divide-stone-100">
-        {
-          PPDB_WAVES.map((wave, idx) => (
-            <li class="py-3 first:pt-1 flex items-start gap-3.5">
-              <div class="shrink-0 w-16 rounded-xl bg-primary-dark text-white text-center py-2 px-1">
-                <span class="block font-heading text-[10px] font-bold tracking-wider text-gold-light uppercase">
-                  {agendaMonths[idx] ?? 'PPDB'}
-                </span>
-                <span class="block text-[10px] text-emerald-100/80 mt-0.5">
-                  Gel. {idx === 0 ? 'Dini' : idx}
-                </span>
-              </div>
-              <div class="min-w-0 flex-1 space-y-0.5">
-                <div class="flex items-center justify-between gap-2">
-                  <p class="font-heading text-xs sm:text-sm font-bold text-ink-heading truncate">
-                    {wave.name}
-                  </p>
-                  <span
-                    class={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                      wave.status === 'Segera Penuh'
-                        ? 'bg-gold-light text-amber-800'
-                        : 'bg-primary-surface text-primary-dark'
-                    }`}
-                  >
-                    {wave.status}
-                  </span>
-                </div>
-                <p class="text-[11px] font-medium text-primary">{wave.period}</p>
-                <p class="text-xs text-ink-body line-clamp-1">{wave.benefit}</p>
-              </div>
-            </li>
-          ))
+          )
         }
 
-        <li class="pt-3 flex items-start gap-3.5">
-          <div class="shrink-0 w-16 rounded-xl bg-amber-700 text-white text-center py-2 px-1">
-            <span class="block font-heading text-[10px] font-bold tracking-wider uppercase">
-              JUNI
+        <article class="group relative overflow-hidden rounded-2xl bg-primary-dark aspect-[4/5] sm:aspect-auto sm:min-h-[260px]">
+          <Image
+            src={masjidImg}
+            alt="Masjid Jami' At-Taqwa pusat pembinaan ibadah dan tahfidz Al-Fuad"
+            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+          <div class="absolute inset-x-0 bottom-0 p-4 space-y-1">
+            <p class="text-[11px] font-bold text-gold-medium">Fasilitas Ibadah</p>
+            <h4 class="font-heading text-sm font-bold text-white leading-snug">
+              Masjid At-Taqwa &amp; Halaqah Tahfidz
+            </h4>
+            <p class="text-[11px] text-white/80">Poris Gaga, Tangerang</p>
+          </div>
+        </article>
+
+        <article class="group relative overflow-hidden rounded-2xl bg-primary-dark aspect-[4/5] sm:aspect-auto sm:min-h-[260px]">
+          <Image
+            src={labImg}
+            alt="Laboratorium komputer praktik kejuruan SMK-IT dan SMP-IT Al-Fuad"
+            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+          <div class="absolute inset-x-0 bottom-0 p-4 space-y-1">
+            <p class="text-[11px] font-bold text-gold-medium">Praktikum Digital</p>
+            <h4 class="font-heading text-sm font-bold text-white leading-snug">
+              Lab Komputer &amp; Kelas Kondusif
+            </h4>
+            <p class="text-[11px] text-white/80">Unit SMP-IT &amp; SMK-IT</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- Kanan (5 Kolom): Kalender & Jadwal Gelombang PPDB -->
+      <div class="col-span-12 lg:col-span-5 rounded-2xl bg-white border border-stone-200/90 p-5 sm:p-6 flex flex-col justify-between gap-4">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between gap-2 pb-3 border-b border-stone-100">
+            <span class="inline-flex items-center gap-2 font-heading text-sm sm:text-base font-bold text-primary-dark">
+              <Calendar class="h-4 w-4 text-amber-700 shrink-0" aria-hidden="true" />
+              <span>Agenda Gelombang PPDB</span>
             </span>
-            <span class="block text-[10px] text-amber-100 mt-0.5">Tahunan</span>
+            <span class="text-[11px] font-semibold text-primary">TA 2026/2027</span>
           </div>
-          <div class="min-w-0 flex-1 space-y-0.5">
-            <p class="font-heading text-xs sm:text-sm font-bold text-ink-heading">
-              Wisuda Tahfidz Akbar Al-Fuad
-            </p>
-            <p class="text-xs text-ink-body">
-              Uji publik tasmi’ hafalan Juz 30 &amp; apresiasi guru umroh.
-            </p>
-          </div>
-        </li>
-      </ul>
+
+          <ul class="divide-y divide-stone-100">
+            {
+              PPDB_WAVES.map((wave, idx) => (
+                <li class="py-2.5 first:pt-0 last:pb-0 flex items-start gap-3">
+                  <div class="shrink-0 w-16 rounded-xl bg-primary-dark text-white text-center py-1.5 px-1">
+                    <span class="block font-heading text-[10px] font-bold text-gold-light uppercase">
+                      {agendaMonths[idx] ?? 'PPDB'}
+                    </span>
+                    <span class="block text-[10px] text-emerald-100/80">
+                      Gel. {idx === 0 ? 'Dini' : idx}
+                    </span>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center justify-between gap-2">
+                      <p class="font-heading text-xs sm:text-sm font-bold text-ink-heading truncate">
+                        {wave.name}
+                      </p>
+                      <span
+                        class={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                          wave.status === 'Segera Penuh'
+                            ? 'bg-gold-light text-amber-800'
+                            : 'bg-primary-surface text-primary-dark'
+                        }`}
+                      >
+                        {wave.status}
+                      </span>
+                    </div>
+                    <p class="text-[11px] text-ink-body line-clamp-1 mt-0.5">{wave.benefit}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <a
+          href="#biaya-ppdb"
+          class="inline-flex w-full items-center justify-center min-h-[44px] rounded-xl bg-primary-surface hover:bg-emerald-100 text-xs sm:text-sm font-bold text-primary-dark transition-colors"
+        >
+          Lihat Rincian Biaya &amp; Kuota &rarr;
+        </a>
+      </div>
     </div>
   </div>
 </section>

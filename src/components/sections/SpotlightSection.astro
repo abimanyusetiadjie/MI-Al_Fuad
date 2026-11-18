@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+import { ChevronLeft, ChevronRight } from 'lucide-astro';
+import wisudaImg from '@/assets/galeri/wisuda-tahfidz.webp';
+import heroMiImg from '@/assets/hero-mi-alfuad.webp';
+import masjidImg from '@/assets/galeri/masjid-at-taqwa.webp';
+import kelasImg from '@/assets/galeri/ruang-kelas-mi.webp';
+import labImg from '@/assets/galeri/lab-komputer-smkit.webp';
+
+interface SpotlightItem {
+  image: ImageMetadata;
+  alt: string;
+  caption: string;
+}
+
+const spotlightItems: readonly SpotlightItem[] = [
+  {
+    image: wisudaImg,
+    alt: 'Wisuda Tahfidz Akbar siswa-siswi MI TPI & YPI Al-Fuad Poris Gaga',
+    caption: 'Wisuda Tahfidz Juz 30 Akbar',
+  },
+  {
+    image: heroMiImg,
+    alt: 'Pembelajaran Al-Qur’an interaktif bersama Ustadzah di MI TPI Al-Fuad',
+    caption: 'Bimbingan Tahsin Dari Nol',
+  },
+  {
+    image: masjidImg,
+    alt: "Masjid Jami' At-Taqwa tempat sholat berjamaah dan setoran hafalan",
+    caption: "Halaqah Masjid Jami' At-Taqwa",
+  },
+  {
+    image: kelasImg,
+    alt: 'Ruang kelas kondusif dan terang di MI TPI Al-Fuad Poris Gaga',
+    caption: 'Ruang Belajar Ramah Anak',
+  },
+  {
+    image: labImg,
+    alt: 'Praktikum komputer siswa SMK-IT dan SMP-IT Al-Fuad',
+    caption: 'Praktikum IT & Kejuruan',
+  },
+] as const;
+---
+
+<!-- IN THE SPOTLIGHT: Horizontal Photo Carousel (Adaptasi Section 2 Mutiara Bangsa) -->
+<section class="py-12 md:py-16 bg-white">
+  <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 space-y-6">
+    <!-- Centered Header + Controls -->
+    <div class="relative flex flex-col items-center text-center space-y-1.5" data-reveal>
+      <p class="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-amber-700">
+        IN THE SPOTLIGHT
+      </p>
+      <h2 class="font-heading text-2xl sm:text-3xl font-extrabold text-primary-dark tracking-tight">
+        Sorotan Kegiatan Sekolah
+      </h2>
+
+      <!-- Desktop Carousel Arrows -->
+      <div class="hidden md:flex items-center gap-2 md:absolute md:right-0 md:bottom-0">
+        <button
+          type="button"
+          id="spotlight-prev"
+          aria-label="Geser galeri sorotan ke kiri"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 bg-white text-primary-dark hover:bg-primary-surface transition-colors"
+        >
+          <ChevronLeft class="h-5 w-5" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          id="spotlight-next"
+          aria-label="Geser galeri sorotan ke kanan"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 bg-white text-primary-dark hover:bg-primary-surface transition-colors"
+        >
+          <ChevronRight class="h-5 w-5" aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Horizontal Scroll-Snap Photo Track (Zero Swiper Bundle) -->
+    <div
+      id="spotlight-track"
+      class="no-scrollbar flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 scroll-smooth"
+    >
+      {
+        spotlightItems.map((item) => (
+          <figure class="group shrink-0 w-[82%] sm:w-[46%] lg:w-[23.8%] snap-start overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 relative aspect-[4/3]">
+            <Image
+              src={item.image}
+              alt={item.alt}
+              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent p-3.5">
+              <span class="text-xs font-semibold text-white">
+                {item.caption}
+              </span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const track = document.getElementById('spotlight-track');
+    const prevBtn = document.getElementById('spotlight-prev');
+    const nextBtn = document.getElementById('spotlight-next');
+    if (!track) return;
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        track.scrollBy({ left: -Math.max(300, track.clientWidth * 0.6), behavior: 'smooth' });
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        track.scrollBy({ left: Math.max(300, track.clientWidth * 0.6), behavior: 'smooth' });
+      });
+    }
+  })();
+</script>

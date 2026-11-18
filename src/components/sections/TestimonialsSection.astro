@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { CheckCircle2, Quote, ShieldCheck } from 'lucide-astro';
+import { ChevronLeft, ChevronRight, ShieldCheck, UserCheck } from 'lucide-astro';
 
 const testimonials = await getCollection('testimonials');
 
@@ -11,104 +11,127 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
 });
 ---
 
+<!-- Section 10 (#testimoni): Centered Carousel Testimoni (Adaptasi Persis Mutiara Bangsa) -->
 <section
   id="testimoni"
-  class="scroll-mt-24 py-14 md:py-20 bg-white border-b border-stone-200/80"
+  class="scroll-mt-24 py-14 md:py-20 bg-white border-t border-stone-200/80"
 >
-  <div class="container-12 gap-y-6 md:gap-y-8">
-    <!-- Section Heading -->
-    <div class="col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-4" data-reveal>
-      <div class="space-y-2 max-w-2xl">
-        <p class="text-xs font-bold uppercase tracking-wider text-amber-700">
-          Suara Wali Murid &amp; Pengawas
-        </p>
-        <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink-heading tracking-tight">
-          Dipercaya Keluarga Tangerang &amp; Sekitarnya.
-        </h2>
-      </div>
-      <p class="text-xs sm:text-sm text-ink-caption md:hidden">
-        Geser kartu ke samping untuk membaca ulasan &rarr;
+  <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 space-y-8">
+    <!-- Centered Header ala Mutiara Bangsa: "Testimoni. / Apa kata orang tua & pengawas" -->
+    <div class="text-center space-y-1.5" data-reveal>
+      <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-primary-dark tracking-tight">
+        Testimoni.
+      </h2>
+      <p class="text-sm sm:text-base text-ink-body">
+        Apa kata wali murid &amp; pengawas tentang MI TPI &amp; YPI Al-Fuad
       </p>
     </div>
 
-    <!-- Horizontal Swipe di Mobile, 3-Kolom Grid di Desktop -->
-    <div
-      class="col-span-12 no-scrollbar flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-12 md:gap-6 md:overflow-visible md:pb-0"
-    >
-      {
-        sortedTestimonials.map((item) => {
-          const isKemenag = item.data.unitRelated === 'Yayasan';
-          return (
-            <article
-              data-reveal
-              class={`card-elevate shrink-0 w-[84%] sm:w-[68%] snap-start md:w-auto md:col-span-6 lg:col-span-4 rounded-2xl p-5 sm:p-6 border flex flex-col justify-between gap-4 ${
-                isKemenag
-                  ? 'bg-primary-dark text-white border-primary-dark'
-                  : 'bg-[#FAF8F5] text-ink-body border-stone-200/90'
-              }`}
-            >
-              <div class="space-y-3">
-                <div class="flex items-center justify-between gap-2">
+    <!-- Centered Ice-Surface Carousel Card -->
+    <div class="mx-auto max-w-3xl relative">
+      <div class="rounded-3xl bg-[#F4F7F6] border border-stone-200/90 p-6 sm:p-10 text-center">
+        {
+          sortedTestimonials.map((item, idx) => {
+            const isKemenag = item.data.unitRelated === 'Yayasan';
+            return (
+              <article
+                data-testimonial-slide={idx}
+                class={idx === 0 ? 'space-y-5' : 'hidden space-y-5'}
+              >
+                <div class="flex flex-col items-center gap-2.5">
                   <span
-                    class={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-bold ${
+                    class={`flex h-12 w-12 items-center justify-center rounded-full shadow-sm ${
                       isKemenag
                         ? 'bg-amber-700 text-white'
-                        : 'bg-primary-surface text-primary-dark'
-                    }`}
-                  >
-                    {isKemenag ? (
-                      <ShieldCheck class="h-3 w-3 shrink-0" aria-hidden="true" />
-                    ) : (
-                      <CheckCircle2 class="h-3 w-3 text-primary shrink-0" aria-hidden="true" />
-                    )}
-                    <span>
-                      {isKemenag
-                        ? 'Apresiasi Kemenag'
-                        : `Wali Murid ${item.data.unitRelated}`}
-                    </span>
-                  </span>
-
-                  <Quote
-                    class={`h-5 w-5 shrink-0 ${
-                      isKemenag ? 'text-gold-medium/60' : 'text-stone-300'
+                        : 'bg-primary-dark text-gold-light'
                     }`}
                     aria-hidden="true"
-                  />
+                  >
+                    {isKemenag ? (
+                      <ShieldCheck class="h-6 w-6" />
+                    ) : (
+                      <UserCheck class="h-6 w-6" />
+                    )}
+                  </span>
+
+                  <div>
+                    <p class="font-heading text-base font-bold text-primary-dark">
+                      {item.data.authorName}
+                    </p>
+                    <p class="text-xs sm:text-sm font-semibold text-primary">
+                      {item.data.authorRole}
+                    </p>
+                  </div>
                 </div>
 
-                <blockquote
-                  class={`text-xs sm:text-sm leading-relaxed ${
-                    isKemenag ? 'text-emerald-50/90' : 'text-ink-subheading'
-                  }`}
-                >
+                <blockquote class="mx-auto max-w-xl text-sm sm:text-base text-ink-subheading leading-relaxed">
                   “{item.data.quote}”
                 </blockquote>
-              </div>
+              </article>
+            );
+          })
+        }
 
-              <footer
-                class={`pt-3 border-t ${
-                  isKemenag ? 'border-white/15' : 'border-stone-100'
-                }`}
-              >
-                <p
-                  class={`font-heading text-sm font-bold ${
-                    isKemenag ? 'text-gold-light' : 'text-ink-heading'
+        <!-- Controls + Pagination Dots (Persis Mutiara Bangsa) -->
+        <div class="mt-6 pt-5 border-t border-stone-200/80 flex items-center justify-between gap-4">
+          <button
+            type="button"
+            id="testimonial-prev"
+            aria-label="Testimoni sebelumnya"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-stone-200 text-primary-dark hover:bg-primary-surface transition-colors"
+          >
+            <ChevronLeft class="h-4 w-4" aria-hidden="true" />
+          </button>
+
+          <div class="flex items-center gap-2" role="group" aria-label="Pilih testimoni">
+            {
+              sortedTestimonials.map((item, idx) => (
+                <button
+                  type="button"
+                  data-testimonial-dot={idx}
+                  aria-label={`Testimoni ${item.data.authorName}`}
+                  class={`h-2.5 rounded-full transition-all ${
+                    idx === 0 ? 'w-6 bg-primary-dark' : 'w-2.5 bg-stone-300 hover:bg-primary/50'
                   }`}
-                >
-                  {item.data.authorName}
-                </p>
-                <p
-                  class={`text-xs ${
-                    isKemenag ? 'text-emerald-100/75' : 'text-ink-caption'
-                  }`}
-                >
-                  {item.data.authorRole}
-                </p>
-              </footer>
-            </article>
-          );
-        })
-      }
+                />
+              ))
+            }
+          </div>
+
+          <button
+            type="button"
+            id="testimonial-next"
+            aria-label="Testimoni berikutnya"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-stone-200 text-primary-dark hover:bg-primary-surface transition-colors"
+          >
+            <ChevronRight class="h-4 w-4" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  const slides = document.querySelectorAll<HTMLElement>('[data-testimonial-slide]');
+  const dots = document.querySelectorAll<HTMLButtonElement>('[data-testimonial-dot]');
+  const total = slides.length;
+  let current = 0;
+
+  const showSlide = (idx: number) => {
+    if (total === 0) return;
+    current = (idx + total) % total;
+    slides.forEach((s, i) => s.classList.toggle('hidden', i !== current));
+    dots.forEach((d, i) => {
+      const active = i === current;
+      d.classList.toggle('w-6', active);
+      d.classList.toggle('bg-primary-dark', active);
+      d.classList.toggle('w-2.5', !active);
+      d.classList.toggle('bg-stone-300', !active);
+    });
+  };
+
+  dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
+  document.getElementById('testimonial-prev')?.addEventListener('click', () => showSlide(current - 1));
+  document.getElementById('testimonial-next')?.addEventListener('click', () => showSlide(current + 1));
+</script>

@@ -1,93 +1,36 @@
 ---
-import { ArrowUpRight, BookOpen, CalendarCheck, GraduationCap, MessageCircle } from 'lucide-astro';
-
-interface QuickLinkCard {
-  title: string;
-  subtitle: string;
-  href: string;
-  icon: 'ppdb' | 'biaya' | 'jenjang' | 'kabar';
-  accent: 'gold' | 'emerald';
+// Overlapping 3-Column Stats Card (Adaptasi Persis Kartu 3-Statistik Mutiara Bangsa: 20 Years | 6 Campuses | 5K+ Students)
+interface StatMetric {
+  value: string;
+  label: string;
+  target?: number;
+  suffix?: string;
 }
 
-const quickCards: readonly QuickLinkCard[] = [
-  {
-    title: 'Daftar PPDB Online',
-    subtitle: 'Formulir instan WhatsApp',
-    href: '#daftar-ppdb',
-    icon: 'ppdb',
-    accent: 'gold',
-  },
-  {
-    title: 'Biaya & Kuota',
-    subtitle: 'Cicilan 3x & beasiswa',
-    href: '#biaya-ppdb',
-    icon: 'biaya',
-    accent: 'emerald',
-  },
-  {
-    title: '5 Unit & NPSN',
-    subtitle: 'RA, MI TPI, SMP, SMK, Pondok',
-    href: '#jenjang',
-    icon: 'jenjang',
-    accent: 'emerald',
-  },
-  {
-    title: 'Kabar & Agenda',
-    subtitle: 'Jadwal gelombang & wisuda',
-    href: '#kabar',
-    icon: 'kabar',
-    accent: 'gold',
-  },
+const stats: readonly StatMetric[] = [
+  { value: '35+', label: 'Tahun Mengabdi', target: 35, suffix: '+' },
+  { value: '52+', label: 'Guru Hafidz', target: 52, suffix: '+' },
+  { value: '5', label: 'Unit Terpadu', target: 5, suffix: '' },
 ] as const;
 ---
 
-<!-- Overlapping 4-Card Quick Action Strip (Adaptasi Khas Portal Sekolah Bootstrap Modern) -->
-<section
-  aria-label="Akses Cepat Informasi Sekolah & PPDB"
-  class="bg-[#FAF8F5] relative z-10 pb-8 md:pb-10"
->
-  <div class="container-12">
-    <div class="col-span-12 -mt-7 md:-mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-      {
-        quickCards.map((card) => {
-          const isGold = card.accent === 'gold';
-          return (
-            <a
-              href={card.href}
-              class="group card-elevate animate-hero-in-delay min-h-[68px] rounded-2xl bg-white p-4 border border-stone-200/90 shadow-md shadow-emerald-950/5 flex items-center justify-between gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              <div class="flex items-center gap-3 min-w-0">
-                <span
-                  class={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105 ${
-                    isGold
-                      ? 'bg-gold-light text-amber-800'
-                      : 'bg-primary-surface text-primary-dark'
-                  }`}
-                  aria-hidden="true"
-                >
-                  {card.icon === 'ppdb' && <MessageCircle class="h-5 w-5" />}
-                  {card.icon === 'biaya' && <BookOpen class="h-5 w-5" />}
-                  {card.icon === 'jenjang' && <GraduationCap class="h-5 w-5" />}
-                  {card.icon === 'kabar' && <CalendarCheck class="h-5 w-5" />}
-                </span>
-                <div class="min-w-0">
-                  <p class="font-heading text-sm font-bold text-ink-heading group-hover:text-primary-dark truncate">
-                    {card.title}
-                  </p>
-                  <p class="text-xs text-ink-caption truncate">
-                    {card.subtitle}
-                  </p>
-                </div>
-              </div>
-
-              <ArrowUpRight
-                class="h-4 w-4 shrink-0 text-stone-400 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary"
-                aria-hidden="true"
-              />
-            </a>
-          );
-        })
-      }
-    </div>
+<section aria-label="Statistik Utama YPI Al-Fuad" class="relative z-20 px-4 sm:px-6 -mt-10 md:-mt-12">
+  <div class="mx-auto max-w-3xl rounded-2xl bg-[#F4F7F6] border border-stone-200/90 shadow-xl grid grid-cols-3 divide-x divide-stone-200 py-5 sm:py-6 text-center">
+    {
+      stats.map((item) => (
+        <div class="px-2 sm:px-6 space-y-0.5">
+          <p
+            class="font-heading text-2xl sm:text-4xl font-extrabold tracking-tight text-primary-dark tabular-nums"
+            data-counter-target={item.target}
+            data-counter-suffix={item.suffix}
+          >
+            {item.value}
+          </p>
+          <p class="text-[11px] sm:text-sm font-medium text-ink-body">
+            {item.label}
+          </p>
+        </div>
+      ))
+    }
   </div>
 </section>

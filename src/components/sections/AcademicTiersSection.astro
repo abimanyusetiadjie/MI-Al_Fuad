@@ -1,10 +1,16 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { ArrowRight, Clock, ShieldCheck } from 'lucide-astro';
+import { ArrowRight, ChevronLeft, ChevronRight, Clock, MapPin, Phone, ShieldCheck } from 'lucide-astro';
 import { SITE_CONFIG, type UnitId } from '@/data/siteConfig';
 import { PPDB_FEES_BY_UNIT } from '@/data/ppdbData';
 import { formatRupiah } from '@/utils/currency';
 import type { TARGET_UNIT_OPTIONS } from '@/utils/whatsapp';
+import heroMiImg from '@/assets/hero-mi-alfuad.webp';
+import wisudaImg from '@/assets/galeri/wisuda-tahfidz.webp';
+import kelasImg from '@/assets/galeri/ruang-kelas-mi.webp';
+import labImg from '@/assets/galeri/lab-komputer-smkit.webp';
+import masjidImg from '@/assets/galeri/masjid-at-taqwa.webp';
 
 type TargetUnitOption = (typeof TARGET_UNIT_OPTIONS)[number];
 
@@ -16,211 +22,308 @@ const UNIT_TO_PPDB_OPTION: Record<UnitId, TargetUnitOption> = {
   pesantren: 'Pondok Pesantren',
 };
 
+const UNIT_IMAGES: Record<UnitId, ImageMetadata> = {
+  ra: kelasImg,
+  mit: heroMiImg,
+  smpit: wisudaImg,
+  smkit: labImg,
+  pesantren: masjidImg,
+};
+
 const unitsEntries = (await getCollection('units')).sort(
   (a, b) => a.data.order - b.data.order,
 );
 
-const flagshipUnit = unitsEntries.find((u) => u.data.unitId === 'mit');
-const otherUnits = unitsEntries.filter((u) => u.data.unitId !== 'mit');
+const defaultUnitId: UnitId = 'mit';
 ---
 
+<!-- Section 5 (#jenjang): Interactive 5-Unit Campus Showcase Carousel (Adaptasi Mutiara Bangsa Six Campuses) -->
 <section
   id="jenjang"
   class="scroll-mt-24 py-14 md:py-20 bg-white border-b border-stone-200/80"
 >
-  <div class="container-12 gap-y-6 md:gap-y-8">
-    <!-- Section Heading -->
-    <div class="col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-4" data-reveal>
-      <div class="space-y-2 max-w-2xl">
-        <p class="text-xs font-bold uppercase tracking-wider text-amber-700">
-          5 Unit Pendidikan Terpadu
-        </p>
-        <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink-heading tracking-tight">
-          Satu Kawasan Aman Dari Usia Dini Hingga SMK.
-        </h2>
-      </div>
-      <p class="text-sm text-ink-body max-w-sm">
-        Pilih jenjang tujuan untuk mengisi formulir PPDB secara otomatis.
+  <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 space-y-8">
+    <!-- Centered Header ala Mutiara Bangsa -->
+    <div class="text-center space-y-1.5" data-reveal>
+      <p class="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-amber-700">
+        LIMA UNIT TERPADU
       </p>
+      <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-primary-dark tracking-tight">
+        Satu Kawasan Pendidikan di Poris Gaga
+      </h2>
     </div>
 
-    <!-- Flagship Card: MI TPI Al-Fuad (Setara SD Islam) -->
-    {
-      flagshipUnit && (() => {
-        const unitMeta = SITE_CONFIG.units.find((u) => u.id === 'mit');
-        const feeInfo = PPDB_FEES_BY_UNIT.find((f) => f.unitId === 'mit');
-        const ppdbOptionValue = UNIT_TO_PPDB_OPTION.mit;
+    <!-- Pill Tabs Pemilih Cepat Unit -->
+    <div class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto no-scrollbar pb-1">
+      {
+        unitsEntries.map((unit) => {
+          const isActive = unit.data.unitId === defaultUnitId;
+          const feeInfo = PPDB_FEES_BY_UNIT.find((f) => f.unitId === unit.data.unitId);
+          return (
+            <button
+              type="button"
+              data-campus-tab={unit.data.unitId}
+              aria-pressed={isActive ? 'true' : 'false'}
+              class={`min-h-[44px] rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold whitespace-nowrap border transition-all ${
+                isActive
+                  ? 'bg-primary-dark text-white border-primary-dark shadow-sm'
+                  : 'bg-[#FAF8F5] text-ink-subheading border-stone-200 hover:border-primary/40'
+              }`}
+            >
+              {feeInfo?.shortLabel ?? unit.data.title}
+            </button>
+          );
+        })
+      }
+    </div>
 
-        return (
-          <article class="col-span-12 rounded-2xl border border-primary/25 bg-primary-surface/40 p-6 sm:p-8 grid grid-cols-12 gap-6 items-center">
-            <div class="col-span-12 lg:col-span-8 space-y-4">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="rounded-full bg-primary-dark px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-gold-light">
-                  Unggulan Utama
-                </span>
-                <span class="inline-flex items-center gap-1 rounded-md bg-white px-2.5 py-1 font-mono text-xs font-bold text-primary-dark border border-primary/15">
-                  <ShieldCheck class="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-                  NPSN {flagshipUnit.data.npsn}
-                </span>
-                <span class="text-xs font-semibold text-amber-700">
-                  {unitMeta?.levelLabel}
-                </span>
-              </div>
+    <!-- 2-Column Slide Showcase (Photo Left + Campus/Unit Details Right) -->
+    <div class="relative rounded-3xl bg-[#FAF8F5] border border-stone-200/90 p-5 sm:p-8 lg:p-10">
+      {
+        unitsEntries.map((unit) => {
+          const isActive = unit.data.unitId === defaultUnitId;
+          const unitMeta = SITE_CONFIG.units.find((u) => u.id === unit.data.unitId);
+          const feeInfo = PPDB_FEES_BY_UNIT.find((f) => f.unitId === unit.data.unitId);
+          const ppdbOptionValue = UNIT_TO_PPDB_OPTION[unit.data.unitId];
+          const unitPhoto = UNIT_IMAGES[unit.data.unitId];
 
-              <div class="space-y-1.5">
-                <h3 class="font-heading text-xl sm:text-2xl font-extrabold text-ink-heading">
-                  {flagshipUnit.data.title}
-                </h3>
-                <p class="text-sm text-ink-body leading-relaxed max-w-2xl">
-                  Target: <strong class="font-semibold text-primary-dark">{flagshipUnit.data.tahfidzTarget}</strong> &bull;
-                  Bimbingan mengaji dari nol terintegrasi kurikulum Kemenag.
-                </p>
-              </div>
-
-              <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium text-ink-subheading">
-                <span class="inline-flex items-center gap-1.5">
-                  <Clock class="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-                  {flagshipUnit.data.studyHours}
-                </span>
-                {feeInfo && (
-                  <span>
-                    SPP Bulanan: <strong class="text-ink-heading">{formatRupiah(feeInfo.monthlyTuition)}</strong>
-                  </span>
-                )}
-              </div>
-
-              <!-- Detail Kurikulum & Ekskul (Expandable, Bebas Wall of Text) -->
-              <details class="group pt-1">
-                <summary class="inline-flex cursor-pointer list-none items-center gap-1.5 text-xs font-bold text-primary-dark hover:underline [&::-webkit-details-marker]:hidden">
-                  <span>Lihat kurikulum &amp; ekstrakurikuler</span>
-                  <span aria-hidden="true" class="transition-transform group-open:rotate-90">&rsaquo;</span>
-                </summary>
-                <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 rounded-xl bg-white p-4 border border-primary/15 text-xs text-ink-body">
-                  <div>
-                    <p class="font-bold text-ink-heading mb-1">Fokus Kurikulum:</p>
-                    <ul class="space-y-1 list-disc list-inside">
-                      {flagshipUnit.data.curriculumHighlights.slice(0, 3).map((item) => (
-                        <li>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p class="font-bold text-ink-heading mb-1">Ekstrakurikuler:</p>
-                    <p>{flagshipUnit.data.extracurriculars.join(' · ')}</p>
-                  </div>
+          return (
+            <article
+              data-campus-slide={unit.data.unitId}
+              class={isActive ? 'grid grid-cols-12 gap-6 lg:gap-10 items-center' : 'hidden grid grid-cols-12 gap-6 lg:gap-10 items-center'}
+            >
+              <!-- Foto Unit Kiri -->
+              <div class="col-span-12 lg:col-span-6">
+                <div class="overflow-hidden rounded-2xl border border-stone-200 bg-white p-1.5 shadow-sm">
+                  <Image
+                    src={unitPhoto}
+                    alt={`${unit.data.title} — ${SITE_CONFIG.address.subdistrict}, ${SITE_CONFIG.address.city}`}
+                    class="w-full h-auto aspect-[16/10] rounded-xl object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
-              </details>
-            </div>
+              </div>
 
-            <div class="col-span-12 lg:col-span-4 flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center lg:items-end justify-between gap-3 lg:border-l lg:border-primary/15 lg:pl-6">
-              {feeInfo && (
-                <div class="lg:text-right">
-                  <span class="inline-block rounded-full bg-gold-light px-2.5 py-0.5 text-[11px] font-bold text-amber-800">
-                    {feeInfo.quotaStatus} ({feeInfo.quotaRemaining} kursi)
+              <!-- Info Unit Kanan (Adaptasi Tata Letak Kanan Slide Mutiara Bangsa) -->
+              <div class="col-span-12 lg:col-span-6 space-y-4">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-xs font-bold uppercase tracking-[0.15em] text-amber-700">
+                    PORIS GAGA CAMPUS
                   </span>
-                  <p class="mt-1.5 text-xs text-ink-caption">Estimasi Masuk Awal</p>
-                  <p class="font-heading text-lg font-extrabold text-primary-dark">
-                    {formatRupiah(feeInfo.totalEstimatedInitial)}
-                  </p>
+                  <span class="inline-flex items-center gap-1 rounded-md bg-white px-2.5 py-0.5 font-mono text-xs font-bold text-primary-dark border border-stone-200">
+                    <ShieldCheck class="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+                    {unit.data.npsn === 'Terdaftar Kemenag' ? 'Terdaftar Kemenag' : `NPSN ${unit.data.npsn}`}
+                  </span>
                 </div>
-              )}
 
-              <a
-                href="#daftar-ppdb"
-                data-select-unit={ppdbOptionValue}
-                data-unit-id="mit"
-                class="inline-flex items-center justify-center gap-2 min-h-[48px] rounded-xl bg-amber-700 hover:bg-amber-800 px-5 py-3 text-sm font-semibold text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700"
-              >
-                <span>Pilih &amp; Daftar MI TPI</span>
-                <ArrowRight class="h-4 w-4 shrink-0" aria-hidden="true" />
-              </a>
-            </div>
-          </article>
-        );
-      })()
-    }
-
-    <!-- 4 Unit Lainnya (Grid 2x2 Desktop & Tablet, Ringkas di Mobile) -->
-    {
-      otherUnits.map((unit) => {
-        const unitMeta = SITE_CONFIG.units.find((u) => u.id === unit.data.unitId);
-        const feeInfo = PPDB_FEES_BY_UNIT.find((f) => f.unitId === unit.data.unitId);
-        const ppdbOptionValue = UNIT_TO_PPDB_OPTION[unit.data.unitId];
-
-        return (
-          <article data-reveal class="card-elevate col-span-12 md:col-span-6 rounded-2xl bg-[#FAF8F5] border border-stone-200/90 p-5 sm:p-6 flex flex-col justify-between gap-4">
-            <div class="space-y-3">
-              <div class="flex flex-wrap items-center justify-between gap-2">
-                <span class="text-xs font-bold uppercase tracking-wide text-amber-700">
-                  {unitMeta?.levelLabel ?? ''}
-                </span>
-                <span class="rounded-md bg-white px-2 py-0.5 font-mono text-[11px] font-bold text-primary-dark border border-stone-200">
-                  {unit.data.npsn === 'Terdaftar Kemenag' ? 'Kemenag RI' : `NPSN ${unit.data.npsn}`}
-                </span>
-              </div>
-
-              <div class="space-y-1">
-                <h3 class="font-heading text-lg sm:text-xl font-bold text-ink-heading">
-                  {unit.data.title}
-                </h3>
-                <p class="text-xs sm:text-sm text-ink-body line-clamp-2">
-                  Target: <strong class="font-semibold text-ink-heading">{unit.data.tahfidzTarget}</strong>
-                </p>
-              </div>
-
-              <p class="inline-flex items-center gap-1.5 text-xs text-ink-caption">
-                <Clock class="h-3.5 w-3.5 text-primary shrink-0" aria-hidden="true" />
-                <span>{unit.data.studyHours}</span>
-              </p>
-
-              <details class="group">
-                <summary class="inline-flex cursor-pointer list-none items-center gap-1 text-xs font-semibold text-primary hover:underline [&::-webkit-details-marker]:hidden">
-                  <span>Kurikulum &amp; Ekskul</span>
-                  <span aria-hidden="true" class="transition-transform group-open:rotate-90">&rsaquo;</span>
-                </summary>
-                <ul class="mt-2.5 space-y-1 rounded-xl bg-white p-3.5 border border-stone-200 text-xs text-ink-body list-disc list-inside">
-                  {unit.data.curriculumHighlights.slice(0, 3).map((highlight) => (
-                    <li>{highlight}</li>
-                  ))}
-                  <li class="list-none pt-1 font-medium text-ink-heading">
-                    Ekskul: {unit.data.extracurriculars.join(' · ')}
-                  </li>
-                </ul>
-              </details>
-            </div>
-
-            <div class="pt-3 border-t border-stone-200/80 flex items-center justify-between gap-3">
-              {feeInfo && (
                 <div>
-                  <p class="text-[11px] text-ink-caption">
-                    SPP {formatRupiah(feeInfo.monthlyTuition)}/bln
-                  </p>
-                  <p class="text-xs font-bold text-primary-dark">
-                    {feeInfo.quotaStatus} ({feeInfo.quotaRemaining} kursi)
+                  <h3 class="font-heading text-2xl sm:text-3xl font-extrabold text-primary-dark tracking-tight uppercase">
+                    {unit.data.title}
+                  </h3>
+                  <p class="mt-1 text-sm font-semibold text-primary">
+                    {unitMeta?.levelLabel} &bull; {unit.data.tahfidzTarget}
                   </p>
                 </div>
-              )}
 
-              <a
-                href="#daftar-ppdb"
-                data-select-unit={ppdbOptionValue}
-                data-unit-id={unit.data.unitId}
-                class="inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-xl bg-primary hover:bg-primary-dark px-4 py-2 text-xs sm:text-sm font-semibold text-white transition-colors shrink-0"
-              >
-                <span>Pilih &amp; Daftar</span>
-                <ArrowRight class="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              </a>
-            </div>
-          </article>
-        );
-      })
-    }
+                <div class="space-y-2 text-xs sm:text-sm text-ink-body pt-1">
+                  <p class="flex items-start gap-2">
+                    <MapPin class="h-4 w-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                    <span>{SITE_CONFIG.address.fullAddress}</span>
+                  </p>
+                  <p class="flex items-center gap-2">
+                    <Clock class="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
+                    <span>{unit.data.studyHours}</span>
+                  </p>
+                  <p class="flex items-center gap-2">
+                    <Phone class="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
+                    <span>
+                      {SITE_CONFIG.contact.phoneOffice1} / WA {SITE_CONFIG.contact.whatsappDisplay}
+                    </span>
+                  </p>
+                </div>
+
+                {feeInfo && (
+                  <div class="rounded-xl bg-white px-4 py-3 border border-stone-200/80 flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <span>
+                      SPP Bulanan: <strong class="text-primary-dark font-bold">{formatRupiah(feeInfo.monthlyTuition)}</strong>
+                    </span>
+                    <span class="rounded-full bg-gold-light px-2.5 py-0.5 font-bold text-amber-800">
+                      {feeInfo.quotaStatus} ({feeInfo.quotaRemaining} Kursi)
+                    </span>
+                  </div>
+                )}
+
+                <div class="flex flex-wrap items-center gap-3 pt-1">
+                  <a
+                    href="#daftar-ppdb"
+                    data-select-unit={ppdbOptionValue}
+                    data-unit-id={unit.data.unitId}
+                    class="inline-flex items-center justify-center gap-2 min-h-[46px] rounded-xl bg-amber-700 hover:bg-amber-800 px-5 py-2.5 text-sm font-semibold text-white transition-colors"
+                  >
+                    <span>Pilih &amp; Daftar {feeInfo?.shortLabel}</span>
+                    <ArrowRight class="h-4 w-4 shrink-0" aria-hidden="true" />
+                  </a>
+
+                  <a
+                    href="#biaya-ppdb"
+                    data-jump-fee-unit={unit.data.unitId}
+                    class="inline-flex items-center justify-center min-h-[46px] rounded-xl border border-stone-300 bg-white hover:bg-primary-surface px-4 py-2.5 text-xs sm:text-sm font-semibold text-primary-dark transition-colors"
+                  >
+                    Lihat Rincian Biaya
+                  </a>
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
+
+      <!-- Bottom Carousel Pagination Controls & Dots (Persis Mutiara Bangsa) -->
+      <div class="mt-6 pt-5 border-t border-stone-200/80 flex items-center justify-between gap-4">
+        <button
+          type="button"
+          id="campus-prev"
+          aria-label="Unit pendidikan sebelumnya"
+          class="inline-flex items-center gap-1.5 min-h-[44px] px-3 rounded-xl border border-stone-200 bg-white text-xs font-semibold text-primary-dark hover:bg-primary-surface transition-colors"
+        >
+          <ChevronLeft class="h-4 w-4" aria-hidden="true" />
+          <span class="hidden sm:inline">Sebelumnya</span>
+        </button>
+
+        <div class="flex items-center gap-2" role="group" aria-label="Indikator slide unit">
+          {
+            unitsEntries.map((unit) => {
+              const isActive = unit.data.unitId === defaultUnitId;
+              return (
+                <button
+                  type="button"
+                  data-campus-dot={unit.data.unitId}
+                  aria-label={`Tampilkan ${unit.data.title}`}
+                  class={`h-2.5 rounded-full transition-all ${
+                    isActive ? 'w-7 bg-primary-dark' : 'w-2.5 bg-stone-300 hover:bg-primary/50'
+                  }`}
+                />
+              );
+            })
+          }
+        </div>
+
+        <button
+          type="button"
+          id="campus-next"
+          aria-label="Unit pendidikan berikutnya"
+          class="inline-flex items-center gap-1.5 min-h-[44px] px-3 rounded-xl border border-stone-200 bg-white text-xs font-semibold text-primary-dark hover:bg-primary-surface transition-colors"
+        >
+          <span class="hidden sm:inline">Berikutnya</span>
+          <ChevronRight class="h-4 w-4" aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Bar Ringkas 5 NPSN Resmi (Selalu Terlihat untuk Orang Tua & SEO) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+      {
+        SITE_CONFIG.units.map((u) => (
+          <button
+            type="button"
+            data-campus-tab={u.id}
+            class="text-left rounded-xl bg-[#FAF8F5] hover:bg-primary-surface/70 border border-stone-200/80 px-3.5 py-2.5 transition-colors min-h-[44px]"
+          >
+            <p class="font-heading text-xs font-bold text-primary-dark truncate">{u.name}</p>
+            <p class="font-mono text-[11px] text-amber-700 font-semibold">
+              {u.npsn === 'Terdaftar Kemenag' ? 'Kemenag RI' : `NPSN ${u.npsn}`}
+            </p>
+          </button>
+        ))
+      }
+    </div>
   </div>
 </section>
 
 <script>
-  const unitButtons = document.querySelectorAll('[data-select-unit]');
+  const unitOrder = ['ra', 'mit', 'smpit', 'smkit', 'pesantren'];
+  let activeCampusId = 'mit';
 
+  const campusTabs = document.querySelectorAll<HTMLButtonElement>('[data-campus-tab]');
+  const campusSlides = document.querySelectorAll<HTMLElement>('[data-campus-slide]');
+  const campusDots = document.querySelectorAll<HTMLButtonElement>('[data-campus-dot]');
+
+  const showCampusSlide = (unitId: string) => {
+    if (!unitOrder.includes(unitId)) return;
+    activeCampusId = unitId;
+
+    campusSlides.forEach((slide) => {
+      const match = slide.getAttribute('data-campus-slide') === unitId;
+      slide.classList.toggle('hidden', !match);
+    });
+
+    campusTabs.forEach((tab) => {
+      if (!tab.hasAttribute('aria-pressed')) return;
+      const match = tab.getAttribute('data-campus-tab') === unitId;
+      tab.setAttribute('aria-pressed', String(match));
+      tab.classList.toggle('bg-primary-dark', match);
+      tab.classList.toggle('text-white', match);
+      tab.classList.toggle('border-primary-dark', match);
+      tab.classList.toggle('bg-[#FAF8F5]', !match);
+      tab.classList.toggle('text-ink-subheading', !match);
+      tab.classList.toggle('border-stone-200', !match);
+    });
+
+    campusDots.forEach((dot) => {
+      const match = dot.getAttribute('data-campus-dot') === unitId;
+      dot.classList.toggle('w-7', match);
+      dot.classList.toggle('bg-primary-dark', match);
+      dot.classList.toggle('w-2.5', !match);
+      dot.classList.toggle('bg-stone-300', !match);
+    });
+  };
+
+  campusTabs.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-campus-tab');
+      if (id) showCampusSlide(id);
+    });
+  });
+
+  campusDots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const id = dot.getAttribute('data-campus-dot');
+      if (id) showCampusSlide(id);
+    });
+  });
+
+  document.getElementById('campus-prev')?.addEventListener('click', () => {
+    const idx = unitOrder.indexOf(activeCampusId);
+    const prevIdx = (idx - 1 + unitOrder.length) % unitOrder.length;
+    showCampusSlide(unitOrder[prevIdx]);
+  });
+
+  document.getElementById('campus-next')?.addEventListener('click', () => {
+    const idx = unitOrder.indexOf(activeCampusId);
+    const nextIdx = (idx + 1) % unitOrder.length;
+    showCampusSlide(unitOrder[nextIdx]);
+  });
+
+  window.addEventListener('campus:select-slide', (event) => {
+    const customEvent = event as CustomEvent<{ unitId?: string }>;
+    if (customEvent.detail?.unitId) {
+      showCampusSlide(customEvent.detail.unitId);
+    }
+  });
+
+  // Sinkronkan klik "Lihat Rincian Biaya" ke tab #biaya-ppdb
+  document.querySelectorAll('[data-jump-fee-unit]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const unitId = link.getAttribute('data-jump-fee-unit');
+      if (unitId) {
+        window.dispatchEvent(new CustomEvent('ppdb:select-unit', { detail: { unitId } }));
+      }
+    });
+  });
+
+  // Sinkronkan klik "Pilih & Daftar" -> form #daftar-ppdb
+  const unitButtons = document.querySelectorAll('[data-select-unit]');
   unitButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
       const targetUnit = button.getAttribute('data-select-unit');
@@ -252,8 +355,7 @@ const otherUnits = unitsEntries.filter((u) => u.data.unitId !== 'mit');
 
         const formSection =
           document.getElementById('daftar-ppdb') ||
-          document.getElementById('ppdb-form') ||
-          document.getElementById('biaya-ppdb');
+          document.getElementById('ppdb-form');
         if (formSection) {
           event.preventDefault();
           formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });

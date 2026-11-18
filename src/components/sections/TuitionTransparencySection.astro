@@ -1,6 +1,6 @@
 ---
 import { ArrowRight, Download, ShieldCheck } from 'lucide-astro';
-import { PPDB_FEES_BY_UNIT, PPDB_WAVES } from '@/data/ppdbData';
+import { PPDB_FEES_BY_UNIT } from '@/data/ppdbData';
 import type { UnitId } from '@/data/siteConfig';
 import { formatRupiah } from '@/utils/currency';
 import type { TARGET_UNIT_OPTIONS } from '@/utils/whatsapp';
@@ -18,98 +18,88 @@ const UNIT_TO_PPDB_OPTION: Record<UnitId, TargetUnitOption> = {
 const defaultActiveUnitId: UnitId = 'mit';
 ---
 
+<!-- Section 8 (#biaya-ppdb): Admission Open CTA Band + Transparansi Rincian Biaya (Adaptasi Section 8 Mutiara Bangsa) -->
 <section
   id="biaya-ppdb"
-  class="scroll-mt-24 py-14 md:py-20 bg-[#FAF8F5] border-b border-stone-200/80"
+  class="scroll-mt-24 py-14 md:py-20 bg-white border-b border-stone-200/80"
 >
-  <div class="container-12 gap-y-6 md:gap-y-8">
-    <!-- Section Heading -->
-    <div class="col-span-12 flex flex-col lg:flex-row lg:items-end justify-between gap-4">
-      <div class="space-y-2 max-w-2xl">
-        <p class="text-xs font-bold uppercase tracking-wider text-amber-700">
-          Transparansi Biaya &amp; Kuota
-        </p>
-        <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink-heading tracking-tight">
-          Rincian Estimasi Biaya PPDB.
-        </h2>
-        <p class="text-sm text-ink-body">
-          Uang Pangkal (DSP) dapat diangsur hingga 3x. Tersedia beasiswa tahfidz &amp; keringanan yatim.
-        </p>
+  <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 space-y-12">
+    <!-- Top Admission Open Banner persis Gaya Mutiara Bangsa Section 8 -->
+    <div
+      data-reveal
+      class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#F4F7F6] via-white to-primary-surface/60 border border-stone-200/80 py-10 px-6 text-center space-y-3"
+    >
+      <p class="font-heading text-xl sm:text-3xl lg:text-4xl font-extrabold uppercase tracking-wide text-ink-subheading">
+        PENDAFTARAN PESERTA DIDIK BARU!
+      </p>
+      <p class="font-heading text-base sm:text-xl font-bold text-primary">
+        &mdash; Tahun Ajaran 2026 / 2027
+      </p>
+      <p class="mx-auto max-w-xl text-xs sm:text-sm text-ink-body">
+        DSP/Uang Pangkal dapat diangsur hingga 3x. Tersedia potongan Gelombang Dini, saudara kandung, dan beasiswa tahfidz/yatim.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+        <a
+          href="#daftar-ppdb"
+          class="inline-flex items-center justify-center min-h-[46px] rounded-xl bg-primary-surface hover:bg-emerald-100 border border-primary/25 px-6 py-2.5 text-sm font-bold text-primary-dark transition-colors"
+        >
+          Daftar Sekarang
+        </a>
+        <a
+          href="/brosur/brosur-ppdb-ypi-alfuad-2026.pdf"
+          download="Brosur-PPDB-YPI-Al-Fuad.pdf"
+          class="inline-flex items-center gap-2 min-h-[46px] rounded-xl bg-white hover:bg-stone-50 border border-stone-200 px-5 py-2.5 text-xs sm:text-sm font-semibold text-ink-heading transition-colors"
+        >
+          <Download class="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
+          <span>Unduh Brosur (PDF)</span>
+        </a>
       </div>
-
-      <a
-        href="/brosur/brosur-ppdb-ypi-alfuad-2026.pdf"
-        download="Brosur-PPDB-YPI-Al-Fuad.pdf"
-        class="inline-flex w-fit items-center justify-center gap-2 min-h-[44px] rounded-xl bg-white hover:bg-stone-50 px-4 py-2.5 text-xs sm:text-sm font-semibold text-ink-heading border border-stone-200 transition-colors"
-      >
-        <Download class="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
-        <span>Unduh Brosur &amp; Biaya (PDF)</span>
-      </a>
     </div>
 
-    <!-- 3 Gelombang Strip (Ringkas) -->
-    <div class="col-span-12 grid grid-cols-1 md:grid-cols-3 gap-3">
-      {
-        PPDB_WAVES.map((wave) => {
-          const isLimited = wave.status === 'Segera Penuh';
-          return (
-            <div class="rounded-2xl bg-white p-4 border border-stone-200/90 flex flex-col justify-between gap-2">
-              <div class="flex items-center justify-between gap-2">
-                <h3 class="font-heading text-sm font-bold text-ink-heading">
-                  {wave.name}
-                </h3>
-                <span
-                  class={`rounded-full px-2.5 py-0.5 text-[11px] font-bold ${
-                    isLimited
-                      ? 'bg-gold-light text-amber-800'
-                      : 'bg-primary-surface text-primary-dark'
+    <!-- Rincian Biaya Transparan per Jenjang -->
+    <div class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-wider text-amber-700">
+            Transparansi Rincian Biaya
+          </p>
+          <h2 class="font-heading text-xl sm:text-2xl font-extrabold text-primary-dark">
+            Estimasi Biaya Masuk &amp; SPP Bulanan
+          </h2>
+        </div>
+
+        <!-- Pill Tabs -->
+        <div
+          role="tablist"
+          aria-label="Pilih Jenjang untuk Melihat Rincian Biaya"
+          class="no-scrollbar flex items-center gap-2 overflow-x-auto pb-1"
+        >
+          {
+            PPDB_FEES_BY_UNIT.map((unit) => {
+              const isActive = unit.unitId === defaultActiveUnitId;
+              return (
+                <button
+                  type="button"
+                  role="tab"
+                  id={`tab-fee-${unit.unitId}`}
+                  aria-selected={isActive ? 'true' : 'false'}
+                  aria-controls={`panel-fee-${unit.unitId}`}
+                  data-fee-tab={unit.unitId}
+                  class={`min-h-[44px] rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold whitespace-nowrap transition-all border ${
+                    isActive
+                      ? 'bg-primary-dark text-white border-primary-dark'
+                      : 'bg-[#FAF8F5] text-ink-subheading border-stone-200 hover:border-primary/40'
                   }`}
                 >
-                  {wave.status}
-                </span>
-              </div>
-              <p class="text-xs font-semibold text-primary">{wave.period}</p>
-              <p class="text-xs text-ink-body line-clamp-2">{wave.benefit}</p>
-            </div>
-          );
-        })
-      }
-    </div>
-
-    <!-- Segmented Pill Switcher -->
-    <div class="col-span-12">
-      <div
-        role="tablist"
-        aria-label="Pilih Jenjang untuk Melihat Rincian Biaya"
-        class="no-scrollbar flex items-center gap-2 overflow-x-auto pb-1"
-      >
-        {
-          PPDB_FEES_BY_UNIT.map((unit) => {
-            const isActive = unit.unitId === defaultActiveUnitId;
-            return (
-              <button
-                type="button"
-                role="tab"
-                id={`tab-fee-${unit.unitId}`}
-                aria-selected={isActive ? 'true' : 'false'}
-                aria-controls={`panel-fee-${unit.unitId}`}
-                data-fee-tab={unit.unitId}
-                class={`min-h-[44px] rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold whitespace-nowrap transition-all border ${
-                  isActive
-                    ? 'bg-primary-dark text-white border-primary-dark'
-                    : 'bg-white text-ink-subheading border-stone-200 hover:border-primary/40'
-                }`}
-              >
-                {unit.shortLabel}
-              </button>
-            );
-          })
-        }
+                  {unit.shortLabel}
+                </button>
+              );
+            })
+          }
+        </div>
       </div>
-    </div>
 
-    <!-- Panel Rincian Biaya per Unit -->
-    <div class="col-span-12">
+      <!-- Panels -->
       {
         PPDB_FEES_BY_UNIT.map((unit) => {
           const isActive = unit.unitId === defaultActiveUnitId;
@@ -123,11 +113,11 @@ const defaultActiveUnitId: UnitId = 'mit';
               role="tabpanel"
               aria-labelledby={`tab-fee-${unit.unitId}`}
               data-fee-panel={unit.unitId}
-              class={isActive ? 'grid grid-cols-12 gap-4 md:gap-6 items-stretch' : 'hidden grid grid-cols-12 gap-4 md:gap-6 items-stretch'}
+              class={isActive ? 'grid grid-cols-12 gap-5 items-stretch' : 'hidden grid grid-cols-12 gap-5 items-stretch'}
             >
-              <!-- Tabel Biaya Bersih (7 Kolom Desktop) -->
-              <div class="col-span-12 lg:col-span-7 rounded-2xl bg-white border border-stone-200/90 p-5 sm:p-7 flex flex-col justify-between gap-4">
-                <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-stone-100">
+              <!-- Tabel Rincian -->
+              <div class="col-span-12 lg:col-span-7 rounded-2xl bg-[#FAF8F5] border border-stone-200/90 p-5 sm:p-7 flex flex-col justify-between gap-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-stone-200/80">
                   <div>
                     <h3 class="font-heading text-lg sm:text-xl font-bold text-ink-heading">
                       {unit.unitName}
@@ -137,21 +127,18 @@ const defaultActiveUnitId: UnitId = 'mit';
                       {unit.npsn === 'Terdaftar Kemenag' ? unit.npsn : `NPSN ${unit.npsn}`}
                     </span>
                   </div>
-
                   <span
                     class={`rounded-full px-3 py-1 text-xs font-bold ${
-                      isLimitedQuota
-                        ? 'bg-gold-light text-amber-800'
-                        : 'bg-primary-surface text-primary-dark'
+                      isLimitedQuota ? 'bg-gold-light text-amber-800' : 'bg-primary-surface text-primary-dark'
                     }`}
                   >
                     {unit.quotaStatus} &bull; {unit.quotaRemaining} Kursi
                   </span>
                 </div>
 
-                <div class="overflow-x-auto -mx-2 px-2 sm:mx-0 sm:px-0">
+                <div class="overflow-x-auto">
                   <table class="min-w-[280px] w-full text-left border-collapse">
-                    <tbody class="divide-y divide-stone-100 text-xs sm:text-sm">
+                    <tbody class="divide-y divide-stone-200/70 text-xs sm:text-sm">
                       <tr>
                         <td class="py-2.5 text-ink-body">Formulir Pendaftaran</td>
                         <td class="py-2.5 text-right font-semibold text-ink-heading whitespace-nowrap">
@@ -182,11 +169,11 @@ const defaultActiveUnitId: UnitId = 'mit';
                           {formatRupiah(unit.monthlyTuition)} / bln
                         </td>
                       </tr>
-                      <tr class="bg-primary-surface/45">
-                        <td class="py-3 px-2 rounded-l-lg font-heading font-bold text-primary-dark">
+                      <tr class="bg-white">
+                        <td class="py-3 px-2.5 rounded-l-lg font-heading font-bold text-primary-dark">
                           Total Estimasi Daftar Ulang
                         </td>
-                        <td class="py-3 px-2 rounded-r-lg text-right font-heading text-sm sm:text-base font-extrabold text-primary-dark whitespace-nowrap">
+                        <td class="py-3 px-2.5 rounded-r-lg text-right font-heading text-sm sm:text-base font-extrabold text-primary-dark whitespace-nowrap">
                           {formatRupiah(unit.totalEstimatedInitial)}
                         </td>
                       </tr>
@@ -195,7 +182,7 @@ const defaultActiveUnitId: UnitId = 'mit';
                 </div>
               </div>
 
-              <!-- Ringkasan Kuota & CTA (5 Kolom Desktop) -->
+              <!-- Ringkasan Kuota & CTA -->
               <div class="col-span-12 lg:col-span-5 rounded-2xl bg-primary-dark text-white p-6 sm:p-7 flex flex-col justify-between gap-6">
                 <div class="space-y-4">
                   <div class="space-y-2">
@@ -204,13 +191,9 @@ const defaultActiveUnitId: UnitId = 'mit';
                       <span class="text-gold-light">{unit.quotaFilled} / {unit.quotaTotal} Siswa</span>
                     </div>
                     <div class="h-2 w-full rounded-full bg-white/15 overflow-hidden">
-                      <div
-                        class="h-full rounded-full bg-gold-medium"
-                        style={`width: ${quotaPercent}%`}
-                      />
+                      <div class="h-full rounded-full bg-gold-medium" style={`width: ${quotaPercent}%`} />
                     </div>
                   </div>
-
                   <p class="text-xs sm:text-sm text-emerald-50/90 leading-relaxed">
                     {unit.installmentNote}
                   </p>
@@ -226,7 +209,6 @@ const defaultActiveUnitId: UnitId = 'mit';
                     <span>Daftar {unit.shortLabel} Sekarang</span>
                     <ArrowRight class="h-4 w-4 shrink-0" aria-hidden="true" />
                   </a>
-
                   <a
                     href="/brosur/rincian-biaya-ypi-alfuad.pdf"
                     download={`Rincian-Biaya-${unit.shortLabel}-Al-Fuad.pdf`}
@@ -256,7 +238,7 @@ const defaultActiveUnitId: UnitId = 'mit';
       tab.classList.toggle('bg-primary-dark', isSelected);
       tab.classList.toggle('text-white', isSelected);
       tab.classList.toggle('border-primary-dark', isSelected);
-      tab.classList.toggle('bg-white', !isSelected);
+      tab.classList.toggle('bg-[#FAF8F5]', !isSelected);
       tab.classList.toggle('text-ink-subheading', !isSelected);
       tab.classList.toggle('border-stone-200', !isSelected);
     });
