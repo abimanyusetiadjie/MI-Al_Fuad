@@ -22,11 +22,11 @@ const faqJsonLd = {
 
 <section
   id="faq"
-  class="scroll-mt-24 py-14 md:py-20 bg-[#FAF8F5]"
+  class="scroll-mt-24 py-14 md:py-20 bg-white"
 >
   <div class="container-12 items-start gap-y-8">
     <!-- Kolom Kiri (4 Kolom Desktop) -->
-    <div class="col-span-12 lg:col-span-4 space-y-4">
+    <div class="col-span-12 lg:col-span-4 space-y-4" data-reveal>
       <p class="text-xs font-bold uppercase tracking-wider text-amber-700">
         FAQ PPDB
       </p>
@@ -51,8 +51,8 @@ const faqJsonLd = {
     </div>
 
     <!-- Kolom Kanan (8 Kolom Desktop): Accordion Bersih Hairline -->
-    <div class="col-span-12 lg:col-span-8">
-      <div class="divide-y divide-stone-200 border-y border-stone-200 bg-white rounded-2xl px-4 sm:px-6 border-x">
+    <div class="col-span-12 lg:col-span-8" data-reveal data-reveal-delay="80">
+      <div class="divide-y divide-stone-200 border-y border-stone-200 bg-[#FAF8F5] rounded-2xl px-4 sm:px-6 border-x">
         {
           PPDB_FAQS.map((faq, index) => (
             <details class="group py-1" open={index === 0}>

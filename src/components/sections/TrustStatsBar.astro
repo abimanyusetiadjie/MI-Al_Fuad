@@ -1,36 +1,94 @@
 ---
-interface MetricItem {
-  value: string;
-  label: string;
+import { ArrowUpRight, BookOpen, CalendarCheck, GraduationCap, MessageCircle } from 'lucide-astro';
+
+interface QuickLinkCard {
+  title: string;
+  subtitle: string;
+  href: string;
+  icon: 'ppdb' | 'biaya' | 'jenjang' | 'kabar';
+  accent: 'gold' | 'emerald';
 }
 
-const metrics: readonly MetricItem[] = [
-  { value: 'Sejak 1990', label: '35+ Tahun Mengabdi' },
-  { value: '52+ Guru', label: 'Pembina Hafidz Al-Qur’an' },
-  { value: 'Juz 30 + Arti', label: 'Target Wajib Lulusan' },
-  { value: '5 Jenjang', label: 'RA hingga SMK-IT & Pondok' },
+const quickCards: readonly QuickLinkCard[] = [
+  {
+    title: 'Daftar PPDB Online',
+    subtitle: 'Formulir instan WhatsApp',
+    href: '#daftar-ppdb',
+    icon: 'ppdb',
+    accent: 'gold',
+  },
+  {
+    title: 'Biaya & Kuota',
+    subtitle: 'Cicilan 3x & beasiswa',
+    href: '#biaya-ppdb',
+    icon: 'biaya',
+    accent: 'emerald',
+  },
+  {
+    title: '5 Unit & NPSN',
+    subtitle: 'RA, MI TPI, SMP, SMK, Pondok',
+    href: '#jenjang',
+    icon: 'jenjang',
+    accent: 'emerald',
+  },
+  {
+    title: 'Kabar & Agenda',
+    subtitle: 'Jadwal gelombang & wisuda',
+    href: '#kabar',
+    icon: 'kabar',
+    accent: 'gold',
+  },
 ] as const;
 ---
 
+<!-- Overlapping 4-Card Quick Action Strip (Adaptasi Khas Portal Sekolah Bootstrap Modern) -->
 <section
-  aria-label="Statistik Kredibilitas MI TPI & YPI Al-Fuad"
-  class="bg-white border-b border-stone-200/80"
+  aria-label="Akses Cepat Informasi Sekolah & PPDB"
+  class="bg-[#FAF8F5] relative z-10 pb-8 md:pb-10"
 >
-  <div class="container-12 py-6 md:py-8">
-    <div
-      class="col-span-12 grid grid-cols-2 lg:grid-cols-4 gap-y-5 gap-x-4 lg:gap-0 lg:divide-x lg:divide-stone-200/80"
-    >
+  <div class="container-12">
+    <div class="col-span-12 -mt-7 md:-mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
       {
-        metrics.map((item) => (
-          <div class="lg:px-6 first:lg:pl-0 last:lg:pr-0 space-y-0.5">
-            <p class="font-heading text-xl sm:text-2xl font-extrabold tracking-tight text-primary-dark">
-              {item.value}
-            </p>
-            <p class="text-xs sm:text-sm font-medium text-ink-body">
-              {item.label}
-            </p>
-          </div>
-        ))
+        quickCards.map((card, idx) => {
+          const isGold = card.accent === 'gold';
+          return (
+            <a
+              href={card.href}
+              data-reveal
+              data-reveal-delay={idx * 60}
+              class="group card-elevate min-h-[68px] rounded-2xl bg-white p-4 border border-stone-200/90 shadow-md shadow-emerald-950/5 flex items-center justify-between gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <div class="flex items-center gap-3 min-w-0">
+                <span
+                  class={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105 ${
+                    isGold
+                      ? 'bg-gold-light text-amber-800'
+                      : 'bg-primary-surface text-primary-dark'
+                  }`}
+                  aria-hidden="true"
+                >
+                  {card.icon === 'ppdb' && <MessageCircle class="h-5 w-5" />}
+                  {card.icon === 'biaya' && <BookOpen class="h-5 w-5" />}
+                  {card.icon === 'jenjang' && <GraduationCap class="h-5 w-5" />}
+                  {card.icon === 'kabar' && <CalendarCheck class="h-5 w-5" />}
+                </span>
+                <div class="min-w-0">
+                  <p class="font-heading text-sm font-bold text-ink-heading group-hover:text-primary-dark truncate">
+                    {card.title}
+                  </p>
+                  <p class="text-xs text-ink-caption truncate">
+                    {card.subtitle}
+                  </p>
+                </div>
+              </div>
+
+              <ArrowUpRight
+                class="h-4 w-4 shrink-0 text-stone-400 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary"
+                aria-hidden="true"
+              />
+            </a>
+          );
+        })
       }
     </div>
   </div>

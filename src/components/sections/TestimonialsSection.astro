@@ -13,11 +13,11 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
 
 <section
   id="testimoni"
-  class="scroll-mt-24 py-14 md:py-20 bg-[#FAF8F5] border-b border-stone-200/80"
+  class="scroll-mt-24 py-14 md:py-20 bg-white border-b border-stone-200/80"
 >
   <div class="container-12 gap-y-6 md:gap-y-8">
     <!-- Section Heading -->
-    <div class="col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div class="col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-4" data-reveal>
       <div class="space-y-2 max-w-2xl">
         <p class="text-xs font-bold uppercase tracking-wider text-amber-700">
           Suara Wali Murid &amp; Pengawas
@@ -40,10 +40,11 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
           const isKemenag = item.data.unitRelated === 'Yayasan';
           return (
             <article
-              class={`shrink-0 w-[84%] sm:w-[68%] snap-start md:w-auto md:col-span-6 lg:col-span-4 rounded-2xl p-5 sm:p-6 border flex flex-col justify-between gap-4 ${
+              data-reveal
+              class={`card-elevate shrink-0 w-[84%] sm:w-[68%] snap-start md:w-auto md:col-span-6 lg:col-span-4 rounded-2xl p-5 sm:p-6 border flex flex-col justify-between gap-4 ${
                 isKemenag
                   ? 'bg-primary-dark text-white border-primary-dark'
-                  : 'bg-white text-ink-body border-stone-200/90'
+                  : 'bg-[#FAF8F5] text-ink-body border-stone-200/90'
               }`}
             >
               <div class="space-y-3">

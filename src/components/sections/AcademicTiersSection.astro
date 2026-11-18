@@ -30,7 +30,7 @@ const otherUnits = unitsEntries.filter((u) => u.data.unitId !== 'mit');
 >
   <div class="container-12 gap-y-6 md:gap-y-8">
     <!-- Section Heading -->
-    <div class="col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div class="col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-4" data-reveal>
       <div class="space-y-2 max-w-2xl">
         <p class="text-xs font-bold uppercase tracking-wider text-amber-700">
           5 Unit Pendidikan Terpadu
@@ -148,7 +148,7 @@ const otherUnits = unitsEntries.filter((u) => u.data.unitId !== 'mit');
         const ppdbOptionValue = UNIT_TO_PPDB_OPTION[unit.data.unitId];
 
         return (
-          <article class="col-span-12 md:col-span-6 rounded-2xl bg-[#FAF8F5] border border-stone-200/90 p-5 sm:p-6 flex flex-col justify-between gap-4 hover:border-primary/30 transition-colors">
+          <article data-reveal class="card-elevate col-span-12 md:col-span-6 rounded-2xl bg-[#FAF8F5] border border-stone-200/90 p-5 sm:p-6 flex flex-col justify-between gap-4">
             <div class="space-y-3">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <span class="text-xs font-bold uppercase tracking-wide text-amber-700">
