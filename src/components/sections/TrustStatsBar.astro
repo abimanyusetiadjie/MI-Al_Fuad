@@ -49,14 +49,12 @@ const quickCards: readonly QuickLinkCard[] = [
   <div class="container-12">
     <div class="col-span-12 -mt-7 md:-mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
       {
-        quickCards.map((card, idx) => {
+        quickCards.map((card) => {
           const isGold = card.accent === 'gold';
           return (
             <a
               href={card.href}
-              data-reveal
-              data-reveal-delay={idx * 60}
-              class="group card-elevate min-h-[68px] rounded-2xl bg-white p-4 border border-stone-200/90 shadow-md shadow-emerald-950/5 flex items-center justify-between gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              class="group card-elevate animate-hero-in-delay min-h-[68px] rounded-2xl bg-white p-4 border border-stone-200/90 shadow-md shadow-emerald-950/5 flex items-center justify-between gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <div class="flex items-center gap-3 min-w-0">
                 <span
