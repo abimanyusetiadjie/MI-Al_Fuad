@@ -69,12 +69,12 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
           })
         }
 
-        <div class="mt-6 pt-5 border-t border-line-subtle flex items-center justify-between gap-4">
+        <div class="mt-6 pt-5 border-t border-line-subtle flex items-center justify-center sm:justify-between gap-4">
           <button
             type="button"
             id="testimonial-prev"
             aria-label="Testimoni sebelumnya"
-            class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-line-subtle text-primary-dark hover:bg-accent-surface transition-colors"
+            class="hidden sm:inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-line-subtle text-primary-dark hover:bg-accent-surface transition-colors"
           >
             <ChevronLeft class="h-4 w-4" aria-hidden="true" />
           </button>
@@ -98,7 +98,7 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
             type="button"
             id="testimonial-next"
             aria-label="Testimoni berikutnya"
-            class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-line-subtle text-primary-dark hover:bg-accent-surface transition-colors"
+            class="hidden sm:inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-line-subtle text-primary-dark hover:bg-accent-surface transition-colors"
           >
             <ChevronRight class="h-4 w-4" aria-hidden="true" />
           </button>

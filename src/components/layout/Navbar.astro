@@ -24,9 +24,9 @@ const schoolLinks = [
 const quickWaUrl = buildQuickWhatsAppUrl();
 ---
 
-<!-- Sticky Clean White Header -->
+<!-- Sticky Clean White Header (Desktop + Minimalist Borderless Hamburger di Mobile ala Mutiara Bangsa) -->
 <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-line-subtle shadow-[0_1px_10px_rgba(15,23,42,0.04)]">
-  <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 min-h-[68px] md:h-[74px] py-2 flex items-center justify-between gap-3 md:gap-4">
+  <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 min-h-[64px] md:h-[74px] py-2 flex items-center justify-between gap-3 md:gap-4">
     <!-- Kiri: Brand Lockup + Pembatas Vertikal -->
     <div class="flex items-center gap-3 md:gap-4 min-w-0">
       <a
@@ -135,11 +135,11 @@ const quickWaUrl = buildQuickWhatsAppUrl();
       </nav>
     </div>
 
-    <!-- Kanan: Tombol Daftar Luminous Gold + Hamburger Mobile -->
+    <!-- Kanan: CTA Desktop + Hamburger Minimalis Mobile (Persis Mutiara Bangsa) -->
     <div class="flex items-center gap-2 shrink-0">
       <a
         href={`${prefix}#daftar-ppdb`}
-        class="hidden sm:inline-flex items-center justify-center min-h-[44px] rounded-xl bg-gold hover:bg-gold-hover px-4 py-2 text-xs sm:text-sm font-bold text-ink-heading shadow-sm transition-colors whitespace-nowrap focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+        class="hidden lg:inline-flex items-center justify-center min-h-[44px] rounded-xl bg-gold hover:bg-gold-hover px-4 py-2 text-sm font-bold text-ink-heading shadow-sm transition-colors whitespace-nowrap focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
       >
         Daftar PPDB
       </a>
@@ -147,39 +147,46 @@ const quickWaUrl = buildQuickWhatsAppUrl();
       <button
         id="mobile-menu-toggle"
         type="button"
-        class="lg:hidden inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-xl border border-line-subtle bg-white text-primary-dark hover:bg-primary-surface transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        class="lg:hidden inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-lg text-ink-heading hover:bg-surface-sage transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         aria-expanded="false"
         aria-controls="mobile-nav-drawer"
         aria-label="Buka menu navigasi"
       >
-        <Menu id="mobile-icon-open" class="h-5 w-5" aria-hidden="true" />
-        <X id="mobile-icon-close" class="hidden h-5 w-5" aria-hidden="true" />
+        <Menu id="mobile-icon-open" class="h-6 w-6 stroke-[2.2]" aria-hidden="true" />
+        <X id="mobile-icon-close" class="hidden h-6 w-6 stroke-[2.2]" aria-hidden="true" />
       </button>
     </div>
   </div>
 
-  <!-- Mobile Navigation Drawer -->
-  <div id="mobile-nav-drawer" class="hidden lg:hidden border-t border-line-subtle bg-white max-h-[80vh] overflow-y-auto">
-    <nav aria-label="Menu Mobile" class="divide-y divide-line-subtle">
+  <!-- Mobile Navigation Drawer: Baris Induk Gelap Collapsible + Submenu Putih (Persis Mutiara Bangsa) -->
+  <div id="mobile-nav-drawer" class="hidden lg:hidden border-t border-line-subtle bg-white max-h-[82vh] overflow-y-auto shadow-xl">
+    <nav aria-label="Menu Mobile" class="divide-y divide-white/10">
       <a
         href={isHomePage ? '#top' : '/'}
         data-mobile-nav-link
-        class="flex items-center justify-between min-h-[46px] bg-primary-dark px-5 py-3 text-sm font-bold text-white"
+        class="flex items-center justify-between min-h-[48px] bg-primary-dark px-5 py-3 text-sm font-bold text-white"
       >
         <span>Beranda</span>
       </a>
 
+      <!-- Collapsible Accordion: Tentang Kami -->
       <div>
-        <div class="bg-primary-dark px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-gold-light">
-          Tentang Kami
-        </div>
-        <div class="bg-white divide-y divide-line-subtle">
+        <button
+          type="button"
+          data-mobile-accordion-btn="about"
+          aria-expanded="false"
+          class="flex w-full items-center justify-between min-h-[48px] bg-primary-dark px-5 py-3 text-sm font-bold text-white text-left"
+        >
+          <span>Tentang Kami</span>
+          <ChevronDown class="h-4 w-4 text-gold-light transition-transform duration-200" data-accordion-chevron="about" aria-hidden="true" />
+        </button>
+        <div id="mobile-sub-about" class="hidden bg-white divide-y divide-line-subtle">
           {
             aboutLinks.map((item) => (
               <a
                 href={item.href}
                 data-mobile-nav-link
-                class="flex items-center min-h-[44px] pl-8 pr-5 py-2 text-sm font-medium text-ink-subheading hover:bg-accent-surface hover:text-primary-dark"
+                class="flex items-center min-h-[46px] pl-8 pr-5 py-2.5 text-sm font-medium text-ink-subheading hover:bg-accent-surface hover:text-primary-dark"
               >
                 {item.label}
               </a>
@@ -188,18 +195,25 @@ const quickWaUrl = buildQuickWhatsAppUrl();
         </div>
       </div>
 
+      <!-- Collapsible Accordion: Unit Sekolah -->
       <div>
-        <div class="bg-primary-dark px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-gold-light">
-          Unit Sekolah
-        </div>
-        <div class="bg-white divide-y divide-line-subtle">
+        <button
+          type="button"
+          data-mobile-accordion-btn="schools"
+          aria-expanded="true"
+          class="flex w-full items-center justify-between min-h-[48px] bg-primary-dark px-5 py-3 text-sm font-bold text-white text-left"
+        >
+          <span>Unit Sekolah</span>
+          <ChevronDown class="h-4 w-4 text-gold-light rotate-180 transition-transform duration-200" data-accordion-chevron="schools" aria-hidden="true" />
+        </button>
+        <div id="mobile-sub-schools" class="bg-white divide-y divide-line-subtle">
           {
             schoolLinks.map((unit) => (
               <a
                 href={unit.href}
                 data-mobile-nav-link
                 data-nav-unit-id={unit.unitId}
-                class="flex items-center min-h-[44px] pl-8 pr-5 py-2 text-sm font-medium text-ink-subheading hover:bg-accent-surface hover:text-primary-dark"
+                class="flex items-center min-h-[46px] pl-8 pr-5 py-2.5 text-sm font-medium text-ink-subheading hover:bg-accent-surface hover:text-primary-dark"
               >
                 {unit.label}
               </a>
@@ -211,7 +225,7 @@ const quickWaUrl = buildQuickWhatsAppUrl();
       <a
         href={`${prefix}#kabar`}
         data-mobile-nav-link
-        class="flex items-center min-h-[46px] bg-white px-5 py-3 text-sm font-semibold text-ink-heading hover:bg-accent-surface"
+        class="flex items-center min-h-[48px] bg-primary-dark px-5 py-3 text-sm font-bold text-white"
       >
         Kabar &amp; Agenda
       </a>
@@ -219,7 +233,7 @@ const quickWaUrl = buildQuickWhatsAppUrl();
       <a
         href={`${prefix}#biaya-ppdb`}
         data-mobile-nav-link
-        class="flex items-center min-h-[46px] bg-white px-5 py-3 text-sm font-semibold text-ink-heading hover:bg-accent-surface"
+        class="flex items-center min-h-[48px] bg-primary-dark px-5 py-3 text-sm font-bold text-white"
       >
         Biaya PPDB
       </a>
@@ -270,6 +284,20 @@ const quickWaUrl = buildQuickWhatsAppUrl();
 
       drawer.querySelectorAll('[data-mobile-nav-link]').forEach((link) => {
         link.addEventListener('click', () => setMenuOpen(false));
+      });
+
+      // Toggle accordion submenu di dalam mobile drawer ala Mutiara Bangsa
+      drawer.querySelectorAll('[data-mobile-accordion-btn]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const key = btn.getAttribute('data-mobile-accordion-btn');
+          const sub = document.getElementById('mobile-sub-' + key);
+          const chevron = drawer.querySelector('[data-accordion-chevron="' + key + '"]');
+          if (!sub) return;
+          const willOpen = sub.classList.contains('hidden');
+          sub.classList.toggle('hidden', !willOpen);
+          btn.setAttribute('aria-expanded', String(willOpen));
+          if (chevron) chevron.classList.toggle('rotate-180', willOpen);
+        });
       });
 
       document.addEventListener('keydown', (event) => {

@@ -57,7 +57,7 @@ const defaultActiveUnitId: UnitId = 'mit';
 
     <!-- Rincian Biaya Transparan per Jenjang -->
     <div class="space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-center sm:text-left">
         <div>
           <p class="text-xs font-bold uppercase tracking-wider text-gold-text">
             Transparansi Rincian Biaya
@@ -70,7 +70,7 @@ const defaultActiveUnitId: UnitId = 'mit';
         <div
           role="tablist"
           aria-label="Pilih Jenjang untuk Melihat Rincian Biaya"
-          class="no-scrollbar flex items-center gap-2 overflow-x-auto pb-1"
+          class="flex flex-wrap items-center justify-center sm:justify-end gap-2 pb-1"
         >
           {
             PPDB_FEES_BY_UNIT.map((unit) => {

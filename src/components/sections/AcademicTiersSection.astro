@@ -51,8 +51,8 @@ const defaultUnitId: UnitId = 'mit';
       </h2>
     </div>
 
-    <!-- Pill Tabs Pemilih Cepat Unit -->
-    <div class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto no-scrollbar pb-1">
+    <!-- Pill Tabs Pemilih Cepat Unit (Centered di Mobile & Desktop) -->
+    <div class="flex flex-wrap items-center justify-center gap-2 pb-1">
       {
         unitsEntries.map((unit) => {
           const isActive = unit.data.unitId === defaultUnitId;
@@ -103,8 +103,8 @@ const defaultUnitId: UnitId = 'mit';
                 </div>
               </div>
 
-              <div class="col-span-12 lg:col-span-6 space-y-4">
-                <div class="flex flex-wrap items-center gap-2">
+              <div class="col-span-12 lg:col-span-6 space-y-4 text-center lg:text-left">
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2">
                   <span class="text-xs font-bold uppercase tracking-[0.15em] text-gold-text">
                     PORIS GAGA CAMPUS
                   </span>
@@ -124,15 +124,15 @@ const defaultUnitId: UnitId = 'mit';
                 </div>
 
                 <div class="space-y-2 text-xs sm:text-sm text-ink-body pt-1">
-                  <p class="flex items-start gap-2">
-                    <MapPin class="h-4 w-4 text-accent shrink-0 mt-0.5" aria-hidden="true" />
+                  <p class="flex items-start justify-center lg:justify-start gap-2">
+                    <MapPin class="h-4 w-4 text-accent shrink-0 mt-0.5 hidden lg:inline" aria-hidden="true" />
                     <span>{SITE_CONFIG.address.fullAddress}</span>
                   </p>
-                  <p class="flex items-center gap-2">
+                  <p class="flex items-center justify-center lg:justify-start gap-2">
                     <Clock class="h-4 w-4 text-accent shrink-0" aria-hidden="true" />
                     <span>{unit.data.studyHours}</span>
                   </p>
-                  <p class="flex items-center gap-2">
+                  <p class="flex items-center justify-center lg:justify-start gap-2">
                     <Phone class="h-4 w-4 text-accent shrink-0" aria-hidden="true" />
                     <span>
                       {SITE_CONFIG.contact.phoneOffice1} / WA {SITE_CONFIG.contact.whatsappDisplay}
@@ -141,7 +141,7 @@ const defaultUnitId: UnitId = 'mit';
                 </div>
 
                 {feeInfo && (
-                  <div class="rounded-xl bg-white px-4 py-3 border border-line-subtle flex flex-wrap items-center justify-between gap-2 text-xs">
+                  <div class="rounded-xl bg-white px-4 py-3 border border-line-subtle flex flex-wrap items-center justify-center lg:justify-between gap-2 text-xs">
                     <span>
                       SPP Bulanan: <strong class="text-primary-dark font-bold">{formatRupiah(feeInfo.monthlyTuition)}</strong>
                     </span>
@@ -157,7 +157,7 @@ const defaultUnitId: UnitId = 'mit';
                   </div>
                 )}
 
-                <div class="flex flex-wrap items-center gap-3 pt-1">
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1">
                   <a
                     href="#daftar-ppdb"
                     data-select-unit={ppdbOptionValue}

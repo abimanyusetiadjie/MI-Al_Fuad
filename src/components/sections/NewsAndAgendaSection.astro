@@ -76,8 +76,8 @@ const formatTanggalId = (date: Date) =>
 
     <!-- Bottom Grid: Kartu Berita/Fasilitas + Kalender PPDB -->
     <div class="grid grid-cols-12 gap-5 items-stretch">
-      <!-- Kiri (7 Kolom): 3 Portrait Photo Cards (Adaptasi Grid Berita/Kampus Mutiara Bangsa) -->
-      <div class="col-span-12 lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <!-- Kiri (7 Kolom): 3 Portrait Photo Cards (Grid 2-Kolom di Mobile ala Mutiara Bangsa) -->
+      <div class="col-span-12 lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
         {
           secondaryNews && (
             <article class="group relative overflow-hidden rounded-2xl bg-primary-dark aspect-[4/5] sm:aspect-auto sm:min-h-[260px]">
@@ -89,12 +89,12 @@ const formatTanggalId = (date: Date) =>
                 decoding="async"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-              <div class="absolute inset-x-0 bottom-0 p-4 space-y-1">
+              <div class="absolute inset-x-0 bottom-0 p-3.5 sm:p-4 space-y-1">
                 <p class="text-[11px] font-bold text-gold-medium">{secondaryNews.data.category}</p>
-                <h4 class="font-heading text-sm font-bold text-white leading-snug line-clamp-2">
+                <h4 class="font-heading text-xs sm:text-sm font-bold text-white leading-snug line-clamp-2">
                   {secondaryNews.data.title}
                 </h4>
-                <time datetime={secondaryNews.data.publishDate.toISOString()} class="block text-[11px] text-white/80">
+                <time datetime={secondaryNews.data.publishDate.toISOString()} class="block text-[10px] sm:text-[11px] text-white/80">
                   {formatTanggalId(secondaryNews.data.publishDate)}
                 </time>
               </div>
@@ -111,16 +111,16 @@ const formatTanggalId = (date: Date) =>
             decoding="async"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-          <div class="absolute inset-x-0 bottom-0 p-4 space-y-1">
+          <div class="absolute inset-x-0 bottom-0 p-3.5 sm:p-4 space-y-1">
             <p class="text-[11px] font-bold text-gold-medium">Fasilitas Ibadah</p>
-            <h4 class="font-heading text-sm font-bold text-white leading-snug">
+            <h4 class="font-heading text-xs sm:text-sm font-bold text-white leading-snug">
               Masjid At-Taqwa &amp; Halaqah Tahfidz
             </h4>
-            <p class="text-[11px] text-white/80">Poris Gaga, Tangerang</p>
+            <p class="text-[10px] sm:text-[11px] text-white/80">Poris Gaga, Tangerang</p>
           </div>
         </article>
 
-        <article class="group relative overflow-hidden rounded-2xl bg-primary-dark aspect-[4/5] sm:aspect-auto sm:min-h-[260px]">
+        <article class="col-span-2 sm:col-span-1 group relative overflow-hidden rounded-2xl bg-primary-dark aspect-[16/9] sm:aspect-auto sm:min-h-[260px]">
           <Image
             src={labImg}
             alt="Laboratorium komputer praktik kejuruan SMK-IT dan SMP-IT Al-Fuad"
