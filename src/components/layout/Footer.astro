@@ -18,15 +18,13 @@ const navLinks = [
 ] as const;
 ---
 
-<!-- Clean White 4-Column Footer (Adaptasi Footer Mutiara Bangsa + Kelengkapan NPSN Resmi Al-Fuad) -->
-<footer id="kontak" class="bg-white border-t border-stone-200 mt-auto text-ink-body">
+<footer id="kontak" class="bg-white border-t border-line-subtle mt-auto text-ink-body">
   <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-12 md:py-16">
     <div class="grid grid-cols-12 gap-y-8 gap-x-6 items-start">
-      <!-- Kolom 1 (3 Col): Logo + Editorial Summary + Back to Top Pill -->
       <div class="col-span-12 md:col-span-6 lg:col-span-3 space-y-4">
         <a href="#top" class="inline-flex items-center gap-2.5">
           <span
-            class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-dark text-gold-medium"
+            class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-dark text-gold"
             aria-hidden="true"
           >
             <svg viewBox="0 0 36 36" class="h-5 w-5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,14 +44,13 @@ const navLinks = [
 
         <a
           href="#top"
-          class="inline-flex items-center gap-1.5 min-h-[44px] rounded-xl bg-primary-surface hover:bg-emerald-100 px-4 py-2 text-xs font-bold text-primary-dark transition-colors"
+          class="inline-flex items-center gap-1.5 min-h-[44px] rounded-xl bg-accent-surface hover:bg-emerald-100 px-4 py-2 text-xs font-bold text-accent transition-colors"
         >
           <span>Kembali ke Atas</span>
           <ArrowUp class="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
         </a>
       </div>
 
-      <!-- Kolom 2 (2 Col): Navigasi Cepat -->
       <div class="col-span-6 md:col-span-3 lg:col-span-2 space-y-3">
         <h3 class="font-heading text-sm font-bold text-primary-dark">
           Navigasi
@@ -64,7 +61,7 @@ const navLinks = [
               <li>
                 <a
                   href={item.href}
-                  class="inline-flex items-center min-h-[36px] text-ink-body hover:text-primary-dark font-medium transition-colors"
+                  class="inline-flex items-center min-h-[36px] text-ink-body hover:text-accent font-medium transition-colors"
                 >
                   {item.label}
                 </a>
@@ -74,7 +71,6 @@ const navLinks = [
         </ul>
       </div>
 
-      <!-- Kolom 3 (4 Col): Daftar 5 Unit & NPSN Resmi -->
       <div class="col-span-12 sm:col-span-6 md:col-span-3 lg:col-span-4 space-y-3">
         <h3 class="font-heading text-sm font-bold text-primary-dark">
           5 Unit Pendidikan &amp; NPSN
@@ -82,9 +78,9 @@ const navLinks = [
         <ul class="space-y-2 text-xs">
           {
             SITE_CONFIG.units.map((unit) => (
-              <li class="flex items-center justify-between gap-2 pb-1.5 border-b border-stone-100 last:border-b-0 last:pb-0">
+              <li class="flex items-center justify-between gap-2 pb-1.5 border-b border-line-subtle last:border-b-0 last:pb-0">
                 <span class="font-medium text-ink-heading">{unit.name}</span>
-                <span class="shrink-0 font-mono text-[11px] font-bold text-amber-700 bg-gold-light/60 px-2 py-0.5 rounded">
+                <span class="shrink-0 font-mono text-[11px] font-bold text-accent bg-accent-surface px-2 py-0.5 rounded">
                   {unit.npsn === 'Terdaftar Kemenag' ? 'Kemenag RI' : `NPSN ${unit.npsn}`}
                 </span>
               </li>
@@ -93,18 +89,17 @@ const navLinks = [
         </ul>
       </div>
 
-      <!-- Kolom 4 (3 Col): Alamat & Kontak Sekretariat -->
       <div class="col-span-12 md:col-span-6 lg:col-span-3 space-y-3">
         <h3 class="font-heading text-sm font-bold text-primary-dark">
           Sekretariat PPDB
         </h3>
         <address class="not-italic space-y-2 text-xs text-ink-body">
           <p class="flex items-start gap-2">
-            <MapPin class="h-4 w-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+            <MapPin class="h-4 w-4 text-accent shrink-0 mt-0.5" aria-hidden="true" />
             <span>{SITE_CONFIG.address.fullAddress}</span>
           </p>
           <p class="flex items-center gap-2">
-            <MessageCircle class="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
+            <MessageCircle class="h-4 w-4 text-accent shrink-0" aria-hidden="true" />
             <a
               href={quickWaUrl}
               target="_blank"
@@ -115,13 +110,13 @@ const navLinks = [
             </a>
           </p>
           <p class="flex items-center gap-2">
-            <Phone class="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
+            <Phone class="h-4 w-4 text-accent shrink-0" aria-hidden="true" />
             <a href="tel:+622155740372" class="hover:text-primary-dark min-h-[36px] inline-flex items-center">
               {SITE_CONFIG.contact.phoneOffice1}
             </a>
           </p>
           <p class="flex items-center gap-2">
-            <Mail class="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
+            <Mail class="h-4 w-4 text-accent shrink-0" aria-hidden="true" />
             <a href={`mailto:${SITE_CONFIG.contact.email}`} class="hover:text-primary-dark break-all">
               {SITE_CONFIG.contact.email}
             </a>
@@ -141,8 +136,7 @@ const navLinks = [
     </div>
   </div>
 
-  <!-- Copyright Centered Bar Persis Mutiara Bangsa -->
-  <div class="border-t border-stone-200 py-5 px-4 text-center text-xs text-ink-caption">
+  <div class="border-t border-line-subtle py-5 px-4 text-center text-xs text-ink-caption">
     &copy; {currentYear} MI TPI &amp; {SITE_CONFIG.foundationName} &mdash; All Rights Reserved.
   </div>
 </footer>

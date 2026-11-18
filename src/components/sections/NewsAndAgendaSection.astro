@@ -27,14 +27,13 @@ const formatTanggalId = (date: Date) =>
 <!-- Section 7 (#kabar & #fasilitas): Latest Updates / Kabar & Agenda Sekolah (Adaptasi Section 7 Mutiara Bangsa) -->
 <section
   id="kabar"
-  class="scroll-mt-24 py-14 md:py-20 bg-[#FAF8F5] border-b border-stone-200/80"
+  class="scroll-mt-24 py-14 md:py-20 bg-surface-alabaster border-b border-line-subtle"
 >
   <span id="fasilitas" class="scroll-mt-24 sr-only" aria-hidden="true"></span>
 
   <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 space-y-8">
-    <!-- Centered Header persis Mutiara Bangsa "Latest Updates" -->
     <div class="text-center space-y-2" data-reveal>
-      <span class="inline-block rounded-full bg-gold-light px-4 py-1 text-xs font-bold text-amber-800 border border-gold/25">
+      <span class="inline-block rounded-full bg-gold-light px-4 py-1 text-xs font-bold text-status-warningText border border-gold/30">
         Kabar Terbaru
       </span>
       <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-primary-dark tracking-tight">
@@ -42,12 +41,11 @@ const formatTanggalId = (date: Date) =>
       </h2>
     </div>
 
-    <!-- 1 Featured Wide Banner Card (Adaptasi Mutiara Bangsa Featured News Card) -->
     {
       featuredNews && (
         <article
           data-reveal
-          class="group relative overflow-hidden rounded-2xl border border-stone-200 bg-primary-dark h-[260px] sm:h-[320px] shadow-sm"
+          class="group relative overflow-hidden rounded-2xl border border-line-subtle bg-primary-dark h-[260px] sm:h-[320px] shadow-sm"
         >
           <Image
             src={featuredNews.data.category === 'Wisuda Tahfidz' ? wisudaTahfidzImg : heroMiImg}
@@ -142,17 +140,17 @@ const formatTanggalId = (date: Date) =>
       </div>
 
       <!-- Kanan (5 Kolom): Kalender & Jadwal Gelombang PPDB -->
-      <div class="col-span-12 lg:col-span-5 rounded-2xl bg-white border border-stone-200/90 p-5 sm:p-6 flex flex-col justify-between gap-4">
+      <div class="col-span-12 lg:col-span-5 rounded-2xl bg-white border border-line-subtle p-5 sm:p-6 flex flex-col justify-between gap-4">
         <div class="space-y-3">
-          <div class="flex items-center justify-between gap-2 pb-3 border-b border-stone-100">
+          <div class="flex items-center justify-between gap-2 pb-3 border-b border-line-subtle">
             <span class="inline-flex items-center gap-2 font-heading text-sm sm:text-base font-bold text-primary-dark">
-              <Calendar class="h-4 w-4 text-amber-700 shrink-0" aria-hidden="true" />
+              <Calendar class="h-4 w-4 text-accent shrink-0" aria-hidden="true" />
               <span>Agenda Gelombang PPDB</span>
             </span>
-            <span class="text-[11px] font-semibold text-primary">TA 2026/2027</span>
+            <span class="text-[11px] font-bold text-accent">TA 2026/2027</span>
           </div>
 
-          <ul class="divide-y divide-stone-100">
+          <ul class="divide-y divide-line-subtle">
             {
               PPDB_WAVES.map((wave, idx) => (
                 <li class="py-2.5 first:pt-0 last:pb-0 flex items-start gap-3">
@@ -172,8 +170,8 @@ const formatTanggalId = (date: Date) =>
                       <span
                         class={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ${
                           wave.status === 'Segera Penuh'
-                            ? 'bg-gold-light text-amber-800'
-                            : 'bg-primary-surface text-primary-dark'
+                            ? 'bg-status-warningBg text-status-warningText'
+                            : 'bg-status-successBg text-status-successText'
                         }`}
                       >
                         {wave.status}
@@ -189,7 +187,7 @@ const formatTanggalId = (date: Date) =>
 
         <a
           href="#biaya-ppdb"
-          class="inline-flex w-full items-center justify-center min-h-[44px] rounded-xl bg-primary-surface hover:bg-emerald-100 text-xs sm:text-sm font-bold text-primary-dark transition-colors"
+          class="inline-flex w-full items-center justify-center min-h-[44px] rounded-xl bg-accent-surface hover:bg-emerald-100 text-xs sm:text-sm font-bold text-accent transition-colors"
         >
           Lihat Rincian Biaya &amp; Kuota &rarr;
         </a>

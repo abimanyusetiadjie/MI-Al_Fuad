@@ -22,29 +22,47 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#065F46', // Al-Fuad Emerald Brand
-          dark: '#064E3B',    // Deep Forest / Emerald Islamic Primary Dark
-          medium: '#047857',  // Emerald Islamic Primary Medium
-          light: '#10B981',   // Emerald Islamic Primary Light
+          DEFAULT: '#065F46', // Al-Fuad Emerald Brand (7.68:1 white text AAA)
+          dark: '#064E3B',    // Deep Forest / Hero, Visi-Misi & FAQ Open (9.72:1)
+          medium: '#047857',  // Emerald Medium / WhatsApp FAB (5.48:1 white text)
+          light: '#10B981',   // Emerald Glow
           surface: '#ECFDF5', // Soft Mint Surface
         },
+        accent: {
+          DEFAULT: '#0F766E', // Islamic Jade Teal (5.47:1 white, 5.16:1 alabaster)
+          bright: '#0D9488',  // Bright Jade (progress highlights)
+          surface: '#E6F7F4', // Soft Jade Tint
+        },
         gold: {
-          DEFAULT: '#D97706', // Warm Gold Accent / Amber CTA
-          medium: '#F59E0B',  // Warm Gold Medium
+          DEFAULT: '#F59E0B', // Luminous Gold CTA / Pill (8.31:1 dark text AAA)
+          hover: '#D97706',   // Rich Gold Hover (5.60:1 dark text AA)
+          medium: '#F59E0B',  // Alias Luminous Gold
+          text: '#B45309',    // High-contrast Gold Text on light (4.74:1–5.02:1 AA)
           light: '#FEF3C7',   // Soft Gold Tint
         },
         surface: {
-          DEFAULT: '#FAF8F5', // Warm Alabaster
-          alabaster: '#FAF8F5',
+          DEFAULT: '#FAF8F5',   // Warm Alabaster
+          alabaster: '#FAF8F5', // Primary Page Alternation
+          sage: '#F2F6F4',      // Soft Sage Mist (replaces cool #F4F7F6)
+          sand: '#EFECE6',      // Warm Sand (replaces cool #EAECEF FAQ closed)
           cream: '#F3EFEA',
-          ivory: '#F8FAFC',
           white: '#FFFFFF',
         },
+        line: {
+          subtle: '#E6E2DA', // Unified Warm Hairline Border
+          muted: '#D6D1C7',  // Inactive Dot / Muted Border
+        },
+        status: {
+          successBg: '#E6F7F4',
+          successText: '#0F766E',
+          warningBg: '#FEF3C7',
+          warningText: '#92400E',
+        },
         ink: {
-          heading: '#0F172A',    // Charcoal Slate
-          subheading: '#334155', // Dark Slate
-          body: '#475569',       // Muted Slate
-          caption: '#64748B',    // Subtle Slate
+          heading: '#0F172A',    // Deep Charcoal
+          subheading: '#334155', // Slate Subheading
+          body: '#475569',       // Readable Slate Body
+          caption: '#64748B',    // Muted Caption
         },
       },
       maxWidth: {

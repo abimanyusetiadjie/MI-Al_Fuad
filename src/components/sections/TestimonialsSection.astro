@@ -11,13 +11,11 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
 });
 ---
 
-<!-- Section 10 (#testimoni): Centered Carousel Testimoni (Adaptasi Persis Mutiara Bangsa) -->
 <section
   id="testimoni"
-  class="scroll-mt-24 py-14 md:py-20 bg-white border-t border-stone-200/80"
+  class="scroll-mt-24 py-14 md:py-20 bg-white border-t border-line-subtle"
 >
   <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 space-y-8">
-    <!-- Centered Header ala Mutiara Bangsa: "Testimoni. / Apa kata orang tua & pengawas" -->
     <div class="text-center space-y-1.5" data-reveal>
       <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-primary-dark tracking-tight">
         Testimoni.
@@ -27,9 +25,8 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
       </p>
     </div>
 
-    <!-- Centered Ice-Surface Carousel Card -->
     <div class="mx-auto max-w-3xl relative">
-      <div class="rounded-3xl bg-[#F4F7F6] border border-stone-200/90 p-6 sm:p-10 text-center">
+      <div class="rounded-3xl bg-surface-sage border border-line-subtle p-6 sm:p-10 text-center">
         {
           sortedTestimonials.map((item, idx) => {
             const isKemenag = item.data.unitRelated === 'Yayasan';
@@ -42,7 +39,7 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
                   <span
                     class={`flex h-12 w-12 items-center justify-center rounded-full shadow-sm ${
                       isKemenag
-                        ? 'bg-amber-700 text-white'
+                        ? 'bg-gold text-ink-heading'
                         : 'bg-primary-dark text-gold-light'
                     }`}
                     aria-hidden="true"
@@ -58,7 +55,7 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
                     <p class="font-heading text-base font-bold text-primary-dark">
                       {item.data.authorName}
                     </p>
-                    <p class="text-xs sm:text-sm font-semibold text-primary">
+                    <p class="text-xs sm:text-sm font-semibold text-accent">
                       {item.data.authorRole}
                     </p>
                   </div>
@@ -72,13 +69,12 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
           })
         }
 
-        <!-- Controls + Pagination Dots (Persis Mutiara Bangsa) -->
-        <div class="mt-6 pt-5 border-t border-stone-200/80 flex items-center justify-between gap-4">
+        <div class="mt-6 pt-5 border-t border-line-subtle flex items-center justify-between gap-4">
           <button
             type="button"
             id="testimonial-prev"
             aria-label="Testimoni sebelumnya"
-            class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-stone-200 text-primary-dark hover:bg-primary-surface transition-colors"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-line-subtle text-primary-dark hover:bg-accent-surface transition-colors"
           >
             <ChevronLeft class="h-4 w-4" aria-hidden="true" />
           </button>
@@ -91,7 +87,7 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
                   data-testimonial-dot={idx}
                   aria-label={`Testimoni ${item.data.authorName}`}
                   class={`h-2.5 rounded-full transition-all ${
-                    idx === 0 ? 'w-6 bg-primary-dark' : 'w-2.5 bg-stone-300 hover:bg-primary/50'
+                    idx === 0 ? 'w-6 bg-primary-dark' : 'w-2.5 bg-line-muted hover:bg-accent'
                   }`}
                 />
               ))
@@ -102,7 +98,7 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
             type="button"
             id="testimonial-next"
             aria-label="Testimoni berikutnya"
-            class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-stone-200 text-primary-dark hover:bg-primary-surface transition-colors"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-line-subtle text-primary-dark hover:bg-accent-surface transition-colors"
           >
             <ChevronRight class="h-4 w-4" aria-hidden="true" />
           </button>
@@ -127,7 +123,7 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
       d.classList.toggle('w-6', active);
       d.classList.toggle('bg-primary-dark', active);
       d.classList.toggle('w-2.5', !active);
-      d.classList.toggle('bg-stone-300', !active);
+      d.classList.toggle('bg-line-muted', !active);
     });
   };
 
