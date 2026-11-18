@@ -7,21 +7,21 @@ import heroMiImg from '@/assets/hero-mi-alfuad.webp';
 <!-- Opsi B: Full-Bleed Cinematic Editorial Hero (Foto Jernih Alami + Directional Scrim Presisi) -->
 <section
   id="tentang"
-  class="scroll-mt-24 relative overflow-hidden bg-primary-dark text-white min-h-[560px] sm:min-h-[590px] lg:min-h-[530px] flex flex-col justify-end lg:justify-center pt-52 pb-12 sm:pt-60 sm:pb-16 lg:pt-16 lg:pb-24"
+  class="scroll-mt-24 relative overflow-hidden bg-primary-dark text-white min-h-[570px] sm:min-h-[600px] lg:min-h-[540px] flex flex-col justify-end lg:justify-center pt-56 pb-12 sm:pt-64 sm:pb-16 lg:pt-20 lg:pb-28"
 >
   <!-- Full-Bleed Photography Layer (Fokus pada Wajah Santri & Ustadzah di Atas/Kanan) -->
-  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-[68%] sm:h-[70%] lg:inset-0 lg:h-full" aria-hidden="true">
     <Image
       src={heroMiImg}
       alt="Suasana belajar Al-Qur'an siswa MI TPI Al-Fuad Poris Gaga bersama Ustadzah di ruang kelas terang"
-      class="h-full w-full object-cover object-[74%_42%] lg:object-[72%_center]"
+      class="h-full w-full object-cover object-[76%_center] lg:object-[72%_center]"
       loading="eager"
       fetchpriority="high"
     />
 
     <!-- Scrim Mobile/Tablet (Bottom-Up): Bagian Atas Foto Cerah Alami, Bagian Bawah Kontras Tajam -->
     <div
-      class="lg:hidden absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/85 via-[38%] to-transparent"
+      class="lg:hidden absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/65 via-[32%] to-transparent"
     >
     </div>
 
@@ -38,7 +38,7 @@ import heroMiImg from '@/assets/hero-mi-alfuad.webp';
 
   <!-- Foreground Editorial Content -->
   <div class="relative z-10 w-full mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-    <div class="max-w-lg lg:max-w-xl space-y-3.5 sm:space-y-4">
+    <div class="max-w-lg lg:max-w-xl space-y-3.5 sm:space-y-4 animate-hero-in">
       <p class="text-[10.5px] sm:text-xs font-bold uppercase tracking-[0.16em] text-gold-light">
         Poris Gaga, Tangerang &bull; Sejak 1990
       </p>

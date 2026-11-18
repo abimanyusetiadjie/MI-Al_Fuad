@@ -16,12 +16,15 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
   class="scroll-mt-24 py-14 md:py-20 bg-white border-t border-line-subtle"
 >
   <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 space-y-8">
-    <div class="text-center space-y-1.5" data-reveal>
+    <div class="text-center space-y-2" data-reveal>
+      <span class="inline-block rounded-full bg-gold-light px-4 py-1 text-xs font-bold text-status-warningText border border-gold/30">
+        Suara Wali Murid &amp; Pengawas
+      </span>
       <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-primary-dark tracking-tight">
-        Testimoni.
+        Kepercayaan Keluarga Al-Fuad
       </h2>
       <p class="text-sm sm:text-base text-ink-body">
-        Apa kata wali murid &amp; pengawas tentang MI TPI &amp; YPI Al-Fuad
+        Pengalaman nyata orang tua siswa &amp; pengawas tentang pembinaan di MI TPI &amp; YPI Al-Fuad
       </p>
     </div>
 
@@ -58,6 +61,9 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
                     <p class="text-xs sm:text-sm font-semibold text-accent">
                       {item.data.authorRole}
                     </p>
+                    <span class="mt-1.5 inline-block rounded-full bg-white px-2.5 py-0.5 text-[11px] font-semibold text-primary-dark border border-line-subtle">
+                      {isKemenag ? 'Pengawas Kemenag Kota Tangerang' : `Wali Murid Unit ${item.data.unitRelated}`}
+                    </span>
                   </div>
                 </div>
 
@@ -69,12 +75,12 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
           })
         }
 
-        <div class="mt-6 pt-5 border-t border-line-subtle flex items-center justify-center sm:justify-between gap-4">
+        <div class="mt-6 pt-5 border-t border-line-subtle flex items-center justify-between gap-3 sm:gap-4">
           <button
             type="button"
             id="testimonial-prev"
             aria-label="Testimoni sebelumnya"
-            class="hidden sm:inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-line-subtle text-primary-dark hover:bg-accent-surface transition-colors"
+            class="inline-flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full bg-white border border-line-subtle text-primary-dark hover:bg-accent-surface transition-colors"
           >
             <ChevronLeft class="h-4 w-4" aria-hidden="true" />
           </button>
@@ -98,7 +104,7 @@ const sortedTestimonials = [...testimonials].sort((a, b) => {
             type="button"
             id="testimonial-next"
             aria-label="Testimoni berikutnya"
-            class="hidden sm:inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-line-subtle text-primary-dark hover:bg-accent-surface transition-colors"
+            class="inline-flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full bg-white border border-line-subtle text-primary-dark hover:bg-accent-surface transition-colors"
           >
             <ChevronRight class="h-4 w-4" aria-hidden="true" />
           </button>

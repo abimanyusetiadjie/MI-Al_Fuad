@@ -40,7 +40,7 @@ const defaultActiveUnitId: UnitId = 'mit';
       <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
         <a
           href="#daftar-ppdb"
-          class="inline-flex items-center justify-center min-h-[46px] rounded-xl bg-accent-surface hover:bg-emerald-100 border border-accent/25 px-6 py-2.5 text-sm font-bold text-accent transition-colors"
+          class="inline-flex items-center justify-center min-h-[46px] rounded-xl bg-primary-dark hover:bg-primary px-6 py-2.5 text-sm font-bold text-white shadow-sm transition-colors"
         >
           Daftar Sekarang
         </a>
@@ -162,7 +162,7 @@ const defaultActiveUnitId: UnitId = 'mit';
                         </td>
                       </tr>
                       <tr>
-                        <td class="py-2.5 text-ink-body">SPP / Infaq Bulanan</td>
+                        <td class="py-2.5 text-ink-body">SPP / Infaq Bulanan (Bulan Pertama)</td>
                         <td class="py-2.5 text-right font-semibold text-accent whitespace-nowrap">
                           {formatRupiah(unit.monthlyTuition)} / bln
                         </td>
@@ -194,6 +194,21 @@ const defaultActiveUnitId: UnitId = 'mit';
                   <p class="text-xs sm:text-sm text-emerald-50/90 leading-relaxed">
                     {unit.installmentNote}
                   </p>
+
+                  <ul class="space-y-1.5 pt-2 border-t border-white/15 text-xs text-emerald-100/90">
+                    <li class="flex items-center gap-2">
+                      <ShieldCheck class="h-3.5 w-3.5 text-gold shrink-0" aria-hidden="true" />
+                      <span>Angsuran DSP/Uang Pangkal hingga 3x</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <ShieldCheck class="h-3.5 w-3.5 text-gold shrink-0" aria-hidden="true" />
+                      <span>Potongan Gelombang Dini s/d Rp 500.000</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <ShieldCheck class="h-3.5 w-3.5 text-gold shrink-0" aria-hidden="true" />
+                      <span>Keringanan saudara kandung &amp; beasiswa yatim</span>
+                    </li>
+                  </ul>
                 </div>
 
                 <div class="space-y-2.5">

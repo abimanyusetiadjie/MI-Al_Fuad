@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { ArrowRight, ChevronLeft, ChevronRight, Clock, MapPin, Phone, ShieldCheck } from 'lucide-astro';
+import { ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Clock, ShieldCheck } from 'lucide-astro';
 import { SITE_CONFIG, type UnitId } from '@/data/siteConfig';
 import { PPDB_FEES_BY_UNIT } from '@/data/ppdbData';
 import { formatRupiah } from '@/utils/currency';
@@ -123,22 +123,25 @@ const defaultUnitId: UnitId = 'mit';
                   </p>
                 </div>
 
-                <div class="space-y-2 text-xs sm:text-sm text-ink-body pt-1">
-                  <p class="flex items-start justify-center lg:justify-start gap-2">
-                    <MapPin class="h-4 w-4 text-accent shrink-0 mt-0.5 hidden lg:inline" aria-hidden="true" />
-                    <span>{SITE_CONFIG.address.fullAddress}</span>
-                  </p>
-                  <p class="flex items-center justify-center lg:justify-start gap-2">
-                    <Clock class="h-4 w-4 text-accent shrink-0" aria-hidden="true" />
-                    <span>{unit.data.studyHours}</span>
-                  </p>
-                  <p class="flex items-center justify-center lg:justify-start gap-2">
-                    <Phone class="h-4 w-4 text-accent shrink-0" aria-hidden="true" />
-                    <span>
-                      {SITE_CONFIG.contact.phoneOffice1} / WA {SITE_CONFIG.contact.whatsappDisplay}
-                    </span>
-                  </p>
-                </div>
+                <p class="text-xs sm:text-sm text-ink-body leading-relaxed">
+                  {unitMeta?.shortDesc}
+                </p>
+
+                {unitMeta?.highlights && (
+                  <ul class="space-y-1.5 text-xs sm:text-sm text-ink-heading text-left bg-white/80 rounded-xl p-3.5 border border-line-subtle">
+                    {unitMeta.highlights.map((item) => (
+                      <li class="flex items-start gap-2">
+                        <CheckCircle2 class="h-4 w-4 text-accent shrink-0 mt-0.5" aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                <p class="flex items-center justify-center lg:justify-start gap-2 text-xs font-semibold text-primary-dark">
+                  <Clock class="h-4 w-4 text-accent shrink-0" aria-hidden="true" />
+                  <span>Jam Belajar: {unit.data.studyHours}</span>
+                </p>
 
                 {feeInfo && (
                   <div class="rounded-xl bg-white px-4 py-3 border border-line-subtle flex flex-wrap items-center justify-center lg:justify-between gap-2 text-xs">
@@ -227,18 +230,26 @@ const defaultUnitId: UnitId = 'mit';
     <!-- Bar Ringkas 5 NPSN Resmi -->
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
       {
-        SITE_CONFIG.units.map((u) => (
-          <button
-            type="button"
-            data-campus-tab={u.id}
-            class="text-left rounded-xl bg-surface-alabaster hover:bg-accent-surface/70 border border-line-subtle px-3.5 py-2.5 transition-colors min-h-[44px]"
-          >
-            <p class="font-heading text-xs font-bold text-primary-dark truncate">{u.name}</p>
-            <p class="font-mono text-[11px] text-accent font-semibold">
-              {u.npsn === 'Terdaftar Kemenag' ? 'Kemenag RI' : `NPSN ${u.npsn}`}
-            </p>
-          </button>
-        ))
+        SITE_CONFIG.units.map((u) => {
+          const isCardActive = u.id === defaultUnitId;
+          return (
+            <button
+              type="button"
+              data-campus-tab={u.id}
+              data-campus-card={u.id}
+              class={`text-left rounded-xl border px-3.5 py-2.5 transition-colors min-h-[44px] ${
+                isCardActive
+                  ? 'bg-accent-surface border-primary-dark shadow-sm'
+                  : 'bg-surface-alabaster hover:bg-accent-surface/70 border-line-subtle'
+              }`}
+            >
+              <p class="font-heading text-xs font-bold text-primary-dark truncate">{u.name}</p>
+              <p class="font-mono text-[11px] text-accent font-semibold">
+                {u.npsn === 'Terdaftar Kemenag' ? 'Kemenag RI' : `NPSN ${u.npsn}`}
+              </p>
+            </button>
+          );
+        })
       }
     </div>
   </div>
@@ -249,6 +260,7 @@ const defaultUnitId: UnitId = 'mit';
   let activeCampusId = 'mit';
 
   const campusTabs = document.querySelectorAll<HTMLButtonElement>('[data-campus-tab]');
+  const campusCards = document.querySelectorAll<HTMLButtonElement>('[data-campus-card]');
   const campusSlides = document.querySelectorAll<HTMLElement>('[data-campus-slide]');
   const campusDots = document.querySelectorAll<HTMLButtonElement>('[data-campus-dot]');
 
@@ -271,6 +283,16 @@ const defaultUnitId: UnitId = 'mit';
       tab.classList.toggle('bg-surface-alabaster', !match);
       tab.classList.toggle('text-ink-subheading', !match);
       tab.classList.toggle('border-line-subtle', !match);
+    });
+
+    campusCards.forEach((card) => {
+      const match = card.getAttribute('data-campus-card') === unitId;
+      card.classList.toggle('bg-accent-surface', match);
+      card.classList.toggle('border-primary-dark', match);
+      card.classList.toggle('shadow-sm', match);
+      card.classList.toggle('bg-surface-alabaster', !match);
+      card.classList.toggle('hover:bg-accent-surface/70', !match);
+      card.classList.toggle('border-line-subtle', !match);
     });
 
     campusDots.forEach((dot) => {
